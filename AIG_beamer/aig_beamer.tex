@@ -20,14 +20,11 @@
 
 
 %=========================================================================================================================
-%TODO Add title to presentation
-\title{AIG Beamer Template}
-
+\title{Introduction into Possibilistic Logic}
 \author[A. Köhn]{Alexander Köhn}
 \institute{Artificial Intelligence Group,\\
 University of Hagen, Germany}
-%TODO Add correct date for the presentation
-\date{November 12, 2024}
+\date{December 17, 2024}
 %=========================================================================================================================
 \logo{\includegraphics[width=3cm]{figures/logoaig.png}}
 %=========================================================================================================================
@@ -40,6 +37,700 @@ University of Hagen, Germany}
   \titlepage
 \end{frame}
 \nologo
+
+
+\section{Introduction}
+\begin{frame}{What are Possibility Distributions?}
+	\begin{itemize}
+		\item A \textbf{possibility distribution} is a mapping:
+		\[
+		\pi: U \to S,
+		\]
+		where:
+		\begin{itemize}
+			\item \( U \): Set of states (domain of an attribute, Cartesian product, propositional interpretations, etc.).
+			\item \( S \): Totally ordered scale (\( S = [0, 1] \) or finite chains).
+			\item \( \pi(u) \): Degree of possibility (plausibility) of state \( u \).
+		\end{itemize}
+		\item Top of the scale: \( 1 \) (fully plausible).\\
+		Bottom of the scale: \( 0 \) (impossible).
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Interpretation of Possibility Distributions}
+	\begin{itemize}
+		\item \( \pi(u) = 0 \): State \( u \) is \textbf{impossible}.
+		\item \( \pi(u) = 1 \): State \( u \) is \textbf{fully plausible}.
+		\item Higher \( \pi(u) \) values mean greater plausibility.
+	\end{itemize}
+	\pause
+	\begin{block}{Normalization Condition}
+		At least one state \( u \in U \) must have \( \pi(u) = 1 \) (an actual state exists).
+	\end{block}
+\end{frame}
+
+\section{Key Concepts}
+\begin{frame}{Specificity of a Possibility Distribution}
+	\begin{itemize}
+		\item A distribution \( \pi \) is \textbf{at least as specific} as \( \pi' \) if:
+		\[
+		\pi(u) \leq \pi'(u), \quad \forall u \in U.
+		\]
+		\item Examples:
+		\begin{itemize}
+			\item \textbf{Complete knowledge:} \( \pi(u_0) = 1 \), \( \pi(u) = 0 \) for all \( u \neq u_0 \).
+			\item \textbf{Complete ignorance:} \( \pi(u) = 1 \) for all \( u \in U \).
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{The Principle of Minimal Specificity}
+	\begin{block}{Definition}
+		Any hypothesis not known to be impossible cannot be ruled out. Possibility degrees should be maximized under given constraints.
+	\end{block}
+	\pause
+	\begin{itemize}
+		\item If \( x \) is restricted by fuzzy set \( F \) (\( \mu_F(x) \)), then:
+		\[
+		\pi(x) \leq \mu_F(x).
+		\]
+		\item Combining multiple pieces of knowledge:
+		\[
+		\pi(x) = \min_{i=1}^n \mu_{F_i}(x).
+		\]
+	\end{itemize}
+\end{frame}
+
+\section{Possibility and Necessity Measures}
+\begin{frame}{Possibility and Necessity Functions}
+	\begin{itemize}
+		\item Possibility measure:
+		\[
+		\Pi(A) = \sup_{u \in A} \pi(u).
+		\]
+		Evaluates the extent to which \( A \) is consistent with \( \pi \).
+		\item Necessity measure:
+		\[
+		N(A) = \inf_{u \notin A} (1 - \pi(u)).
+		\]
+		Evaluates the extent to which \( A \) is certainly implied by \( \pi \).
+	\end{itemize}
+	\pause
+	\begin{block}{Duality Relationship}
+		\[
+		N(A) = 1 - \Pi(A^c).
+		\]
+		Where \( A^c \) is the complement of \( A \).
+	\end{block}
+\end{frame}
+
+\begin{frame}{Key Properties of Measures}
+	\begin{itemize}
+		\item \textbf{Possibility: Maxitivity Property}
+		\[
+		\Pi(A \cup B) = \max(\Pi(A), \Pi(B)).
+		\]
+		\item \textbf{Necessity: Minimization Property}
+		\[
+		N(A \cap B) = \min(N(A), N(B)).
+		\]
+	\end{itemize}
+\end{frame}
+
+\section{Examples}
+\begin{frame}{Example: Knowledge Scenarios}
+	\begin{itemize}
+		\item \( U = \{u_1, u_2, u_3\} \), and \( \pi(u_1) = 0.8, \pi(u_2) = 0.6, \pi(u_3) = 0.2 \).
+		\item For \( A = \{u_1, u_2\} \):
+		\begin{align*}
+			\Pi(A) &= \sup_{u \in A} \pi(u) = \max(\pi(u_1), \pi(u_2)) = 0.8. \\
+			N(A) &= \inf_{u \notin A} (1 - \pi(u)) = 1 - \pi(u_3) = 0.8.
+		\end{align*}
+	\end{itemize}
+\end{frame}
+
+\section{Applications}
+\begin{frame}{Applications of Possibility Theory}
+	\begin{itemize}
+		\item **Default Reasoning**: Handling incomplete knowledge in expert systems.
+		\item **Medical Diagnosis**: Prioritizing plausible diagnoses based on symptoms.
+		\item **Decision-Making**: Evaluating options under uncertainty.
+		\item **Fuzzy Control Systems**: Representing and processing vague information.
+	\end{itemize}
+\end{frame}
+
+% Slide 1: Introduction
+\section{Introduction}
+\begin{frame}{What is Possibilistic Logic?}
+	\begin{itemize}
+		\item **Definition**: Possibilistic logic is an extension of classical logic designed to handle:
+		\begin{itemize}
+			\item **Uncertainty**: Representing incomplete knowledge.
+			\item **Plausibility**: Differentiating between plausible and less plausible states.
+		\end{itemize}
+		\item **Core Measures**:
+		\begin{itemize}
+			\item **Possibility (\(\Pi\))**: Indicates how plausible an event is.
+			\item **Necessity (\(N\))**: Indicates how certain an event is.
+		\end{itemize}
+		\item **Applications**:
+		\begin{itemize}
+			\item Used in expert systems, decision-making, and AI for reasoning under uncertainty.
+		\end{itemize}
+	\end{itemize}
+	\pause
+	\begin{block}{Key Idea}
+		Possibilistic logic prioritizes **qualitative reasoning** over quantitative probabilities, making it useful for handling incomplete or vague information.
+	\end{block}
+\end{frame}
+
+% Slide 2: Syntax
+\section{Syntax}
+\begin{frame}{Syntax of Possibilistic Logic}
+	\begin{itemize}
+		\item A possibilistic logic formula is represented as:
+		\[
+		(a, \alpha)
+		\]
+		where:
+		\begin{itemize}
+			\item \(a\): A classical logic formula (e.g., \(p \to q\)).
+			\item \(\alpha \in [0, 1]\): Certainty level (minimum necessity degree of \(a\)).
+		\end{itemize}
+		\item **Interpretation**:
+		\begin{itemize}
+			\item \( (a, \alpha) \): "Formula \(a\) is at least certain to degree \(\alpha\)."
+			\item The higher \(\alpha\), the stronger the belief in \(a\).
+		\end{itemize}
+	\end{itemize}
+	\pause
+	\begin{block}{Example}
+		Rule: \textit{"If fever, then flu" is 90\% certain.}
+		\[
+		(\text{fever} \to \text{flu}, 0.9)
+		\]
+		\begin{itemize}
+			\item This means: "If fever is observed, it is 90\% certain that the patient has flu."
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+% Slide 3: Measures of Plausibility
+\section{Possibility and Necessity}
+\begin{frame}{Measures of Possibility and Necessity}
+	\begin{itemize}
+		\item **Possibility Measure (\(\Pi\))**:
+		\[
+		\Pi(A) = \sup_{u \in A} \pi(u)
+		\]
+		\begin{itemize}
+			\item Evaluates the highest degree of plausibility in set \(A\).
+		\end{itemize}
+		\item **Necessity Measure (\(N\))**:
+		\[
+		N(A) = \inf_{u \notin A} (1 - \pi(u))
+		\]
+		\begin{itemize}
+			\item Evaluates how strongly \(A\) is implied by the information.
+		\end{itemize}
+		\item **Duality**:
+		\[
+		N(A) = 1 - \Pi(A^c)
+		\]
+	\end{itemize}
+	\pause
+	\begin{block}{Example (Diagnoses)}
+		Let \(U = \{\text{flu}, \text{cold}, \text{allergy}\}\) and:
+		\[
+		\pi(\text{flu}) = 0.9, \pi(\text{cold}) = 0.6, \pi(\text{allergy}) = 0.2
+		\]
+		For \(A = \{\text{flu}, \text{cold}\}\):
+		\begin{itemize}
+			\item \(\Pi(A) = \max(0.9, 0.6) = 0.9\).
+			\item \(N(A) = \min(1 - 0.2) = 0.8\).
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+% Slide 4: Inference
+\section{Inference in Possibilistic Logic}
+\begin{frame}{Inference Rules}
+	\begin{itemize}
+		\item **Weakened Certainty**:
+		\[
+		(a, \alpha) \Rightarrow (a, \beta), \quad \text{if } \alpha \geq \beta
+		\]
+		\item **Min-Based Conjunction**:
+		\[
+		N(a \land b) = \min(N(a), N(b))
+		\]
+		\item **Resolution**:
+		\[
+		(\neg a \lor b, \alpha), (a \lor c, \beta) \Rightarrow (b \lor c, \min(\alpha, \beta))
+		\]
+	\end{itemize}
+	\pause
+	\begin{block}{Example (Continued)}
+		Using rules:
+		\[
+		(\neg \text{fever} \lor \text{flu}, 0.9), \quad (\text{fever} \lor \text{headache}, 0.8)
+		\]
+		Inference:
+		\[
+		(\text{flu} \lor \text{headache}, 0.8)
+		\]
+	\end{block}
+\end{frame}
+
+% Slide 5: Handling Inconsistencies
+\section{Handling Inconsistencies}
+\begin{frame}{Managing Inconsistent Information}
+	\begin{itemize}
+		\item Possibilistic logic can handle conflicting information by:
+		\begin{itemize}
+			\item Identifying an **inconsistency level** (\(inc-l\)).
+			\item Filtering out rules with certainty levels below \(inc-l\).
+		\end{itemize}
+		\item **Example**:
+		\[
+		\{(a, 0.8), (\neg a, 0.7)\}
+		\]
+		\begin{itemize}
+			\item Inconsistency level: \(inc-l = 0.7\).
+			\item Filtered result: \((a, 0.8)\) dominates.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+% Slide 6: Applications
+\section{Applications}
+\begin{frame}{Applications of Possibilistic Logic}
+	\begin{itemize}
+		\item **Medical Diagnosis**:
+		\begin{itemize}
+			\item Rules with certainty for differential diagnoses.
+		\end{itemize}
+		\item **Decision-Making**:
+		\begin{itemize}
+			\item Selecting actions under incomplete knowledge.
+		\end{itemize}
+		\item **Knowledge Bases**:
+		\begin{itemize}
+			\item Handling updates with belief revision.
+		\end{itemize}
+	\end{itemize}
+	\pause
+	\begin{block}{Example Wrap-Up}
+		Throughout the presentation, we used:
+		\begin{itemize}
+			\item Syntax: Representation of rules (\((a, \alpha)\)).
+			\item Measures: Calculating \(\Pi(A)\) and \(N(A)\).
+			\item Inference: Combining uncertain rules.
+			\item Inconsistencies: Managing conflicts in rules.
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\section{Introduction}
+\begin{frame}{What is Possibilistic Logic?}
+	\begin{itemize}
+		\item **Definition**: Possibilistic logic is an extension of classical logic that incorporates a certainty level for each formula.
+		\item **Purpose**: Designed for reasoning under qualitative uncertainty and preferences.
+		\item **Core Characteristics**:
+		\begin{itemize}
+			\item A formula in possibilistic logic is a pair \((a, \alpha)\), where:
+			\begin{itemize}
+				\item \(a\): A classical logical formula (propositional or first-order logic).
+				\item \(\alpha \in [0,1]\): A certainty level.
+			\end{itemize}
+			\item Certainty levels (\(\alpha\)) represent the confidence or priority of the formula.
+		\end{itemize}
+		\item **Scope**:
+		\begin{itemize}
+			\item Classical logic is retained: Formulas are either true or false.
+			\item Extensions exist for fuzzy predicates, but basic possibilistic logic does not handle degrees of truth.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+% Slide 2: Syntax
+\section{Syntax of Possibilistic Logic}
+\begin{frame}{Basic Syntax}
+	\begin{itemize}
+		\item A possibilistic logic formula is written as:
+		\[
+		(a, \alpha), \quad \text{where } \alpha \in [0, 1].
+		\]
+		\item Interpretation:
+		\begin{itemize}
+			\item \(a\): A propositional formula.
+			\item \(\alpha\): The minimum necessity level associated with \(a\).
+		\end{itemize}
+		\item **Examples**:
+		\begin{itemize}
+			\item \((p \to q, 0.8)\): "If \(p\), then \(q\) with certainty 0.8."
+			\item \((\neg p, 1)\): "Not \(p\) is absolutely certain."
+		\end{itemize}
+	\end{itemize}
+	\pause
+	\begin{block}{Key Idea}
+		Possibilistic logic extends classical logic by associating a priority (certainty) level to each formula while maintaining Boolean semantics.
+	\end{block}
+\end{frame}
+
+% Slide 3: Inference Rules
+\section{Inference Rules}
+\begin{frame}{Inference Rules}
+	\begin{itemize}
+		\item **Certainty Weakening**:
+		\[
+		\text{If } \beta \leq \alpha, \quad (a, \alpha) \vdash (a, \beta).
+		\]
+		\item **Modus Ponens**:
+		\[
+		(\neg a \lor b, \alpha), \quad (a, \alpha) \vdash (b, \alpha).
+		\]
+		\item **Resolution**:
+		\[
+		(\neg a \lor b, \alpha), \quad (a \lor c, \alpha) \vdash (b \lor c, \alpha).
+		\]
+		\item **Weakest Link Resolution**:
+		\[
+		(\neg a \lor b, \alpha), \quad (a \lor c, \beta) \vdash (b \lor c, \min(\alpha, \beta)).
+		\]
+	\end{itemize}
+	\pause
+	\begin{block}{Example}
+		Consider:
+		\begin{align*}
+			&(\neg \text{fever} \lor \text{flu}, 0.9), \\
+			&(\text{fever} \lor \text{headache}, 0.8).
+		\end{align*}
+		Using weakest link resolution:
+		\[
+		(\text{flu} \lor \text{headache}, 0.8).
+		\]
+	\end{block}
+\end{frame}
+
+% Slide 4: Formula Weakening
+\begin{frame}{Formula Weakening}
+	\begin{itemize}
+		\item **Definition**:
+		\[
+		\text{If } a \vdash b \text{ in classical logic, then } (a, \alpha) \vdash (b, \alpha).
+		\]
+		\item Derived from resolution:
+		\[
+		(\neg a \lor b, 1), \quad (a, \alpha) \vdash (b, \alpha).
+		\]
+		\item Example:
+		\begin{itemize}
+			\item \(a \to b\): \(p \wedge q \vdash p\).
+			\item With certainty: \((p \wedge q, 0.7) \vdash (p, 0.7)\).
+		\end{itemize}
+	\end{itemize}
+	\pause
+	\begin{block}{Key Property}
+		Any valid deduction in propositional logic is valid in possibilistic logic, with certainty levels propagated.
+	\end{block}
+\end{frame}
+
+% Slide 5: Logical Base and Weighted Clauses
+\begin{frame}{Logical Base and Weighted Clauses}
+	\begin{itemize}
+		\item A possibilistic logic base is a collection of weighted formulas:
+		\[
+		\{(a_1, \alpha_1), (a_2, \alpha_2), \dots\}.
+		\]
+		\item Clauses can be rewritten in terms of their weights:
+		\begin{itemize}
+			\item Example:
+			\[
+			(a \land b, \alpha) \quad \Leftrightarrow \quad \{(a, \alpha), (b, \alpha)\}.
+			\]
+		\end{itemize}
+		\item Logical tautologies (\(t\)) hold with any certainty level:
+		\[
+		(t, \alpha), \quad \forall \alpha \in [0, 1].
+		\]
+	\end{itemize}
+\end{frame}
+
+% Slide 6: Example Summary
+\section{Example: Diagnoses}
+\begin{frame}{Example: Medical Diagnosis}
+	\begin{itemize}
+		\item Rule base:
+		\begin{align*}
+			&(\neg \text{fever} \lor \text{flu}, 0.9), \\
+			&(\neg \text{cough} \lor \text{cold}, 0.8), \\
+			&(\text{fever} \lor \text{headache}, 0.7).
+		\end{align*}
+		\item Facts:
+		\[
+		(\text{fever}, 1), \quad (\text{cough}, 1).
+		\]
+		\item Inference:
+		\begin{itemize}
+			\item From Modus Ponens:
+			\[
+			(\text{flu}, 0.9), \quad (\text{cold}, 0.8).
+			\]
+			\item From Resolution:
+			\[
+			(\text{flu} \lor \text{headache}, 0.7).
+			\]
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+% Slide 7: Conclusion
+\section{Conclusion}
+\begin{frame}{Conclusion}
+	\begin{itemize}
+		\item Possibilistic logic provides a robust framework for reasoning under uncertainty.
+		\item Key features:
+		\begin{itemize}
+			\item Certainty levels for qualitative inference.
+			\item Compatibility with classical logic.
+			\item Handling of conflicting information.
+		\end{itemize}
+		\item Applications:
+		\begin{itemize}
+			\item Medical diagnosis, decision-making, and knowledge representation.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\section{Introduction}
+\begin{frame}{What is Possibilistic Logic?}
+	\begin{itemize}
+		\item **Definition**: A logical framework for reasoning under uncertainty.
+		\item **Purpose**: Handles incomplete information and default rules with exceptions.
+		\item **Core Idea**:
+		\begin{itemize}
+			\item Classical logic enriched with certainty levels.
+			\item Focus on **default reasoning**: "What typically happens."
+		\end{itemize}
+		\item **Applications**:
+		\begin{itemize}
+			\item Nonmonotonic reasoning.
+			\item Knowledge representation and reasoning about exceptions.
+		\end{itemize}
+	\end{itemize}
+	\pause
+	\begin{block}{Example Context}
+		Default reasoning can handle statements like:
+		\begin{itemize}
+			\item "Birds fly (usually)." \((b \to f)\).
+			\item "Penguins do not fly." \((p \to \neg f)\).
+			\item "Penguins are birds." \((p \to b)\).
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+% Slide 2: Syntax of Possibilistic Logic
+\section{Syntax and Semantics}
+\begin{frame}{Basic Syntax}
+	\begin{itemize}
+		\item A possibilistic formula is a pair:
+		\[
+		(a, \alpha), \quad \text{where } \alpha \in [0, 1].
+		\]
+		\item Interpretation:
+		\begin{itemize}
+			\item \(a\): A propositional formula.
+			\item \(\alpha\): Certainty level (degree of belief in \(a\)).
+		\end{itemize}
+		\item **Examples**:
+		\begin{itemize}
+			\item \((b \to f, 0.9)\): Birds fly with certainty 0.9.
+			\item \((p \to \neg f, 1)\): Penguins do not fly, absolutely certain.
+		\end{itemize}
+	\end{itemize}
+	\pause
+	\begin{block}{Key Idea}
+		Certainty levels enrich classical logic, enabling reasoning about typical cases and exceptions.
+	\end{block}
+\end{frame}
+
+% Slide 3: Inference Rules
+\section{Inference Rules}
+\begin{frame}{Key Inference Rules}
+	\begin{itemize}
+		\item **Certainty Weakening**:
+		\[
+		\underline{\text{If } \beta \leq \alpha, \quad (a, \alpha) \vdash (a, \beta)}.
+		\]
+		\item **Modus Ponens**:
+		\[
+		\underline{(\neg a \lor b, \alpha), \quad (a, \alpha) \vdash (b, \alpha)}.
+		\]
+		\item **Resolution**:
+		\[
+		\underline{(\neg a \lor b, \alpha), \quad (a \lor c, \alpha) \vdash (b \lor c, \alpha)}.
+		\]
+		\item **Weakest Link Resolution**:
+		\[
+		\underline{(\neg a \lor b, \alpha), \quad (a \lor c, \beta) \vdash (b \lor c, \min(\alpha, \beta))}.
+		\]
+	\end{itemize}
+	\pause
+	\begin{block}{Penguin Example}
+		Consider:
+		\begin{align*}
+			(\neg b \lor f, 0.9), \quad (\neg p \lor \neg f, 1), \quad (\neg p \lor b, 1).
+		\end{align*}
+		If:
+		\[
+		(b, 1) \quad \text{(Tweety is a bird)}.
+		\]
+		Then:
+		\[
+		(\neg p \lor f, 0.9) \quad \text{(Tweety flies by default)}.
+		\]
+	\end{block}
+\end{frame}
+
+% Slide 4: Possibility Measures
+\section{Possibility Measures}
+\begin{frame}{Default Rules as Constraints}
+	\begin{itemize}
+		\item Default rule:
+		\[
+		\underline{\Pi(a \land b) > \Pi(a \land \neg b)}.
+		\]
+		- \(a \to b\): "If \(a\), then \(b\) is more plausible than \(\neg b\)."
+		\item In terms of necessity:
+		\[
+		\underline{N(b | a) = 1 - \Pi(\neg b | a) > 0}.
+		\]
+		\item Comparative relation:
+		\[
+		\underline{a \land b >_\Pi a \land \neg b}.
+		\]
+	\end{itemize}
+	\pause
+	\begin{block}{Penguin Example Constraints}
+		\begin{align*}
+			b \land f >_\Pi b \land \neg f \quad &\text{(birds fly)}. \\
+			p \land \neg f >_\Pi p \land f \quad &\text{(penguins don't fly)}. \\
+			p \land b >_\Pi p \land \neg b \quad &\text{(penguins are birds)}.
+		\end{align*}
+	\end{block}
+\end{frame}
+
+% Slide 5: Computing Necessity Levels
+\section{Example: Computing Necessity}
+\begin{frame}{Computing Necessity for Penguin Example}
+	\begin{itemize}
+		\item **Possibility Distribution**:
+		\[
+		\pi(\omega) \text{ values assigned to worlds } \omega.
+		\]
+		\item Worlds:
+		\[
+		\Omega = \{ \omega_0, \omega_1, \omega_2, \omega_3, \omega_4, \omega_5, \omega_6, \omega_7 \}.
+		\]
+		\pause
+		\item **Constraints**:
+		\begin{align*}
+			C_1 &: \max(\pi(\omega_6), \pi(\omega_7)) > \max(\pi(\omega_4), \pi(\omega_5)). \\
+			C_2 &: \max(\pi(\omega_5), \pi(\omega_1)) > \max(\pi(\omega_3), \pi(\omega_7)). \\
+			C_3 &: \max(\pi(\omega_5), \pi(\omega_7)) > \max(\pi(\omega_1), \pi(\omega_3)).
+		\end{align*}
+	\end{itemize}
+\end{frame}
+
+% Slide 6: Inference with Facts
+\begin{frame}{Inference with New Information}
+	\begin{itemize}
+		\item Factual knowledge:
+		\[
+		(b, 1) \quad \text{(Tweety is a bird)}.
+		\]
+		\item Possibilistic inference:
+		\[
+		K \cup \{(b, 1)\} \vdash (f, 1/3).
+		\]
+		- Default rule: Tweety flies with certainty \(1/3\).
+		\item Adding \(p = 1\) (Tweety is a penguin):
+		\[
+		K \cup F \vdash (\neg f, 2/3).
+		\]
+		- New inference: Tweety does not fly.
+	\end{itemize}
+\end{frame}
+
+% Slide 7: Conclusion
+\section{Conclusion}
+\begin{frame}{Conclusion}
+	\begin{itemize}
+		\item Possibilistic logic effectively models:
+		\begin{itemize}
+			\item Default reasoning with exceptions.
+			\item Reasoning under uncertainty.
+		\end{itemize}
+		\item **Penguin Example**:
+		\begin{itemize}
+			\item Illustrated how rules like "birds fly" and "penguins don't fly" can be reconciled.
+			\item Demonstrated inference and conflict resolution.
+		\end{itemize}
+		\item **Applications**:
+		\begin{itemize}
+			\item Knowledge bases.
+			\item Default rule modeling.
+			\item Nonmonotonic reasoning.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+
+\section{Introduction}
+%*
+%Handling Uncertainty in AI:
+%Uncertainty is a common feature of real-world information and knowledge.
+%Early AI systems, such as the MYCIN expert system (1970s), tackled uncertainty using certainty factors to represent degrees of belief and disbelief.
+%2.	The Role of Possibility Theory:
+%?	Possibility theory was introduced to represent imprecise and uncertain information. It complements probability theory by handling incomplete knowledge and degrees of plausibility.
+%?	Developed by Zadeh (1978) and extended by others like Dubois and Prade, possibility theory provides a framework for qualitative reasoning about uncertainty.
+%3.	Relation to Probability:
+%?	Unlike probability, which requires exact numeric values, possibility theory uses dual measures:
+%?	Possibility measure ($ \Pi $ ): Upper bounds of unknown probabilities.
+%?	Necessity measure ( N ): Lower bounds, representing degrees of certainty.
+%?	These measures allow for states of partial belief or ignorance, which are not well-handled by probabilistic approaches.
+%4.	Possibilistic Logic:
+%?	Possibilistic logic is the logical counterpart of possibility theory. It associates classical logic formulas with certainty levels, enabling qualitative reasoning.
+%?	It can manage inconsistencies by stratifying formulas based on their certainty levels, prioritizing the most reliable information.
+
+\begin{frame}{Introduction}
+
+\end{frame}
+
+\section{Syntax}
+
+Possibility distribution: \\
+$U$ is a set of affairs.\\
+A possibility distribution is a mapping $ \pi $ from $ U $ to a totally ordered scale $ S $, with top denoted by 1 and bottom by 0. In the finite case $ S= \left\lbrace 1 = \lambda_{1} >...\lambda_{n}  >\lambda_{n+1}  = 0 \right\rbrace  $. \\
+The function $ \pi $ represents the state of knowledge of an agent (about
+the actual state of affairs), also called an epistemic state.\\
+$ \pi \left( u \right) = 0 $  means that state $ u $ is rejected as impossible;\\
+$ \pi \left( u \right) = 1 $ means that state $ u $ is totally possible (= plausible).\\
+Specificity:
+A possibility distribution $ \pi $ is said to be at least as specific
+as another $ \pi ' $ if and only if for each state of affairs $ u $: $ \pi \left( u \right) \leq \pi' \left( u \right) $. Then, $ \pi $ is at least as restrictive and informative as  $ \pi ' $ , since it
+rules out at least as many states with at least as much strength.\\
+Complete knowledge: for some $ u_{0} $, $ \pi \left( u_{0} \right) = 1 $ and $ \pi \left( u \right) = 0 $, $ \forall u  \neq u_{0}$ (only $ u_{0} $, is possible). \\
+Complete ignorance: $ \pi \left( u \right) = 1 $,$ \forall u  \in U $ (all states are possible).
+
+Principle of minimal specificity: It states that any hypothesis not known to be impossible cannot be ruled out. It is a minimal commitment, cautious, information principle.
+
+Possibility and necessity functions:
+$\Pi(A) = \sup_{u \in A} \pi(u); \quad N(A) = \inf_{u \notin A} (1 - \pi(u))$
+
+\section{Example}
 
 \section{Section}
 
