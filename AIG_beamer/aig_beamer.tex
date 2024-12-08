@@ -40,6 +40,16 @@ University of Hagen, Germany}
 
 
 \section{Introduction}
+% Slide 1: Introduction
+\begin{frame}{What is Possibilistic Logic?}
+	\begin{itemize}
+		\item \textbf{Definition}: Possibilistic logic is a weighted logic that handles uncertainty in a qualitative way by associating certainty to classical logic formulas		
+		\item \textbf{Applications}: Used in expert systems, decision-making, and AI for reasoning under uncertainty.
+	\end{itemize}
+\end{frame}
+
+
+\section{Syntax}
 \begin{frame}{What are Possibility Distributions?}
 	\begin{itemize}
 		\item A \textbf{possibility distribution} is a mapping:
@@ -52,24 +62,17 @@ University of Hagen, Germany}
 			\item \( S \): Totally ordered scale (\( S = [0, 1] \) or finite chains).
 			\item \( \pi(u) \): Degree of possibility (plausibility) of state \( u \).
 		\end{itemize}
-		\item Top of the scale: \( 1 \) (fully plausible).\\
-		Bottom of the scale: \( 0 \) (impossible).
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Interpretation of Possibility Distributions}
-	\begin{itemize}
+		\item Top of the scale: \( 1 \) (fully plausible).
+		\item Bottom of the scale: \( 0 \) (impossible).
 		\item \( \pi(u) = 0 \): State \( u \) is \textbf{impossible}.
 		\item \( \pi(u) = 1 \): State \( u \) is \textbf{fully plausible}.
 		\item Higher \( \pi(u) \) values mean greater plausibility.
 	\end{itemize}
-	\pause
 	\begin{block}{Normalization Condition}
 		At least one state \( u \in U \) must have \( \pi(u) = 1 \) (an actual state exists).
 	\end{block}
 \end{frame}
 
-\section{Key Concepts}
 \begin{frame}{Specificity of a Possibility Distribution}
 	\begin{itemize}
 		\item A distribution \( \pi \) is \textbf{at least as specific} as \( \pi' \) if:
@@ -84,24 +87,6 @@ University of Hagen, Germany}
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{The Principle of Minimal Specificity}
-	\begin{block}{Definition}
-		Any hypothesis not known to be impossible cannot be ruled out. Possibility degrees should be maximized under given constraints.
-	\end{block}
-	\pause
-	\begin{itemize}
-		\item If \( x \) is restricted by fuzzy set \( F \) (\( \mu_F(x) \)), then:
-		\[
-		\pi(x) \leq \mu_F(x).
-		\]
-		\item Combining multiple pieces of knowledge:
-		\[
-		\pi(x) = \min_{i=1}^n \mu_{F_i}(x).
-		\]
-	\end{itemize}
-\end{frame}
-
-\section{Possibility and Necessity Measures}
 \begin{frame}{Possibility and Necessity Functions}
 	\begin{itemize}
 		\item Possibility measure:
@@ -159,30 +144,7 @@ University of Hagen, Germany}
 	\end{itemize}
 \end{frame}
 
-% Slide 1: Introduction
-\section{Introduction}
-\begin{frame}{What is Possibilistic Logic?}
-	\begin{itemize}
-		\item **Definition**: Possibilistic logic is an extension of classical logic designed to handle:
-		\begin{itemize}
-			\item **Uncertainty**: Representing incomplete knowledge.
-			\item **Plausibility**: Differentiating between plausible and less plausible states.
-		\end{itemize}
-		\item **Core Measures**:
-		\begin{itemize}
-			\item **Possibility (\(\Pi\))**: Indicates how plausible an event is.
-			\item **Necessity (\(N\))**: Indicates how certain an event is.
-		\end{itemize}
-		\item **Applications**:
-		\begin{itemize}
-			\item Used in expert systems, decision-making, and AI for reasoning under uncertainty.
-		\end{itemize}
-	\end{itemize}
-	\pause
-	\begin{block}{Key Idea}
-		Possibilistic logic prioritizes **qualitative reasoning** over quantitative probabilities, making it useful for handling incomplete or vague information.
-	\end{block}
-\end{frame}
+
 
 % Slide 2: Syntax
 \section{Syntax}
