@@ -21,6 +21,7 @@
 
 %=========================================================================================================================
 \title{Introduction into Possibilistic Logic}
+\subtitle{Possibilistic Logic - An Overview by Didier Dubois and Henri Prade}
 \author[A. Köhn]{Alexander Köhn}
 \institute{Artificial Intelligence Group,\\
 University of Hagen, Germany}
@@ -38,18 +39,35 @@ University of Hagen, Germany}
 \end{frame}
 \nologo
 
+% Greeting
+% Welcome to my presentation about Possibilistic Logic
+% I am currently in my second year in the Master Praktische Informatik
+% As a main source I have used the overview chapter: Possibilistic Logic - An Overview Didier Dubois and Henri Prade
+
+% Overview
+% After a short Introduction and history,
+% we will dive into possibility theory, as this is necessary to step further to possibilitc logic
+% I will introduce you to possibilistic logic and explain the semantic and syntactic aspects
+% Following with the explanation, I am providing an example
+% and end with information about real world usage
+
 
 \section{Introduction}
 % Slide 1: Introduction
 \begin{frame}{What is Possibilistic Logic?}
 	\begin{itemize}
-		\item \textbf{Definition}: Possibilistic logic is a weighted logic that handles uncertainty in a qualitative way by associating certainty to classical logic formulas		
+		\item \textbf{Definition}: Possibilistic logic is a weighted logic that handles uncertainty in a qualitative way by adding certainty to classical logic formulas		
 		\item \textbf{Applications}: Used in expert systems, decision-making, and AI for reasoning under uncertainty.
 	\end{itemize}
 \end{frame}
+% ability to deal with inconsistency
+% modal flavor
+% remains very close to classical logic
+% developed for about thirty years
+% it can also model preferences
 
-
-\section{Syntax}
+\section{Possibility Theory}
+% Now I will introduce you first into Possibilty theory
 \begin{frame}{What are Possibility Distributions?}
 	\begin{itemize}
 		\item A \textbf{possibility distribution} is a mapping:
@@ -58,20 +76,20 @@ University of Hagen, Germany}
 		\]
 		where:
 		\begin{itemize}
-			\item \( U \): Set of states (domain of an attribute, Cartesian product, propositional interpretations, etc.).
+			\item \( U \): Set of states
 			\item \( S \): Totally ordered scale (\( S = [0, 1] \) or finite chains).
 			\item \( \pi(u) \): Degree of possibility (plausibility) of state \( u \).
 		\end{itemize}
-		\item Top of the scale: \( 1 \) (fully plausible).
-		\item Bottom of the scale: \( 0 \) (impossible).
 		\item \( \pi(u) = 0 \): State \( u \) is \textbf{impossible}.
-		\item \( \pi(u) = 1 \): State \( u \) is \textbf{fully plausible}.
-		\item Higher \( \pi(u) \) values mean greater plausibility.
+		\item \( \pi(u) = 1 \): State \( u \) is \textbf{fully possible}.
 	\end{itemize}
 	\begin{block}{Normalization Condition}
 		At least one state \( u \in U \) must have \( \pi(u) = 1 \) (an actual state exists).
 	\end{block}
 \end{frame}
+% To start with possibility theory we need to first understand possibility distributions
+% A possibility distribution is a mapping ? from U to a totally ordered scale S, with top denoted by 1 and bottom by 0
+%function ? represents the state of knowledge of an agent (about the actual state of a?airs), also called an epistemic state distinguishing what is plausible from what is less plausible, what is the normal course of things from what is not, what is surprising from what is expected. It represents a flexible restriction on what is the actual state of facts with the following conventions (similar to probability
 
 \begin{frame}{Specificity of a Possibility Distribution}
 	\begin{itemize}
@@ -84,8 +102,10 @@ University of Hagen, Germany}
 			\item \textbf{Complete knowledge:} \( \pi(u_0) = 1 \), \( \pi(u) = 0 \) for all \( u \neq u_0 \).
 			\item \textbf{Complete ignorance:} \( \pi(u) = 1 \) for all \( u \in U \).
 		\end{itemize}
+		\item Principle of minimal specificity: It states that any hypothesis not known to be impossible cannot be ruled out. It is a minimal commitment, cautious, information principle.
 	\end{itemize}
 \end{frame}
+% A possibility distribution ? is said to be at least as specific as another ??if and only if for each state of a?airs u: ?(u) ???(u) Then, ? is at least as restrictive and informative as ??, since it rules out at least as many states with at least as much strength.
 
 \begin{frame}{Possibility and Necessity Functions}
 	\begin{itemize}
@@ -100,7 +120,6 @@ University of Hagen, Germany}
 		\]
 		Evaluates the extent to which \( A \) is certainly implied by \( \pi \).
 	\end{itemize}
-	\pause
 	\begin{block}{Duality Relationship}
 		\[
 		N(A) = 1 - \Pi(A^c).
@@ -108,6 +127,8 @@ University of Hagen, Germany}
 		Where \( A^c \) is the complement of \( A \).
 	\end{block}
 \end{frame}
+% Given a simple query of the form ?does event A occur?? (is the corresponding proposition a true?), where A is a subset of states, the set of models of a, the response to the query can be obtained by computing degrees of possibility and necessity respectively
+
 
 \begin{frame}{Key Properties of Measures}
 	\begin{itemize}
@@ -121,36 +142,70 @@ University of Hagen, Germany}
 		\]
 	\end{itemize}
 \end{frame}
+% Possibility measures satisfy the characteristic ?maxitivity? property
+% Necessity measures satisfy an axiom dual to that of possibility measures
+% N(a?b) = min(N(a),N(b)), expresses that to be certain about a?b, one has to be certain about a and to be certain about b.
+% Note also that we only have N(A?B) ? max(N(A),N(B)).This goes well with the idea that one may be certain about the event A?B, without being really certain about more specific events such as A and B.
 
-\section{Examples}
-\begin{frame}{Example: Knowledge Scenarios}
+\begin{frame}{Certainty Qualification in Possibilistic Logic}
 	\begin{itemize}
-		\item \( U = \{u_1, u_2, u_3\} \), and \( \pi(u_1) = 0.8, \pi(u_2) = 0.6, \pi(u_3) = 0.2 \).
-		\item For \( A = \{u_1, u_2\} \):
-		\begin{align*}
-			\Pi(A) &= \sup_{u \in A} \pi(u) = \max(\pi(u_1), \pi(u_2)) = 0.8. \\
-			N(A) &= \inf_{u \notin A} (1 - \pi(u)) = 1 - \pi(u_3) = 0.8.
-		\end{align*}
+		\item Certainty-qualified information: "A is certain to degree \(\alpha\)" is modeled by the constraint: 
+		\[
+		N(A) \geq \alpha
+		\]
+		\item Least Specific Possibility Distribution:
+		\[
+		\pi_{(A, \alpha)}(u) = 
+		\begin{cases} 
+			1 & \text{if } u \in A, \\ 
+			1 - \alpha & \text{otherwise}.
+		\end{cases}
+		\]
+		\begin{itemize}
+			\item If \(\alpha = 1\): \(\pi(A, \alpha)\) becomes the characteristic function of \(A\).
+			\item If \(\alpha = 0\): \(\pi(A, \alpha)\) represents total ignorance.
+		\end{itemize}
 	\end{itemize}
 \end{frame}
+% Human knowledge is often expressed as statements with **belief degrees**.
+%  Represents a family of possible epistemic states \(\pi\) that satisfy this constraint.
+% Serves as a building block for constructing possibility distributions from multiple uncertain knowledge pieces.
+% Integral to the semantics of possibilistic logic.
 
-\section{Applications}
-\begin{frame}{Applications of Possibility Theory}
+\begin{frame}{Example}
 	\begin{itemize}
-		\item **Default Reasoning**: Handling incomplete knowledge in expert systems.
-		\item **Medical Diagnosis**: Prioritizing plausible diagnoses based on symptoms.
-		\item **Decision-Making**: Evaluating options under uncertainty.
-		\item **Fuzzy Control Systems**: Representing and processing vague information.
+		\item A doctor is trying to diagnose a patient based on symptoms and diseases:
+		\begin{itemize}
+			\item \( U = \{\text{flu}, \text{cold}, \text{allergy}\} \).
+			\item Possibility distribution \(\pi\) based on symptom severity:
+			\[
+			\pi(\text{flu}) = 0.9, \quad \pi(\text{cold}) = 0.6, \quad \pi(\text{allergy}) = 0.3.
+			\]
+		\end{itemize}
+		\item The doctor evaluates the possibility and necessity measures for a hypothesis \( A \):
+		\[ 
+		A = \{\text{flu}, \text{cold}\}
+		\]
+		\item Calculation:
+		\begin{align*}
+			\Pi(A) &= \sup_{u \in A} \pi(u) = \max(\pi(\text{flu}), \pi(\text{cold})) = 0.9. \\
+			N(A) &= \inf_{u \notin A} (1 - \pi(u)) = 1 - \pi(\text{allergy}) = 1 - 0.3 = 0.7.
+		\end{align*}
+		\item Interpretation:
+		\begin{itemize}
+			\item Possibility (\(\Pi(A)\)): Flu or cold is highly possible (\(0.9\)).
+			\item Necessity (\(N(A)\)): It is moderately certain (\(0.7\)) that the patient has either flu or cold.
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 
 
 % Slide 2: Syntax
-\section{Syntax}
-\begin{frame}{Syntax of Possibilistic Logic}
+\section{Syntax of Possibilistic Logic}
+\begin{frame}{Possibilistic Logic}
 	\begin{itemize}
-		\item A possibilistic logic formula is represented as:
+		\item A basic  possibilistic logic formula is represented as:
 		\[
 		(a, \alpha)
 		\]
@@ -165,57 +220,10 @@ University of Hagen, Germany}
 			\item The higher \(\alpha\), the stronger the belief in \(a\).
 		\end{itemize}
 	\end{itemize}
-	\pause
-	\begin{block}{Example}
-		Rule: \textit{"If fever, then flu" is 90\% certain.}
-		\[
-		(\text{fever} \to \text{flu}, 0.9)
-		\]
-		\begin{itemize}
-			\item This means: "If fever is observed, it is 90\% certain that the patient has flu."
-		\end{itemize}
-	\end{block}
 \end{frame}
-
-% Slide 3: Measures of Plausibility
-\section{Possibility and Necessity}
-\begin{frame}{Measures of Possibility and Necessity}
-	\begin{itemize}
-		\item **Possibility Measure (\(\Pi\))**:
-		\[
-		\Pi(A) = \sup_{u \in A} \pi(u)
-		\]
-		\begin{itemize}
-			\item Evaluates the highest degree of plausibility in set \(A\).
-		\end{itemize}
-		\item **Necessity Measure (\(N\))**:
-		\[
-		N(A) = \inf_{u \notin A} (1 - \pi(u))
-		\]
-		\begin{itemize}
-			\item Evaluates how strongly \(A\) is implied by the information.
-		\end{itemize}
-		\item **Duality**:
-		\[
-		N(A) = 1 - \Pi(A^c)
-		\]
-	\end{itemize}
-	\pause
-	\begin{block}{Example (Diagnoses)}
-		Let \(U = \{\text{flu}, \text{cold}, \text{allergy}\}\) and:
-		\[
-		\pi(\text{flu}) = 0.9, \pi(\text{cold}) = 0.6, \pi(\text{allergy}) = 0.2
-		\]
-		For \(A = \{\text{flu}, \text{cold}\}\):
-		\begin{itemize}
-			\item \(\Pi(A) = \max(0.9, 0.6) = 0.9\).
-			\item \(N(A) = \min(1 - 0.2) = 0.8\).
-		\end{itemize}
-	\end{block}
-\end{frame}
+% certainty level ? ?(0,1], viewed as a lower bound of a necessity measure, i.e., (a,?) is understood as N(a) ??
 
 % Slide 4: Inference
-\section{Inference in Possibilistic Logic}
 \begin{frame}{Inference Rules}
 	\begin{itemize}
 		\item **Weakened Certainty**:
@@ -245,7 +253,6 @@ University of Hagen, Germany}
 \end{frame}
 
 % Slide 5: Handling Inconsistencies
-\section{Handling Inconsistencies}
 \begin{frame}{Managing Inconsistent Information}
 	\begin{itemize}
 		\item Possibilistic logic can handle conflicting information by:
@@ -264,34 +271,8 @@ University of Hagen, Germany}
 	\end{itemize}
 \end{frame}
 
-% Slide 6: Applications
-\section{Applications}
-\begin{frame}{Applications of Possibilistic Logic}
-	\begin{itemize}
-		\item **Medical Diagnosis**:
-		\begin{itemize}
-			\item Rules with certainty for differential diagnoses.
-		\end{itemize}
-		\item **Decision-Making**:
-		\begin{itemize}
-			\item Selecting actions under incomplete knowledge.
-		\end{itemize}
-		\item **Knowledge Bases**:
-		\begin{itemize}
-			\item Handling updates with belief revision.
-		\end{itemize}
-	\end{itemize}
-	\pause
-	\begin{block}{Example Wrap-Up}
-		Throughout the presentation, we used:
-		\begin{itemize}
-			\item Syntax: Representation of rules (\((a, \alpha)\)).
-			\item Measures: Calculating \(\Pi(A)\) and \(N(A)\).
-			\item Inference: Combining uncertain rules.
-			\item Inconsistencies: Managing conflicts in rules.
-		\end{itemize}
-	\end{block}
-\end{frame}
+
+
 
 \section{Introduction}
 \begin{frame}{What is Possibilistic Logic?}
@@ -647,7 +628,44 @@ University of Hagen, Germany}
 		\end{itemize}
 	\end{itemize}
 \end{frame}
+% Slide 6: Applications
+\section{Applications}
+\begin{frame}{Applications of Possibilistic Logic}
+	\begin{itemize}
+		\item **Medical Diagnosis**:
+		\begin{itemize}
+			\item Rules with certainty for differential diagnoses.
+		\end{itemize}
+		\item **Decision-Making**:
+		\begin{itemize}
+			\item Selecting actions under incomplete knowledge.
+		\end{itemize}
+		\item **Knowledge Bases**:
+		\begin{itemize}
+			\item Handling updates with belief revision.
+		\end{itemize}
+	\end{itemize}
+	\pause
+	\begin{block}{Example Wrap-Up}
+		Throughout the presentation, we used:
+		\begin{itemize}
+			\item Syntax: Representation of rules (\((a, \alpha)\)).
+			\item Measures: Calculating \(\Pi(A)\) and \(N(A)\).
+			\item Inference: Combining uncertain rules.
+			\item Inconsistencies: Managing conflicts in rules.
+		\end{itemize}
+	\end{block}
+\end{frame}
 
+\section{Applications}
+\begin{frame}{Applications of Possibility Theory}
+	\begin{itemize}
+		\item **Default Reasoning**: Handling incomplete knowledge in expert systems.
+		\item **Medical Diagnosis**: Prioritizing plausible diagnoses based on symptoms.
+		\item **Decision-Making**: Evaluating options under uncertainty.
+		\item **Fuzzy Control Systems**: Representing and processing vague information.
+	\end{itemize}
+\end{frame}
 
 
 \section{Introduction}
