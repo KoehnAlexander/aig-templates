@@ -214,43 +214,75 @@ University of Hagen, Germany}
 			\item \(a\): A classical logic formula (e.g., \(p \to q\)).
 			\item \(\alpha \in [0, 1]\): Certainty level (minimum necessity degree of \(a\)).
 		\end{itemize}
-		\item **Interpretation**:
+		\item Interpretation:
 		\begin{itemize}
 			\item \( (a, \alpha) \): "Formula \(a\) is at least certain to degree \(\alpha\)."
 			\item The higher \(\alpha\), the stronger the belief in \(a\).
 		\end{itemize}
 	\end{itemize}
 \end{frame}
-% certainty level ? ?(0,1], viewed as a lower bound of a necessity measure, i.e., (a,?) is understood as N(a) ??
+% A basic possibilistic logic formula is a pair (a,?) made of a classical logic formula a associated with a certainty level ? ?(0,1], viewed as a lower bound of a necessity measure, i.e., (a,?) is understood as N(a) ??
+% In the following, we only consider the case of (basic) possibilistic propositional logic, ?L for short, i.e., possibilistic logic formulas (a,?) are such that a is a formula in a propositional language
 
 % Slide 4: Inference
-\begin{frame}{Inference Rules}
+\begin{frame}{Axioms and Inference Rules}
 	\begin{itemize}
-		\item **Weakened Certainty**:
+		\item Certainty weakening:
 		\[
-		(a, \alpha) \Rightarrow (a, \beta), \quad \text{if } \alpha \geq \beta
+		\text{If } \beta \leq \alpha, \quad (a, \alpha) \vdash (a, \beta)
 		\]
-		\item **Min-Based Conjunction**:
+		\begin{exampleblock}{Example}
+		\((\text{It will rain tomorrow}, 0.9) \vdash (\text{It will rain tomorrow}, 0.7)\)  
+		- If the certainty level decreases, the conclusion still holds.
+		\end{exampleblock}
+		\item Modus ponens:
 		\[
-		N(a \land b) = \min(N(a), N(b))
+		(\neg a \lor b, \alpha), \quad (a, \alpha) \vdash (b, \alpha)
 		\]
-		\item **Resolution**:
-		\[
-		(\neg a \lor b, \alpha), (a \lor c, \beta) \Rightarrow (b \lor c, \min(\alpha, \beta))
-		\]
+		\begin{exampleblock}{Example}
+			\((\neg \text{fever} \lor \text{flu}, 0.8), \quad (\text{fever}, 0.8) \vdash (\text{flu}, 0.8)\)  
+			- If fever is observed, flu is inferred with certainty 0.8.
+		\end{exampleblock}
+		
 	\end{itemize}
-	\pause
-	\begin{block}{Example (Continued)}
-		Using rules:
-		\[
-		(\neg \text{fever} \lor \text{flu}, 0.9), \quad (\text{fever} \lor \text{headache}, 0.8)
-		\]
-		Inference:
-		\[
-		(\text{flu} \lor \text{headache}, 0.8)
-		\]
-	\end{block}
 \end{frame}
+
+\begin{frame}{Axioms and Inference Rules}
+	\begin{itemize}
+		\item Resolution:
+		\[
+		(\neg a \lor b, \alpha), \quad (a \lor c, \alpha) \vdash (b \lor c, \alpha)
+		\]
+		\begin{exampleblock}{Example}
+			\((\neg \text{fever} \lor \text{flu}, 0.8), \quad (\text{fever} \lor \text{headache}, 0.8) \vdash (\text{flu} \lor \text{headache}, 0.8)\)
+		\end{exampleblock}
+		\item Weakest link resolution:
+		\[
+		(\neg a \lor b, \alpha), \quad (a \lor c, \beta) \vdash (b \lor c, \min(\alpha, \beta))
+		\]
+		\begin{exampleblock}{Example}
+			\((\neg \text{fever} \lor \text{flu}, 0.9), \quad (\text{fever} \lor \text{headache}, 0.7) \vdash (\text{flu} \lor \text{headache}, 0.7)\)
+			- The weakest certainty (0.7) determines the conclusion.
+		\end{exampleblock}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Axioms and Inference Rules}
+	\begin{itemize}
+		\item Formula weakening:
+		\[
+		\text{If } a \vdash b \text{ in classical logic, then } (a, \alpha) \vdash (b, \alpha).
+		\]
+		\begin{exampleblock}{Example}
+			\((\text{fever}, 0.9) \vdash (\text{flu}, 0.9)\)
+			- Logical implication is preserved with the same certainty level.
+		\end{exampleblock}
+	\end{itemize}
+\end{frame}
+
+% The idea that in a reasoning chain, the certainty level of the conclusion is the smallest of the certainty levels of the formulas involved in the premises is at the basis of the syntactic approach proposed for plausible reasoning, and would date back to Theophrastus, an Aristotle?s follower.
+% It turns out that any valid deduction in propositional logic is valid in possibilistic logic as well where the corresponding propositions are associated with any level ??(0,1]
+
 
 % Slide 5: Handling Inconsistencies
 \begin{frame}{Managing Inconsistent Information}
@@ -271,113 +303,6 @@ University of Hagen, Germany}
 	\end{itemize}
 \end{frame}
 
-
-
-
-\section{Introduction}
-\begin{frame}{What is Possibilistic Logic?}
-	\begin{itemize}
-		\item **Definition**: Possibilistic logic is an extension of classical logic that incorporates a certainty level for each formula.
-		\item **Purpose**: Designed for reasoning under qualitative uncertainty and preferences.
-		\item **Core Characteristics**:
-		\begin{itemize}
-			\item A formula in possibilistic logic is a pair \((a, \alpha)\), where:
-			\begin{itemize}
-				\item \(a\): A classical logical formula (propositional or first-order logic).
-				\item \(\alpha \in [0,1]\): A certainty level.
-			\end{itemize}
-			\item Certainty levels (\(\alpha\)) represent the confidence or priority of the formula.
-		\end{itemize}
-		\item **Scope**:
-		\begin{itemize}
-			\item Classical logic is retained: Formulas are either true or false.
-			\item Extensions exist for fuzzy predicates, but basic possibilistic logic does not handle degrees of truth.
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-% Slide 2: Syntax
-\section{Syntax of Possibilistic Logic}
-\begin{frame}{Basic Syntax}
-	\begin{itemize}
-		\item A possibilistic logic formula is written as:
-		\[
-		(a, \alpha), \quad \text{where } \alpha \in [0, 1].
-		\]
-		\item Interpretation:
-		\begin{itemize}
-			\item \(a\): A propositional formula.
-			\item \(\alpha\): The minimum necessity level associated with \(a\).
-		\end{itemize}
-		\item **Examples**:
-		\begin{itemize}
-			\item \((p \to q, 0.8)\): "If \(p\), then \(q\) with certainty 0.8."
-			\item \((\neg p, 1)\): "Not \(p\) is absolutely certain."
-		\end{itemize}
-	\end{itemize}
-	\pause
-	\begin{block}{Key Idea}
-		Possibilistic logic extends classical logic by associating a priority (certainty) level to each formula while maintaining Boolean semantics.
-	\end{block}
-\end{frame}
-
-% Slide 3: Inference Rules
-\section{Inference Rules}
-\begin{frame}{Inference Rules}
-	\begin{itemize}
-		\item **Certainty Weakening**:
-		\[
-		\text{If } \beta \leq \alpha, \quad (a, \alpha) \vdash (a, \beta).
-		\]
-		\item **Modus Ponens**:
-		\[
-		(\neg a \lor b, \alpha), \quad (a, \alpha) \vdash (b, \alpha).
-		\]
-		\item **Resolution**:
-		\[
-		(\neg a \lor b, \alpha), \quad (a \lor c, \alpha) \vdash (b \lor c, \alpha).
-		\]
-		\item **Weakest Link Resolution**:
-		\[
-		(\neg a \lor b, \alpha), \quad (a \lor c, \beta) \vdash (b \lor c, \min(\alpha, \beta)).
-		\]
-	\end{itemize}
-	\pause
-	\begin{block}{Example}
-		Consider:
-		\begin{align*}
-			&(\neg \text{fever} \lor \text{flu}, 0.9), \\
-			&(\text{fever} \lor \text{headache}, 0.8).
-		\end{align*}
-		Using weakest link resolution:
-		\[
-		(\text{flu} \lor \text{headache}, 0.8).
-		\]
-	\end{block}
-\end{frame}
-
-% Slide 4: Formula Weakening
-\begin{frame}{Formula Weakening}
-	\begin{itemize}
-		\item **Definition**:
-		\[
-		\text{If } a \vdash b \text{ in classical logic, then } (a, \alpha) \vdash (b, \alpha).
-		\]
-		\item Derived from resolution:
-		\[
-		(\neg a \lor b, 1), \quad (a, \alpha) \vdash (b, \alpha).
-		\]
-		\item Example:
-		\begin{itemize}
-			\item \(a \to b\): \(p \wedge q \vdash p\).
-			\item With certainty: \((p \wedge q, 0.7) \vdash (p, 0.7)\).
-		\end{itemize}
-	\end{itemize}
-	\pause
-	\begin{block}{Key Property}
-		Any valid deduction in propositional logic is valid in possibilistic logic, with certainty levels propagated.
-	\end{block}
-\end{frame}
 
 % Slide 5: Logical Base and Weighted Clauses
 \begin{frame}{Logical Base and Weighted Clauses}
@@ -446,33 +371,6 @@ University of Hagen, Germany}
 	\end{itemize}
 \end{frame}
 
-\section{Introduction}
-\begin{frame}{What is Possibilistic Logic?}
-	\begin{itemize}
-		\item **Definition**: A logical framework for reasoning under uncertainty.
-		\item **Purpose**: Handles incomplete information and default rules with exceptions.
-		\item **Core Idea**:
-		\begin{itemize}
-			\item Classical logic enriched with certainty levels.
-			\item Focus on **default reasoning**: "What typically happens."
-		\end{itemize}
-		\item **Applications**:
-		\begin{itemize}
-			\item Nonmonotonic reasoning.
-			\item Knowledge representation and reasoning about exceptions.
-		\end{itemize}
-	\end{itemize}
-	\pause
-	\begin{block}{Example Context}
-		Default reasoning can handle statements like:
-		\begin{itemize}
-			\item "Birds fly (usually)." \((b \to f)\).
-			\item "Penguins do not fly." \((p \to \neg f)\).
-			\item "Penguins are birds." \((p \to b)\).
-		\end{itemize}
-	\end{block}
-\end{frame}
-
 % Slide 2: Syntax of Possibilistic Logic
 \section{Syntax and Semantics}
 \begin{frame}{Basic Syntax}
@@ -499,7 +397,6 @@ University of Hagen, Germany}
 \end{frame}
 
 % Slide 3: Inference Rules
-\section{Inference Rules}
 \begin{frame}{Key Inference Rules}
 	\begin{itemize}
 		\item **Certainty Weakening**:
@@ -645,7 +542,6 @@ University of Hagen, Germany}
 			\item Handling updates with belief revision.
 		\end{itemize}
 	\end{itemize}
-	\pause
 	\begin{block}{Example Wrap-Up}
 		Throughout the presentation, we used:
 		\begin{itemize}
@@ -657,7 +553,6 @@ University of Hagen, Germany}
 	\end{block}
 \end{frame}
 
-\section{Applications}
 \begin{frame}{Applications of Possibility Theory}
 	\begin{itemize}
 		\item **Default Reasoning**: Handling incomplete knowledge in expert systems.
@@ -710,7 +605,7 @@ Principle of minimal specificity: It states that any hypothesis not known to be 
 Possibility and necessity functions:
 $\Pi(A) = \sup_{u \in A} \pi(u); \quad N(A) = \inf_{u \notin A} (1 - \pi(u))$
 
-\section{Example}
+
 
 \section{Section}
 
