@@ -91,15 +91,14 @@ University of Hagen, Germany}
 			\item \( \pi(u) = 1 \): State \( u \) is \textbf{fully possible}.
 		\end{itemize}
 	\end{exampleblock}
-	\begin{block}{Normalization Condition}
-		At least one state \( u \in U \) must have \( \pi(u) = 1 \) (an actual state exists).
-	\end{block}
 \end{frame}
 % Notes:
 % To start with possibility theory we need to first understand possibility distributions
 % A possibility distribution is a mapping ? from U to a totally ordered scale S, with top denoted by 1 and bottom by 0
 % For the further explanations in this presentation we will use the ordered scale 0 to 1
 % The function ? represents the state of knowledge of an agent (about the actual state of a?airs), also called an epistemic state distinguishing what is plausible from what is less plausible, what is the normal course of things from what is not, what is surprising from what is expected. It represents a flexible restriction on what is the actual state of facts with the following conventions (similar to probability
+% In exhaustive worlds: 
+% At least one state \( u \in U \) must have \( \pi(u) = 1 \) (an actual state exists).
 
 % Slide 3:
 \begin{frame}{Specificity of a Possibility Distribution}
@@ -414,7 +413,6 @@ University of Hagen, Germany}
 		\]
 		\begin{itemize}
 		\item A possibilistic inference \((a, \alpha)\) depends only on formulas with certainty levels \(\geq \alpha\).
-		\item These formulas can be reduced to classical logic formulas for inference.
 		\end{itemize}
 	\end{block}
 	\begin{exampleblock}{Example}
@@ -431,7 +429,6 @@ University of Hagen, Germany}
 	\end{exampleblock}
 \end{frame}
 % Notes:
-
 
 
 % Slide 17:
@@ -478,62 +475,71 @@ University of Hagen, Germany}
 % Logic Programming: Possibilistic logic has influenced logic programming and constraint satisfaction problems.
 % Applications in Diagnosis and Recognition: Used in diagnosis (e.g., medical diagnosis) and recognition problems (e.g., pattern recognition).
 
-
+% Slide 19:
 \begin{frame}{Default reasoning}
-	\begin{itemize}
-		\item Default rule:
+	\begin{block}{Default rule}
 		\[
 		\Pi (a \land b) > \Pi(a \land \neg b)
 		\]
-		- \(a \to b\): "If \(a\), then \(b\) is more plausible than \(\neg b\)."
+		"If \(a\), then \(b\) is more plausible than \(\neg b\)."
+	\end{block}
+	\begin{itemize}
 		\item In terms of necessity:
 		\[
 		N(b | a) = 1 - \Pi(\neg b | a) > 0
 		\]
-		\item Comparative relation:
+		\item Comparative possibility relation:
 		\[
 		a \land b >_\Pi a \land \neg b
 		\]
 	\end{itemize}
 \end{frame}
-% It expresses that in the context where ais true, there exists situations where having b true is strictly more satisfactory than any situations where b is false in the same context.
+% Notes:
+% It expresses that in the context where a is true, there exists situations where having b true is strictly more satisfactory than any situations where b is false in the same context.
 
-
-% Slide 3: Penguin Example - Rules and Constraints
+% Slide 20:
 \begin{frame}{Penguin Example: Rules and Constraints}
-	\begin{itemize}
-		\item Default Rules:
+	\begin{exampleblock}{Default Rules}
 		\begin{align*}
 			d_1 &: b \rightarrow f \quad (\text{"Birds fly"}), \\
 			d_2 &: p \rightarrow \neg f \quad (\text{"Penguins do not fly"}), \\
 			d_3 &: p \rightarrow b \quad (\text{"Penguins are birds"}).
 		\end{align*}
+	\end{exampleblock}
+	\begin{itemize}
 		\item Constraints:
 		\begin{align*}
 			C_1 &: b \land f >_\Pi b \land \neg f \quad \text{(birds fly)}. \\
 			C_2 &: p \land \neg f >_\Pi p \land f \quad \text{(penguins don't fly)}. \\
 			C_3 &: p \land b >_\Pi p \land \neg b \quad \text{(penguins are birds)}.
 		\end{align*}
-		\item Principle of Minimal Specificity: Assigns possibility levels to worlds while satisfying these constraints.
 	\end{itemize}
 \end{frame}
 
-% Slide 4: Penguin Example - Worlds and Possibility
+% Slide 21:
 \begin{frame}{Penguin Example: Worlds and Possibility}
-	\begin{itemize}
-		\item Worlds (\(\Omega\)):
+	\begin{block}{Worlds (\(\Omega\))}
+		\(\Omega\) is the finite set of interpretations of the considered propositional language.
+	\end{block}
+	\begin{exampleblock}{Worlds (\(\Omega\))}
+		Worlds (\(\Omega\)):
 		\[
 		\Omega = \{\omega_0, \omega_1, \omega_2, \omega_3, \omega_4, \omega_5, \omega_6, \omega_7\},
 		\]
-		where each \(\omega_i\) represents a unique combination of \(b, f, p\) (bird, fly, penguin), e.g: $  \omega_0 : \neg b \land \neg f \land \neg p, \quad
-		\omega_1 : \neg b \land \neg f \land p, \quad
-		\omega_2 : \neg b \land f \land \neg p, \quad
-		\omega_3 : \neg b \land f \land p, \quad
-		\omega_4 : b \land \neg f \land \neg p, \quad
-		\omega_5 : b \land \neg f \land p, \quad
-		\omega_6 : b \land f \land \neg p, \quad
-		\omega_7 : b \land f \land p $
-		\vspace{0.3cm}
+		where each \(\omega_i\) represents a unique combination of \(b, f, p\) (bird, fly, penguin):
+		\begin{align*}
+			\omega_0 &: \neg b \land \neg f \land \neg p, \quad  \omega_1 : \neg b \land \neg f \land p,  \\
+			\omega_2 &: \neg b \land f \land \neg p, \quad 	\omega_3 : \neg b \land f \land p,  \\
+			\omega_4 &: b \land \neg f \land \neg p, \quad  \omega_5 : b \land \neg f \land p,  \\
+			\omega_6 &: b \land f \land \neg p, \quad  \omega_7 : b \land f \land p 
+		\end{align*} 
+	\end{exampleblock}
+\end{frame}
+% Notes:
+
+% Slide 22:
+\begin{frame}{Penguin Example: Updated Constraints}
+	\begin{itemize}
 		\item Constraints:
 		\begin{align*}
 			C_1 &: \max(\pi(\omega_6), \pi(\omega_7)) > \max(\pi(\omega_4), \pi(\omega_5)), \\
@@ -541,11 +547,16 @@ University of Hagen, Germany}
 			C_3 &: \max(\pi(\omega_5), \pi(\omega_7)) > \max(\pi(\omega_1), \pi(\omega_3)).
 		\end{align*}
 	\end{itemize}
+	\begin{block}{Principle of Minimal Specificity}
+		Assigns possibility levels to worlds while satisfying these constraints.
+	\end{block}
 \end{frame}
+% Notes:
 % The constraints C_1, C_2, C_3 determine relationships between the possibility degrees of the worlds (\pi(\omega_i)). These constraints ensure that some worlds are ranked higher than others.
 % The partition respects these rules by ranking worlds consistently with their plausibility under the defaults
 
-\begin{frame}{Constraints and Plausibility Relationships}
+% Slides 23:
+\begin{frame}{Penguin Example: Constraints and Plausibility Relationships}
 	\begin{itemize}
 		\item Default Rule \(d_1: b \to f\) ("Birds fly"):
 		\begin{itemize}
@@ -573,6 +584,7 @@ University of Hagen, Germany}
 		\end{itemize}
 	\end{itemize}
 \end{frame}
+% Notes
 
 \begin{frame}{Penguin Example: Worlds and Possibility}
 	\begin{itemize}
