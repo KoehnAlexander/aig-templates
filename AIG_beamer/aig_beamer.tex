@@ -255,136 +255,230 @@ University of Hagen, Germany}
 % In the following, we only consider the case of (basic) possibilistic propositional logic, ?L for short, i.e., possibilistic logic formulas (a,?) are such that a is a formula in a propositional language
 
 % Slide 9:
-\begin{frame}{Axioms and Inference Rules}
-	
-	\begin{itemize}
-		\item Certainty weakening:
+\begin{frame}{Axioms and Inference Rules 1 }
+	\begin{block}{Certainty weakening}
 		\[
 		\text{If } \beta \leq \alpha, \quad (a, \alpha) \vdash (a, \beta)
 		\]
-		\begin{exampleblock}{Example}
-		\((\text{It will rain tomorrow}, 0.9) \vdash (\text{It will rain tomorrow}, 0.7)\)  
-		- If the certainty level decreases, the conclusion still holds.
-		\end{exampleblock}
-		\item Modus ponens:
-		\[
-		(\neg a \lor b, \alpha), \quad (a, \alpha) \vdash (b, \alpha)
-		\]
-		\begin{exampleblock}{Example}
-			\((\neg \text{fever} \lor \text{flu}, 0.8), \quad (\text{fever}, 0.8) \vdash (\text{flu}, 0.8)\)  
-			- If fever is observed, flu is inferred with certainty 0.8.
-		\end{exampleblock}
-	\end{itemize}
+	\end{block}
+	\begin{exampleblock}{Example}
+		\((\text{It will rain tomorrow}, 0.9) \vdash (\text{It will rain tomorrow}, 0.7)\)  \\
+		If the certainty level decreases, the conclusion still holds.
+	\end{exampleblock}
+	
 \end{frame}
 % Notes:
-% 
+% The axioms of Possibilistic Logic are those of propositional logic
+% ? indicates that a statement (or formula) can be derived or proven from a set of premises in a formal system.
+% arrow: Implies (if-then).
+% if a formula is valid with a high certainty level, it is also valid with any lower certainty level
+% Certainty levels represent the minimum degree of belief or plausibility with which a formula holds.
+% If a formula holds with a certainty level \alpha, it automatically implies that it holds with any lower level of certainty (\beta \leq \alpha) because we are being less demanding.
 
-\begin{frame}{Axioms and Inference Rules}
-	\begin{itemize}
-		\item Resolution:
+% Slide 10:
+\begin{frame}{Axioms and Inference Rules 2}
+	\begin{block}{Modus ponens}
+		\[
+		(\neg a \lor b, \alpha), (a, \alpha) \vdash (b, \alpha), \quad \forall \alpha \in (0, 1]
+		\]
+	\end{block}
+	\begin{exampleblock}{Example}
+		\((\neg \text{fever} \lor \text{flu}, 0.8), (\text{fever}, 0.8) \vdash (\text{flu}, 0.8)\)  \\
+		If fever is observed, flu is inferred with certainty 0.8.
+	\end{exampleblock}
+\end{frame}
+% Notes:
+% The rule states that if a \to b is true with certainty level \alpha, and a is also true with certainty level \alpha, then b must be true with certainty level \alpha.
+
+% Slide 11:
+\begin{frame}{Axioms and Inference Rules 3}
+	\begin{block}{Resolution}
 		\[
 		(\neg a \lor b, \alpha), \quad (a \lor c, \alpha) \vdash (b \lor c, \alpha)
 		\]
-		\begin{exampleblock}{Example}
-			\((\neg \text{fever} \lor \text{flu}, 0.8), \quad (\text{fever} \lor \text{headache}, 0.8) \vdash (\text{flu} \lor \text{headache}, 0.8)\)
-		\end{exampleblock}
-		\item Weakest link resolution:
+	\end{block}
+	\begin{exampleblock}{Example}
+		\begin{itemize}
+			\item Propositions:
+			\begin{itemize}
+				\item \(a = \text{"It is raining"}\),
+				\item \(b = \text{"The ground is wet"}\),
+				\item \(c = \text{"There is a thunderstorm"}\).
+			\end{itemize}
+			\item Resolution:
+			\[
+			(\neg a \lor b, 0.7), (a \lor c, 0.7) \vdash ( b \lor c, 0.7)
+			\]
+			\item Interpretation: "The ground is wet or there is a thunderstorm" holds with certainty \(0.7\).
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
+% Notes:
+% In classical logic, the resolution rule allows us to combine two clauses that share a literal (a in this case) to eliminate that literal and infer a new clause.
+% In possibilistic logic, the resolution rule preserves the certainty level \alpha, because the inferred formula (b or c) cannot be more certain than the least certain premise (both premises are given at level \alpha).
+
+% Slide 12:
+\begin{frame}{Axioms and Inference Rules 4}
+	\begin{block}{Weakest link resolution}
 		\[
 		(\neg a \lor b, \alpha), \quad (a \lor c, \beta) \vdash (b \lor c, \min(\alpha, \beta))
 		\]
-		\begin{exampleblock}{Example}
-			\((\neg \text{fever} \lor \text{flu}, 0.9), \quad (\text{fever} \lor \text{headache}, 0.7) \vdash (\text{flu} \lor \text{headache}, 0.7)\)
-			- The weakest certainty (0.7) determines the conclusion.
-		\end{exampleblock}
-	\end{itemize}
+	\end{block}
+	\begin{exampleblock}{Example}
+		\begin{itemize}
+			\item Premises:
+			\[
+			(\neg a \lor b, 0.7), \quad (a \lor c, 0.5).
+			\]
+			\item Inference:
+			\[
+			(\neg a \lor b, 0.7), \quad (a \lor c, 0.5) \vdash (b \lor c, \min(0.7, 0.5)).
+			\]
+			\item Interpretation: "The ground is wet or there is a thunderstorm" is true with certainty \(0.5\), limited by the weaker premise.
+		\end{itemize}
+	\end{exampleblock}
 \end{frame}
+% Notes: 
+% It extends the resolution rule by incorporating the concept of differing certainty levels (\alpha and \beta) in the premises.
+% The weakest link resolution reflects the idea that the certainty of the conclusion cannot exceed the weakest (lowest) certainty of the premises.
+% If one of the premises is less certain, it becomes the ?bottleneck? for the certainty of the conclusion
 
-\begin{frame}{Axioms and Inference Rules}
-	\begin{itemize}
-		\item Formula weakening:
+% The idea that in a reasoning chain, the certainty level of the conclusion is the smallest of the certainty levels of the formulas involved in the premises is at the basis of the syntactic approach proposed for plausible reasoning, and would date back to Theophrastus, an Aristotle?s follower.
+
+
+% Slide 13:
+\begin{frame}{Axioms and Inference Rules 5}
+	\begin{block}{Formula weakening}
 		\[
 		\text{If } a \vdash b \text{ in classical logic, then } (a, \alpha) \vdash (b, \alpha).
 		\]
-		\begin{exampleblock}{Example}
-			\((\text{fever}, 0.9) \vdash (\text{flu}, 0.9)\)
-			- Logical implication is preserved with the same certainty level.
-		\end{exampleblock}
-	\end{itemize}
+	\end{block}
+	\begin{exampleblock}{Example}
+		\begin{itemize}
+			\item Premise:
+			\[
+			(a, 0.8) \quad \text{("It is raining with certainty 0.8")}.
+			\]
+			\item Conclusion:
+			\[
+			(b, 0.8) \quad \text{("The ground is wet with certainty 0.8")}.
+			\]
+		\end{itemize}
+	\end{exampleblock}
 \end{frame}
-
-% The idea that in a reasoning chain, the certainty level of the conclusion is the smallest of the certainty levels of the formulas involved in the premises is at the basis of the syntactic approach proposed for plausible reasoning, and would date back to Theophrastus, an Aristotle?s follower.
+% Notes:
+% if \(a \vdash b\) holds in classical logic, 
+% then in possibilistic logic, (b, \alpha) can be derived from (a, \alpha) with the same certainty level \alpha. 
 % It turns out that any valid deduction in propositional logic is valid in possibilistic logic as well where the corresponding propositions are associated with any level ??(0,1]
 
-% Slide 1: Inference in Possibilistic Logic
-\begin{frame}{Inference in Possibilistic Logic}
-	\begin{itemize}
-		\item Knowledge Base (\(\Gamma\)):
+% Slide 14:
+\begin{frame}{Knowledge Base 1}
+	\begin{block}{Knowledge base (\(\Gamma\))}
 		\[
-		\Gamma = \{(a_i, \alpha_i), i = 1, \dots, m\}.
+		\Gamma = \{(a_i, \alpha_i), i = 1, \dots, m\}
 		\]
-		- A set of possibilistic formulas \((a_i, \alpha_i)\), where \(a_i\) is a classical formula and \(\alpha_i\) is its certainty level.		
-		\item Stratification by Certainty Levels:
-		- The knowledge base \(\Gamma\) is divided into nested level cuts:
-		\[
-		\Gamma_\alpha = \{(a_i, \alpha_i) \in \Gamma \mid \alpha_i \geq \alpha\}.
-		\]
-		\item Properties:
+	\end{block}
+	\begin{exampleblock}{Properties}
 		\begin{itemize}
 			\item Nested structure: \(\Gamma_\alpha \subseteq \Gamma_\beta \quad \text{if } \beta \leq \alpha.\)
 			\item Formulas in \(\Gamma_\alpha\) contribute to inferences at certainty level \(\alpha\).
 		\end{itemize}
-	\end{itemize}
+	\end{exampleblock}
 \end{frame}
+% Notes:
+% The possibilistic knowledge base, a collection of possibilistic formulas (a_i, \alpha_i), where a_i is a classical logic formula, and \alpha_i is its certainty level.
 
-% Slide 3: Inconsistency Level
+% Slide 15:
+\begin{frame}{Knowledge Base 2}
+	\begin{block}{Knowledge base (\( \Gamma_\alpha \))}
+		The knowledge base \(\Gamma\) is divided into nested level cuts:
+		\[
+		\Gamma_\alpha = \{(a_i, \alpha_i) \in \Gamma \mid \alpha_i \geq \alpha\}
+		\]
+	\end{block}
+	\begin{block}{Knowledge base (\( \Gamma_\alpha \))}
+		Classical logic knowledge base derived from $ \Gamma $, consisting of only the formulas $ a_i $ (without their certainty levels)
+		\[
+		\Gamma^* = \{a_i \mid (a_i, \alpha_i) \in \Gamma\}
+		\]
+	\end{block}
+\end{frame}
+% The \alpha-cut of the knowledge base \Gamma, containing only those formulas from \Gamma whose certainty level is at least \alpha
+% This means that a can be derived in classical logic from the formulas in Gamma^*, the classical logic subset of \Gamma (ignoring certainty levels).
+
+% Slide 16:
+\begin{frame}{Inference in Possibilistic Logic}
+	\begin{block}{Inference}
+		\[
+		\Gamma \vdash (a, \alpha) \iff \Gamma_\alpha \vdash (a, \alpha) \iff (\Gamma_\alpha)^* \vdash a,
+		\]
+		\begin{itemize}
+		\item A possibilistic inference \((a, \alpha)\) depends only on formulas with certainty levels \(\geq \alpha\).
+		\item These formulas can be reduced to classical logic formulas for inference.
+		\end{itemize}
+	\end{block}
+	\begin{exampleblock}{Example}
+		\begin{itemize}
+			\item Knowledge Base:
+			\[
+			\Gamma = \{(a_1, 0.9), (a_2, 0.7), (a_3, 0.5)\}.
+			\]
+			\item Inference for \(\alpha = 0.7\):
+			\[
+			(\Gamma_\alpha)^* \vdash a_2 \implies \Gamma_\alpha \vdash (a_2, 0.7) \implies \Gamma \vdash (a_2, 0.7).
+			\]
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
+% Notes:
+
+
+
+% Slide 17:
 \begin{frame}{Inconsistency Level of a Knowledge Base}
-	\begin{itemize}
-		\item Definition:
-		- The inconsistency level of \(\Gamma\) is:
+	\begin{block}{Inconsistency level of \(\Gamma\)}
 		\[
 		\text{inc-l}(\Gamma) = \max\{\alpha \mid \Gamma \vdash (\bot, \alpha)\}.
 		\]
-		- It is the highest certainty level at which the knowledge base becomes inconsistent.
-		\vspace{0.3cm}
-		
-		\item Safe Formulas:
-		- Formulas with certainty levels \(> \text{inc-l}(\Gamma)\) are safe from inconsistency.
-		\[
-		\text{inc-l}(\{ (a_i, \alpha_i) \mid (a_i, \alpha_i) \in \Gamma \text{and } \alpha_i > \text{inc-l}(\Gamma)\}) = 0.
-		\]
-		
-		\item Key Property:
-		- If \((\Gamma)^*\) (the classical counterpart of \(\Gamma\)) is consistent, then:
-		\[
-		\text{inc-l}(\Gamma) = 0.
-		\]
-	\end{itemize}
-\end{frame}
-
-
-
-% Slide 5: Handling Inconsistencies
-\begin{frame}{Managing Inconsistent Information}
-	\begin{itemize}
-		\item Possibilistic logic can handle conflicting information by:
-		\begin{itemize}
-			\item Identifying an **inconsistency level** (\(inc-l\)).
-			\item Filtering out rules with certainty levels below \(inc-l\).
+	\end{block}
+	\begin{exampleblock}{Properties}
+		\begin{itemize}		
+			\item Formulas with certainty levels \(> \text{inc-l}(\Gamma)\) are safe from inconsistency.
+			\[
+			\text{inc-l}(\{ (a_i, \alpha_i) \mid (a_i, \alpha_i) \in \Gamma \text{and } \alpha_i > \text{inc-l}(\Gamma)\}) = 0.
+			\]
+			
+			\item If \((\Gamma)^*\) (the classical counterpart of \(\Gamma\)) is consistent, then:
+			\[
+			\text{inc-l}(\Gamma) = 0.
+			\]
 		\end{itemize}
-		\item Example:
-		\[
-		\{(a, 0.8), (\neg a, 0.7)\}
-		\]
-		\begin{itemize}
-			\item Inconsistency level: \(inc-l = 0.7\).
-			\item Filtered result: \((a, 0.8)\) dominates.
-		\end{itemize}
-	\end{itemize}
+	\end{exampleblock}
 \end{frame}
+% Notes:
+% the highest certainty level at which the knowledge base becomes inconsistent
 
-
-% Slide 4: Possibility Measures
 \section{Applications}
+% Slide 18:
+\begin{frame}{Applications of Basic Possibilistic Logic}
+	\begin{itemize}
+		\item Default Reasoning
+		\item Belief Revision and Information Fusion
+		\item Decision Under Uncertainty:		
+		\item Handling Uncertainty in Information Systems
+		\item Logic Programming
+		\item Applications in Diagnosis and Recognition
+	\end{itemize}
+\end{frame}
+% Notes:
+% Default Reasoning: Used to handle incomplete information and exceptions in reasoning.
+% Belief Revision and Information Fusion: Used to revise beliefs based on new information and to combine knowledge from different sources.
+% Decision Under Uncertainty: Helps in making decisions when outcomes are uncertain, using possibilistic logic to weigh different possibilities.
+% Handling Uncertainty in Information Systems: Applied to manage uncertainty in systems that deal with imprecise or incomplete data.
+% Logic Programming: Possibilistic logic has influenced logic programming and constraint satisfaction problems.
+% Applications in Diagnosis and Recognition: Used in diagnosis (e.g., medical diagnosis) and recognition problems (e.g., pattern recognition).
+
+
 \begin{frame}{Default reasoning}
 	\begin{itemize}
 		\item Default rule:
@@ -560,22 +654,6 @@ University of Hagen, Germany}
 
 
 
-\begin{frame}{Applications of Basic Possibilistic Logic}
-	\begin{itemize}
-		\item Default Reasoning
-		\item Belief Revision and Information Fusion
-		\item Decision Under Uncertainty:		
-		\item Handling Uncertainty in Information Systems
-		\item Logic Programming
-		\item Applications in Diagnosis and Recognition
-	\end{itemize}
-\end{frame}
-%  Default Reasoning: Used to handle incomplete information and exceptions in reasoning.
-% Belief Revision and Information Fusion: Used to revise beliefs based on new information and to combine knowledge from different sources.
-% Decision Under Uncertainty: Helps in making decisions when outcomes are uncertain, using possibilistic logic to weigh different possibilities.
-% Handling Uncertainty in Information Systems: Applied to manage uncertainty in systems that deal with imprecise or incomplete data.
-% Logic Programming: Possibilistic logic has influenced logic programming and constraint satisfaction problems.
-% Applications in Diagnosis and Recognition: Used in diagnosis (e.g., medical diagnosis) and recognition problems (e.g., pattern recognition).
 
 
 % Slide 7: Conclusion
@@ -599,58 +677,6 @@ University of Hagen, Germany}
 % Possibilistic logic translates these tools into a qualitative reasoning framework:
 % It integrates uncertainty into logical reasoning.
 % It provides structured inference mechanisms for decision-making under uncertainty.
-
-
-
-%*
-%Handling Uncertainty in AI:
-%Uncertainty is a common feature of real-world information and knowledge.
-%Early AI systems, such as the MYCIN expert system (1970s), tackled uncertainty using certainty factors to represent degrees of belief and disbelief.
-%2.	The Role of Possibility Theory:
-%?	Possibility theory was introduced to represent imprecise and uncertain information. It complements probability theory by handling incomplete knowledge and degrees of plausibility.
-%?	Developed by Zadeh (1978) and extended by others like Dubois and Prade, possibility theory provides a framework for qualitative reasoning about uncertainty.
-%3.	Relation to Probability:
-%?	Unlike probability, which requires exact numeric values, possibility theory uses dual measures:
-%?	Possibility measure ($ \Pi $ ): Upper bounds of unknown probabilities.
-%?	Necessity measure ( N ): Lower bounds, representing degrees of certainty.
-%?	These measures allow for states of partial belief or ignorance, which are not well-handled by probabilistic approaches.
-%4.	Possibilistic Logic:
-%?	Possibilistic logic is the logical counterpart of possibility theory. It associates classical logic formulas with certainty levels, enabling qualitative reasoning.
-%?	It can manage inconsistencies by stratifying formulas based on their certainty levels, prioritizing the most reliable information.
-
-
-\section{Section}
-
-\begin{frame}{Blocks}
-    \begin{block}{Block}
-        This is a regular block.
-        \begin{itemize}
-            \item This is an item in a block.
-        \end{itemize}
-    \end{block}
-    
-    \begin{alertblock}{Block}
-        This is an alert block.
-        \begin{itemize}
-            \item This is an item in an alert block.
-        \end{itemize}
-    \end{alertblock}
-    
-    \begin{exampleblock}{Block}
-        This is an example block.
-        \begin{itemize}
-            \item This is an item in an example block.
-        \end{itemize}
-    \end{exampleblock}
-\end{frame}
-
-
-\subsection{Subsection}
-
-\begin{frame}{Highlighting Text}
-    We can \highlight{highlight} text. There are also a \darkhighlight{darker} option, and a \yellowhighlight{yellow} option.\\
-    The same options are also available in math mode: $\mathhighlight{a} + \darkmathhighlight{b} = \yellowmathhighlight{c}$
-\end{frame}
 
 
 
