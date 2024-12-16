@@ -71,7 +71,7 @@ University of Hagen, Germany}
 
 \section{Possibility Theory}
 % Now I will introduce you first into Possibilty theory
-% Slide 2:  
+% Slide 2: Possibility Distribution
 \begin{frame}{Possibility Distribution}
 	\begin{block}{Possibility distribution}
 		A \textbf{possibility distribution} is a mapping:
@@ -100,7 +100,7 @@ University of Hagen, Germany}
 % In exhaustive worlds: 
 % At least one state \( u \in U \) must have \( \pi(u) = 1 \) (an actual state exists).
 
-% Slide 3:
+% Slide 3: Specificity of a Possibility Distribution
 \begin{frame}{Specificity of a Possibility Distribution}
 	\begin{block}{Specificity of a Possibility Distribution}
 		A distribution \( \pi \) is \textbf{at least as specific} as \( \pi' \) if:
@@ -121,7 +121,7 @@ University of Hagen, Germany}
 % Notes:
 % A possibility distribution ? is said to be at least as specific as another ??if and only if for each state of a?airs u: ?(u) ???(u) Then, ? is at least as restrictive and informative as ??, since it rules out at least as many states with at least as much strength.
 
-% Slide 4:
+% Slide 4: Possibility and Necessity Functions
 \begin{frame}{Possibility and Necessity Functions}
 	\begin{block}{Possibility measure}
 		\[
@@ -143,7 +143,7 @@ University of Hagen, Germany}
 % A is a subset of states, the set of models of a, 
 % the response to the query can be obtained by computing degrees of possibility and necessity respectively
 
-% Slide 5:
+% Slide 5: Key Properties of Measures
 \begin{frame}{Key Properties of Measures}
 	\begin{block}{Duality Relationship}
 		\[
@@ -168,7 +168,7 @@ University of Hagen, Germany}
 % N(a?b) = min(N(a),N(b)), expresses that to be certain about a?b, one has to be certain about a and to be certain about b.
 % Note also that we only have N(A?B) ? max(N(A),N(B)).This goes well with the idea that one may be certain about the event A?B, without being really certain about more specific events such as A and B.
 
-% Slide 6:
+% Slide 6: Certainty Qualification in Possibilistic Logi
 \begin{frame}{Certainty Qualification in Possibilistic Logic}
 	\begin{itemize}
 		\item Certainty-qualified information: "A is certain to degree \(\alpha\)" is modeled by the constraint: 
@@ -196,7 +196,7 @@ University of Hagen, Germany}
 % Represents a family of possible epistemic states \(\pi\) that satisfy this constraint.
 % Integral to the semantics of possibilistic logic.
 
-% Slide 7:
+% Slide 7: Example
 \begin{frame}{Example}
 	\begin{itemize}
 		\item A doctor is trying to diagnose a patient based on symptoms and diseases:
@@ -225,7 +225,7 @@ University of Hagen, Germany}
 \end{frame}
 % Notes:
 
-% Slide 8:
+% Slide 8: Basic Possibilistic Logic
 \section{Possibilistic Logic}
 \begin{frame}{Basic Possibilistic Logic}
 	\begin{block}{Basic possibilistic logic formula}
@@ -253,8 +253,8 @@ University of Hagen, Germany}
 % The higher alpha, the stronger the belief in a
 % In the following, we only consider the case of (basic) possibilistic propositional logic, ?L for short, i.e., possibilistic logic formulas (a,?) are such that a is a formula in a propositional language
 
-% Slide 9:
-\begin{frame}{Axioms and Inference Rules 1 }
+% Slide 9: Axioms and Inference Rules 1
+\begin{frame}{Axioms and Inference Rules 1}
 	\begin{block}{Certainty weakening}
 		\[
 		\text{If } \beta \leq \alpha, \quad (a, \alpha) \vdash (a, \beta)
@@ -274,7 +274,7 @@ University of Hagen, Germany}
 % Certainty levels represent the minimum degree of belief or plausibility with which a formula holds.
 % If a formula holds with a certainty level \alpha, it automatically implies that it holds with any lower level of certainty (\beta \leq \alpha) because we are being less demanding.
 
-% Slide 10:
+% Slide 10: Axioms and Inference Rules 2
 \begin{frame}{Axioms and Inference Rules 2}
 	\begin{block}{Modus ponens}
 		\[
@@ -289,7 +289,7 @@ University of Hagen, Germany}
 % Notes:
 % The rule states that if a \to b is true with certainty level \alpha, and a is also true with certainty level \alpha, then b must be true with certainty level \alpha.
 
-% Slide 11:
+% Slide 11: Axioms and Inference Rules 3
 \begin{frame}{Axioms and Inference Rules 3}
 	\begin{block}{Resolution}
 		\[
@@ -316,7 +316,7 @@ University of Hagen, Germany}
 % In classical logic, the resolution rule allows us to combine two clauses that share a literal (a in this case) to eliminate that literal and infer a new clause.
 % In possibilistic logic, the resolution rule preserves the certainty level \alpha, because the inferred formula (b or c) cannot be more certain than the least certain premise (both premises are given at level \alpha).
 
-% Slide 12:
+% Slide 12: Axioms and Inference Rules 4
 \begin{frame}{Axioms and Inference Rules 4}
 	\begin{block}{Weakest link resolution}
 		\[
@@ -345,7 +345,7 @@ University of Hagen, Germany}
 % The idea that in a reasoning chain, the certainty level of the conclusion is the smallest of the certainty levels of the formulas involved in the premises is at the basis of the syntactic approach proposed for plausible reasoning, and would date back to Theophrastus, an Aristotle?s follower.
 
 
-% Slide 13:
+% Slide 13: Axioms and Inference Rules 5
 \begin{frame}{Axioms and Inference Rules 5}
 	\begin{block}{Formula weakening}
 		\[
@@ -370,7 +370,7 @@ University of Hagen, Germany}
 % then in possibilistic logic, (b, \alpha) can be derived from (a, \alpha) with the same certainty level \alpha. 
 % It turns out that any valid deduction in propositional logic is valid in possibilistic logic as well where the corresponding propositions are associated with any level ??(0,1]
 
-% Slide 14:
+% Slide 14: Knowledge Base 1
 \begin{frame}{Knowledge Base 1}
 	\begin{block}{Knowledge base (\(\Gamma\))}
 		\[
@@ -387,7 +387,7 @@ University of Hagen, Germany}
 % Notes:
 % The possibilistic knowledge base, a collection of possibilistic formulas (a_i, \alpha_i), where a_i is a classical logic formula, and \alpha_i is its certainty level.
 
-% Slide 15:
+% Slide 15: Knowledge Base 2
 \begin{frame}{Knowledge Base 2}
 	\begin{block}{Knowledge base (\( \Gamma_\alpha \))}
 		The knowledge base \(\Gamma\) is divided into nested level cuts:
@@ -405,7 +405,7 @@ University of Hagen, Germany}
 % The \alpha-cut of the knowledge base \Gamma, containing only those formulas from \Gamma whose certainty level is at least \alpha
 % This means that a can be derived in classical logic from the formulas in Gamma^*, the classical logic subset of \Gamma (ignoring certainty levels).
 
-% Slide 16:
+% Slide 16: Inference in Possibilistic Logic
 \begin{frame}{Inference in Possibilistic Logic}
 	\begin{block}{Inference}
 		\[
@@ -430,8 +430,7 @@ University of Hagen, Germany}
 \end{frame}
 % Notes:
 
-
-% Slide 17:
+% Slide 17: Inconsistency Level of a Knowledge Base
 \begin{frame}{Inconsistency Level of a Knowledge Base}
 	\begin{block}{Inconsistency level of \(\Gamma\)}
 		\[
@@ -456,7 +455,7 @@ University of Hagen, Germany}
 % the highest certainty level at which the knowledge base becomes inconsistent
 
 \section{Applications}
-% Slide 18:
+% Slide 18: Applications of Basic Possibilistic Logic
 \begin{frame}{Applications of Basic Possibilistic Logic}
 	\begin{itemize}
 		\item Default Reasoning
@@ -475,7 +474,7 @@ University of Hagen, Germany}
 % Logic Programming: Possibilistic logic has influenced logic programming and constraint satisfaction problems.
 % Applications in Diagnosis and Recognition: Used in diagnosis (e.g., medical diagnosis) and recognition problems (e.g., pattern recognition).
 
-% Slide 19:
+% Slide 19: Default reasoning
 \begin{frame}{Default reasoning}
 	\begin{block}{Default rule}
 		\[
@@ -497,7 +496,7 @@ University of Hagen, Germany}
 % Notes:
 % It expresses that in the context where a is true, there exists situations where having b true is strictly more satisfactory than any situations where b is false in the same context.
 
-% Slide 20:
+% Slide 20: Penguin Example: Rules and Constraints
 \begin{frame}{Penguin Example: Rules and Constraints}
 	\begin{exampleblock}{Default Rules}
 		\begin{align*}
@@ -516,7 +515,7 @@ University of Hagen, Germany}
 	\end{itemize}
 \end{frame}
 
-% Slide 21:
+% Slide 21: Penguin Example: Worlds and Possibility
 \begin{frame}{Penguin Example: Worlds and Possibility}
 	\begin{block}{Worlds (\(\Omega\))}
 		\(\Omega\) is the finite set of interpretations of the considered propositional language.
@@ -537,7 +536,7 @@ University of Hagen, Germany}
 \end{frame}
 % Notes:
 
-% Slide 22:
+% Slide 22: Penguin Example: Updated Constraints
 \begin{frame}{Penguin Example: Updated Constraints}
 	\begin{itemize}
 		\item Constraints:
@@ -555,30 +554,30 @@ University of Hagen, Germany}
 % The constraints C_1, C_2, C_3 determine relationships between the possibility degrees of the worlds (\pi(\omega_i)). These constraints ensure that some worlds are ranked higher than others.
 % The partition respects these rules by ranking worlds consistently with their plausibility under the defaults
 
-% Slides 23:
+% Slides 23: Penguin Example: Constraints and Plausibility Relationships
 \begin{frame}{Penguin Example: Constraints and Plausibility Relationships}
 	\begin{itemize}
 		\item Default Rule \(d_1: b \to f\) ("Birds fly"):
 		\begin{itemize}
-			\item Makes worlds where birds fly (\(b \land f\)) more plausible than those where birds don?t fly (\(b \land \neg f\)).
+			\item Makes worlds where birds fly (\(b \land f\)) more plausible than those where birds don not fly (\(b \land \neg f\)).
 			\item Affects:
 			\[
-			\omega_6 \, (\text{bird flies}) \quad \text{vs.} \quad \omega_4, \omega_5 \, (\text{bird doesn?t fly}).
+			\omega_6 \, (\text{bird flies}) \quad \text{vs.} \quad \omega_4, \omega_5 \, (\text{bird does not fly}).
 			\]
 		\end{itemize}
 		\vspace{0.2cm}
 		
-		\item Default Rule \(d_2: p \to \neg f\) ("Penguins don?t fly"):
+		\item Default Rule \(d_2: p \to \neg f\) ("Penguins do not fly"):
 		\begin{itemize}
-			\item Makes worlds where penguins don?t fly (\(p \land \neg f\)) more plausible than those where penguins fly (\(p \land f\)).
+			\item Makes worlds where penguins do not fly (\(p \land \neg f\)) more plausible than those where penguins fly (\(p \land f\)).
 			\item Affects:
 			\[
-			\omega_5 \, (\text{penguin doesn?t fly}) \quad \text{vs.} \quad \omega_7, \omega_3 \, (\text{penguin flies}).
+			\omega_5 \, (\text{penguin does not fly}) \quad \text{vs.} \quad \omega_7, \omega_3 \, (\text{penguin flies}).
 			\]
 		\end{itemize}
 		\vspace{0.2cm}
 		
-		\item*Default Rule \(d_3: p \to b\) ("Penguins are birds"):
+		\item Default Rule \(d_3: p \to b\) ("Penguins are birds"):
 		\begin{itemize}
 			\item Ensures penguins are considered birds, influencing how penguin-related worlds (\(p\)) are ranked.
 		\end{itemize}
@@ -586,23 +585,31 @@ University of Hagen, Germany}
 \end{frame}
 % Notes
 
+% Slide 24: Penguin Example: Worlds and Possibility
 \begin{frame}{Penguin Example: Worlds and Possibility}
 	\begin{itemize}
 		\item Partition: Worlds are ranked based on constraints:
 		\[
 		\{\omega_0, \omega_2, \omega_6\} >_\Pi \{\omega_4, \omega_5\} >_\Pi \{\omega_1, \omega_3, \omega_7\}.
 		\]
-		\vspace{0.3cm}
 		\item \(m\) is the number of distinct plausibility levels (possibility degrees) assigned to the worlds in \(\Omega\).
 		\item Possibility Levels:
-		\[
-		\pi(\omega_0) = \pi(\omega_2) = \pi(\omega_6) = 1, \quad \pi(\omega_4) = \pi(\omega_5) = 2/3, \quad \pi(\omega_1) = \pi(\omega_3) = \pi(\omega_7) = 1/3.
-		\]
+		\begin{align*}
+			\pi(\omega_0) &= \pi(\omega_2) = \pi(\omega_6) = 1, \\
+			\pi(\omega_4) &= \pi(\omega_5) = 2/3, \\
+			\pi(\omega_1) &= \pi(\omega_3) = \pi(\omega_7) = 1/3
+		\end{align*}
 	\end{itemize}
 \end{frame}
+% Notes
 % Worlds in this group are most plausible under the constraints.
-% From the possibility distribution ? associated with the well ordered partition, we can compute the necessity level N(a) of any proposition a. The method then consists in turning each default pi qi into a possibilistic clause (¬pi?qi, N(¬pi?qi)), where N is computed from the greatest possibility distribution ? induced by the set of constraints corresponding to the default knowledge base, as already explained. We thus obtain a possibilistic logic base K
-\begin{frame}{Computing Necessity Measures and Possibilistic Base}
+% From the possibility distribution  associated with the well ordered partition, we can compute the necessity level N(a) of any proposition a. 
+% The method then consists in turning each default pi qi into a possibilistic clause (¬pi?qi, N(¬pi?qi)), where N is computed from the greatest possibility distribution ? induced by the set of constraints corresponding to the default knowledge base, as already explained. 
+% We thus obtain a possibilistic logic base K
+% This encodes the generic knowledge embedded in the default rules.
+
+% Slide 25: Penguin Example: Computing Necessity Measures
+\begin{frame}{Penguin Example: Computing Necessity Measures}
 	\begin{itemize}
 		\item Necessity Measure (\(N(A)\)):
 		\[
@@ -631,44 +638,72 @@ University of Hagen, Germany}
 		\]
 	\end{itemize}
 \end{frame}
+% Notes
+% This encodes the generic knowledge embedded in the default rules.
 
-\begin{frame}{Reasoning with Tweety: Bird and Penguin Cases}
+% Slide 26: Penguin Example: Reasoning with Initial Information
+\begin{frame}{Penguin Example: Reasoning with Initial Information}
+	Initial Information (Tweety is a Bird):
+	\[
+	F = \{(b, 1)\} \quad \text{(Tweety is a bird with certainty 1)}.
+	\]
 	\begin{itemize}
-		\item Initial Information (Tweety is a Bird):
-		\[
-		F = \{(b, 1)\} \quad \text{(Tweety is a bird with certainty 1)}.
-		\]
-		- Apply the weakest link resolution rule:
+		\item Apply the weakest link resolution rule:
 		\[
 		K \cup \{(b, 1)\} \vdash (f, 1/3).
 		\]
-		- Conclusion: If Tweety is a bird, we conclude that Tweety flies with certainty \( \frac{1}{3} \).
-		
-		\item New Information (Tweety is a Penguin):
+		\item From the rule \((\neg b \lor f, 1/3)\) in \(K\), we know:
 		\[
-		F = \{(b, 1), (p, 1)\} \quad \text{(Tweety is a bird and a penguin with certainty 1)}.
+		(\neg b \lor f, 1/3) \quad \text{and} \quad (b, 1) \vdash (f, \min(1, 1/3)) = (f, 1/3).
 		\]
-		- Apply the weakest link resolution rule:
+		\item  Conclusion: If Tweety is a bird, we conclude that Tweety flies with certainty \( \frac{1}{3} \).
+	\end{itemize}
+\end{frame}
+% Notes:
+
+%Slide 27: Penguin Example: Reasoning with New Information
+\begin{frame}{Penguin Example: Reasoning with New Information}
+	New Information (Tweety is a Penguin):
+	\[
+	F = \{(b, 1), (p, 1)\} \quad \text{(Tweety is a bird and a penguin with certainty 1)}.
+	\]
+	\begin{itemize}
+		\item Apply the weakest link resolution rule: $ K \cup F \vdash (\bot, 1/3) $
+		\item From the rule \((\neg p \lor \neg f, 2/3)\) in \(K\), we know:
 		\[
-		K \cup F \vdash (\bot, 1/3).
+		(\neg p \lor \neg f, 2/3) \quad \text{and} \quad (p, 1) \vdash (\neg f, \min(1, 2/3)) = (\neg f, 2/3).
 		\]
-		- Conclusion: The knowledge base becomes inconsistent with certainty \( \frac{1}{3} \).
-		
-		\item Final Conclusion (Tweety is a Penguin):
-		- Despite inconsistency, we can still infer:
+		\item From the new information \((b, 1)\) and the rule \((\neg b \lor f, 1/3)\):
+		\[
+		(\neg b \lor f, 1/3) \quad \text{and} \quad (b, 1) \vdash (f, 1/3).
+		\]
+		\item These results conflict because:
+		\[
+		(\neg f, 2/3) \quad \text{and} \quad (f, 1/3) \vdash (\bot, \min(2/3, 1/3)) = (\bot, 1/3).
+		\]
+		\item Conclusion: The knowledge base becomes inconsistent with certainty \( \frac{1}{3} \).
+	\end{itemize}
+\end{frame}
+% Notes
+
+% Slide 28: Penguin Example: Reasoning Final Conclusion
+\begin{frame}{Penguin Example: Reasoning Final Conclusion}	
+	Final Conclusion (Tweety is a Penguin):
+	\begin{itemize}				
+		\item Despite inconsistency, we can still infer:
 		\[
 		K \cup F \vdash (\neg f, 2/3).
 		\]
-		- Conclusion: Since Tweety is a penguin, we conclude that Tweety does not fly with certainty \( \frac{2}{3} \).
+		\[
+		(\neg p \lor \neg f, 2/3) \quad \text{and} \quad (p, 1) \vdash (\neg f, \min(1, 2/3)) = (\neg f, 2/3).
+		\]
+		\item Conclusion: Since Tweety is a penguin, we conclude that Tweety does not fly with certainty \( \frac{2}{3} \).
 	\end{itemize}
 \end{frame}
+% Notes:
 % This encoding takes advantage of the fact that when a new piece of information is received, the level of inconsistency of the base cannot decrease, and if it strictly increases, some inferences that were safe before are now drowned in the new inconsistency level of the base and are thus no longer allowed, hence a nonmonotonic consequence mechanism takes place.
 
-
-
-
-
-% Slide 7: Conclusion
+% Slide 29: Conclusion
 \section{Conclusion}
 \begin{frame}{Conclusion}
 	\begin{itemize}
@@ -685,13 +720,11 @@ University of Hagen, Germany}
 		\end{itemize}
 	\end{itemize}
 \end{frame}
+% Notes:
 % Possibility theory provides quantitative tools for modeling uncertainty.
 % Possibilistic logic translates these tools into a qualitative reasoning framework:
 % It integrates uncertainty into logical reasoning.
 % It provides structured inference mechanisms for decision-making under uncertainty.
-
-
-
 
 \appendix
 
