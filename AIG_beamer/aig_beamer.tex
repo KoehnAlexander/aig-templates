@@ -114,7 +114,6 @@ University of Hagen, Germany}
 		\]
 		Evaluates the extent to which \( A \) is certainly implied by \( \pi \).
 	\end{block}
-	
 \end{frame}
 % Slide 6: Possibility and Necessity Functions
 % Notes:
@@ -126,41 +125,6 @@ University of Hagen, Germany}
 % It is the maximun of possibility of all the states of A
 % The Necessity evaluates to which extent A is certainly implied by pi.
 % It is the minimum of the inversed possibility value of all states which are not in A
-
-\begin{frame}{Example}
-	\begin{itemize}
-		\item A doctor is trying to diagnose a patient based on symptoms and diseases:
-		\begin{itemize}
-			\item \( U = \{\text{flu}, \text{cold}, \text{allergy}\} \).
-			\item Possibility distribution \(\pi\) based on symptom severity:
-			\[
-			\pi(\text{flu}) = 0.9, \quad \pi(\text{cold}) = 0.6, \quad \pi(\text{allergy}) = 0.3.
-			\]
-		\end{itemize}
-		\item The doctor evaluates the possibility and necessity measures for a hypothesis \( A \):
-		\[ 
-		A = \{\text{flu}, \text{cold}\}
-		\]
-		\item Calculation:
-		\begin{align*}
-			\Pi(A) &= \sup_{u \in A} \pi(u) = \max(\pi(\text{flu}), \pi(\text{cold})) = 0.9. \\
-			N(A) &= \inf_{u \notin A} (1 - \pi(u)) = 1 - \pi(\text{allergy}) = 1 - 0.3 = 0.7.
-		\end{align*}
-		\item Interpretation:
-		\begin{itemize}
-			\item Possibility (\(\Pi(A)\)): Flu or cold is highly possible (\(0.9\)).
-			\item Necessity (\(N(A)\)): It is moderately certain (\(0.7\)) that the patient has either flu or cold.
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-% Slide 7: Example
-% Notes:
-% We can use  Possibility theory for example id diagnose diseases
-% If had a set of possible diseases: flu, cold and allergy
-% And we have a possibility distrubtion which has the possibility values of the states from the observation of symptoms or historical data.
-% now we can calculate the Possibility and Necessity of an Hypothesis.
-% We see that the Necessity is different than the Possibility of the Hypothesis
-
 
 \section{Possibilistic Logic}
 
@@ -183,7 +147,7 @@ University of Hagen, Germany}
 		\end{itemize}
 	\end{exampleblock}
 \end{frame}
-% Slide 9: Basic Possibilistic Logic
+% Slide 8: Basic Possibilistic Logic
 % Notes: 
 % After we have now seen the core concept of possibility theory we will jump in the next chapter right into Possibilistic Logic.
 % A basic possibilistic logic formula is a pair a and alpha:
@@ -207,7 +171,7 @@ University of Hagen, Germany}
 	\end{exampleblock}
 	
 \end{frame}
-% Slide 10: Axioms and Inference Rules: Certainty Weakening
+% Slide 9: Axioms and Inference Rules: Certainty Weakening
 % Notes:
 % The axioms of Possibilistic Logic are those of propositional logic
 % In the following I will explain you the inference rules of possibilistic logic, which we will need later in our example
@@ -230,7 +194,7 @@ University of Hagen, Germany}
 		If fever is observed, flu is inferred with certainty 0.8.
 	\end{exampleblock}
 \end{frame}
-% Slide 11: Axioms and Inference Rules: Modus Ponens
+% Slide 10: Axioms and Inference Rules: Modus Ponens
 % Notes:
 % The Modus ponens rules states that:
 % If a to b is true with certainty level alpha, and a is also true with certainty level alpha
@@ -258,7 +222,7 @@ University of Hagen, Germany}
 		\end{itemize}
 	\end{exampleblock}
 \end{frame}
-% Slide 12: Axioms and Inference Rules: Resolution
+% Slide 11: Axioms and Inference Rules: Resolution
 % Notes:
 % In classical logic, the resolution rule allows us to combine two clauses that share a literal to eliminate that literal and infer a new clause.
 % In possibilistic logic, the resolution rule preserves the certainty level alpha, because the inferred formula (b or c) cannot be more certain than the least certain premise
@@ -283,35 +247,11 @@ University of Hagen, Germany}
 		\end{itemize}
 	\end{exampleblock}
 \end{frame}
-% Slide 13: Axioms and Inference Rules: Weakest Link Resolution
+% Slide 12: Axioms and Inference Rules: Weakest Link Resolution
 % Notes: 
 % The weakest link resolution rule extends the resolution rule by  the concept of different certainty levels alpha and beta in the premises.
 % The weakest link resolution reflects the idea that the certainty of the conclusion cannot exceed the weakest certainty of the premises.
 % If one of the premises is less certain, it becomes the bottleneck for the certainty of the conclusion
-
-\begin{frame}{Axioms and Inference Rules: Formula Weakening}
-	\begin{block}{Formula weakening}
-		\[
-		\text{If } a \vdash b \text{ in classical logic, then } (a, \alpha) \vdash (b, \alpha).
-		\]
-	\end{block}
-	\begin{exampleblock}{Example}
-		\begin{itemize}
-			\item Premise:
-			\[
-			(a, 0.8) \quad \text{("It is raining with certainty 0.8")}.
-			\]
-			\item Conclusion:
-			\[
-			(b, 0.8) \quad \text{("The ground is wet with certainty 0.8")}.
-			\]
-		\end{itemize}
-	\end{exampleblock}
-\end{frame}
-% Slide 14: Axioms and Inference Rules: Formula Weakening
-% Notes:
-% The Formula weakening rule states that if b can be derived from a in classical logic
-% It can be derived in possibilistic logic with the same certainty level
 
 \begin{frame}{Knowledge Base}
 	\begin{block}{Knowledge base (\(\Gamma\))}
@@ -329,7 +269,7 @@ University of Hagen, Germany}
 		\end{itemize}
 	\end{block}
 \end{frame}
-% Slide 15: Knowledge Base
+% Slide 13: Knowledge Base
 % Notes:
 % We can define a possibilistic knowledge base as a collection of possibilistic formulas
 % Further we can define the alpha cut of knowledge base
@@ -358,7 +298,7 @@ University of Hagen, Germany}
 		\end{itemize}
 	\end{exampleblock}
 \end{frame}
-% Slide 16: Inference in Possibilistic Logic
+% Slide 14: Inference in Possibilistic Logic
 % Notes:
 % If we want to infer from the knowledge, we can only look on the formulas with a certainty of at least alpha
 % This means that a inference is ony valid if it is valid with the alpha cut of a knowledge base
@@ -376,7 +316,7 @@ University of Hagen, Germany}
 		\]
 	\end{exampleblock}
 \end{frame}
-% Slide 17: Inconsistency Level of a Knowledge Base
+% Slide 15: Inconsistency Level of a Knowledge Base
 % Notes:
 % An Important attribute of knowledge bases is the inconsistency level
 % It is the highest certainty level at which the knowledge base becomes inconsistent
@@ -397,7 +337,7 @@ University of Hagen, Germany}
 		\]
 	\end{block}
 \end{frame}
-% Slide 19: Default Reasoning
+% Slide 17: Default Reasoning
 % Notes:
 % One application of possibilistic logic is Default Reasoning: 
 % where we reason with incomplete information.
@@ -423,7 +363,7 @@ University of Hagen, Germany}
 		\end{align*}
 	\end{itemize}
 \end{frame}
-% Slide 20: Penguin Example: Rules and Constraints
+% Slide 18: Penguin Example: Rules and Constraints
 % Notes:
 % With the gained knowledge we can jump into the Penguin example
 % It has three default rules
@@ -450,7 +390,7 @@ University of Hagen, Germany}
 		\end{align*} 
 	\end{exampleblock}
 \end{frame}
-% Slide 21: Penguin Example: Worlds and Possibility
+% Slide 19: Penguin Example: Worlds and Possibility
 % Notes:
 % Now we can define the worlds omega, which correspond to the interpretation of the corresponding language
 % In this case birds, penguins and fly
@@ -466,7 +406,7 @@ University of Hagen, Germany}
 		\end{align*}
 	\end{itemize}
 \end{frame}
-% Slide 22: Penguin Example: Updated Constraints
+% Slide 20: Penguin Example: Updated Constraints
 % Notes:
 % we can now update the constraints with including the possible worlds
 % These constraints ensure that some worlds are ranked higher than others.
@@ -486,7 +426,7 @@ University of Hagen, Germany}
 		\end{align*}
 	\end{exampleblock}
 \end{frame}
-% Slide 23: Penguin Example: Partition and Possibility Levels
+% Slide 21: Penguin Example: Partition and Possibility Levels
 % Notes
 % By using the principle of minimal specificity, we can assign possibility levels to the worlds with satisfying the constraints
 % Worlds in highest group are most plausible under the constraints.
@@ -508,7 +448,7 @@ University of Hagen, Germany}
 		\end{align*}
 	\end{exampleblock}
 \end{frame}
-% Slide 24: Penguin Example: Computing Necessity Measures
+% Slide 22: Penguin Example: Computing Necessity Measures
 % Notes:
 % From the possibility of the worlds we can now compute the necessity level N of any proposition
 % And have as a result for each rule a certainty level
@@ -521,7 +461,7 @@ University of Hagen, Germany}
 		\]
 	\end{exampleblock}
 \end{frame}
-% Slide 25: Penguin Example: Resulting Possibilistic Logic Base
+% Slide 23: Penguin Example: Resulting Possibilistic Logic Base
 % Notes:
 % We can now build a possibilistic logic base K
 % K encodes the generic knowledge embedded in the default rules.
@@ -540,7 +480,7 @@ University of Hagen, Germany}
 		\item  Conclusion: If Tweety is a bird, we conclude that Tweety flies with certainty \( \frac{1}{3} \).
 	\end{itemize}
 \end{frame}
-% Slide 26: Penguin Example: Reasoning with Initial Information
+% Slide 24: Penguin Example: Reasoning with Initial Information
 % Notes:
 % With the initial information that tweety is fully certain a bird
 % We can infer from the logic base by applying the weakest link resolution rule and modus ponens
@@ -568,7 +508,7 @@ University of Hagen, Germany}
 		\item Conclusion: The knowledge base becomes inconsistent with certainty \( \frac{1}{3} \).
 	\end{itemize}
 \end{frame}
-% Slide 27: Penguin Example: Reasoning with New Information
+% Slide 25: Penguin Example: Reasoning with New Information
 % Notes:
 % With new information that Tweety is a penguin
 % We apply both informaiton to the knowledge base
@@ -589,7 +529,7 @@ University of Hagen, Germany}
 		\item Conclusion: Since Tweety is a penguin, we conclude that Tweety does not fly with certainty \( \frac{2}{3} \).
 	\end{itemize}
 \end{frame}
-% Slide 28: Penguin Example: Reasoning Final Conclusion
+% Slide 26: Penguin Example: Reasoning Final Conclusion
 % Notes:
 % But by poving that Tweety does not fly with certainty two thirds
 % The rule that birds fly is dropped as its certainty is below the two thirds
@@ -615,7 +555,7 @@ University of Hagen, Germany}
 		\end{itemize}
 	\end{itemize}
 \end{frame}
-% Slide 30: Conclusion
+% Slide 28: Conclusion
 % Notes:
 % With this presentation I wanted to show you that
 % Possibilistic logic provides a robust framework for reasoning under uncertainty
@@ -713,6 +653,65 @@ University of Hagen, Germany}
 % Human knowledge is often expressed as statements with degrees of belief.
 % Represents a family of possible epistemic states \(\pi\) that satisfy this constraint.
 % Integral to the semantics of possibilistic logic.
+
+\begin{frame}{Example}
+	\begin{itemize}
+		\item A doctor is trying to diagnose a patient based on symptoms and diseases:
+		\begin{itemize}
+			\item \( U = \{\text{flu}, \text{cold}, \text{allergy}\} \).
+			\item Possibility distribution \(\pi\) based on symptom severity:
+			\[
+			\pi(\text{flu}) = 0.9, \quad \pi(\text{cold}) = 0.6, \quad \pi(\text{allergy}) = 0.3.
+			\]
+		\end{itemize}
+		\item The doctor evaluates the possibility and necessity measures for a hypothesis \( A \):
+		\[ 
+		A = \{\text{flu}, \text{cold}\}
+		\]
+		\item Calculation:
+		\begin{align*}
+			\Pi(A) &= \sup_{u \in A} \pi(u) = \max(\pi(\text{flu}), \pi(\text{cold})) = 0.9. \\
+			N(A) &= \inf_{u \notin A} (1 - \pi(u)) = 1 - \pi(\text{allergy}) = 1 - 0.3 = 0.7.
+		\end{align*}
+		\item Interpretation:
+		\begin{itemize}
+			\item Possibility (\(\Pi(A)\)): Flu or cold is highly possible (\(0.9\)).
+			\item Necessity (\(N(A)\)): It is moderately certain (\(0.7\)) that the patient has either flu or cold.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+% Slide 7: Example
+% Notes:
+% We can use  Possibility theory for example id diagnose diseases
+% If had a set of possible diseases: flu, cold and allergy
+% And we have a possibility distrubtion which has the possibility values of the states from the observation of symptoms or historical data.
+% now we can calculate the Possibility and Necessity of an Hypothesis.
+% We see that the Necessity is different than the Possibility of the Hypothesis
+
+\begin{frame}{Axioms and Inference Rules: Formula Weakening}
+	\begin{block}{Formula weakening}
+		\[
+		\text{If } a \vdash b \text{ in classical logic, then } (a, \alpha) \vdash (b, \alpha).
+		\]
+	\end{block}
+	\begin{exampleblock}{Example}
+		\begin{itemize}
+			\item Premise:
+			\[
+			(a, 0.8) \quad \text{("It is raining with certainty 0.8")}.
+			\]
+			\item Conclusion:
+			\[
+			(b, 0.8) \quad \text{("The ground is wet with certainty 0.8")}.
+			\]
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
+% Slide 14: Axioms and Inference Rules: Formula Weakening
+% Notes:
+% The Formula weakening rule states that if b can be derived from a in classical logic
+% It can be derived in possibilistic logic with the same certainty level
+
 
 % Slides 23: Penguin Example: Constraints and Plausibility Relationships
 \begin{frame}{Penguin Example: Constraints and Plausibility Relationships}
