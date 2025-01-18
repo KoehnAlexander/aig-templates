@@ -88,19 +88,67 @@ The duality of the two measures is expressed as $ N \left( A \right)  = 1 - \Pi 
 
 % Note also that we only have N(A?B) ? max(N(A),N(B)).This goes well with the idea that one may be certain about the event A?B, without being really certain about more specific events such as A and B.
 \subsection{Formal foundations of Basic Possibilistic Logic}
+\subsubsection{Syntax}
 A basic possibilistic logic formula is represented as:
 \[
 (a, \alpha)
 \]
 where \(a\) is a classical logic formula (e.g., \(p \to q\)) and \(\alpha \) is the certainty level (minimum necessity degree of \( a \)). It can be viewed as a lower bound of a necessity measure. The pair $ \left( a , \alpha \right) $ is understood as $ N \left( a \right) > \alpha $. 
 We can interpret that the formula $ a $ is at least certain to degree $ \alpha $. The higher $ \alpha $, the stronger the belief in $ a $. For example \((b \to f, 0.9)\) means that birds fly with certainty $ 0.9 $.
-\subsubsection{Axioms and Inference Rules}
+\subsubsection{Axioms}
+The axioms of Possibilistic Logic are those of propositional logic. In the following the inference rules of basic possibilistic logic will be explained. The Certainty weakening rule states that if a formula is valid with a high certainty level, it is also valid with any lower certainty level.  If a formula holds with a certainty level $ \alpha $, it automatically implies that it holds with any lower level of certainty beta because we are being less demanding, see equation  \ref{Eq:Certainty_weakening}.
+\begin{equation} \label{Eq:Certainty_weakening}
+	\text{If } \beta \leq \alpha, \quad (a, \alpha) \vdash (a, \beta)
+\end{equation}
+The Modus ponens rules states that if $ a $ to $ b $ is true with certainty level $ \alpha $, and $ a $ is also true with certainty level $ \alpha $ then $ b $ must be true with certainty level $ \alpha $, see equation  \ref{Eq:Modus_ponens}.
+\begin{equation}\label{Eq:Modus_ponens}
+	(\neg a \lor b, \alpha), (a, \alpha) \vdash (b, \alpha), \quad \forall \alpha \in (0, 1]
+\end{equation}
+In classical logic, the resolution rule allows us to combine two clauses that share a literal to eliminate that literal and infer a new clause. In possibilistic logic, the resolution rule preserves the certainty level $ \alpha $, because the inferred formula $ b \lor c $ cannot be more certain than the least certain premise, see equation \ref{Eq:Resolution}.
+\begin{equation}\label{Eq:Resolution}
+	(\neg a \lor b, \alpha), \quad (a \lor c, \alpha) \vdash (b \lor c, \alpha)
+\end{equation}
+The weakest link resolution rule extends the resolution rule by  the concept of different certainty levels $ \alpha $ and $ \beta $ in the premises. The weakest link resolution reflects the idea that the certainty of the conclusion cannot exceed the weakest certainty of the premises. If one of the premises is less certain, it becomes the bottleneck for the certainty of the conclusion, see equation \ref{Eq:Weakest_link_resolution}.
+\begin{equation}\label{Eq:Weakest_link_resolution}
+	(\neg a \lor b, \alpha), \quad (a \lor c, \beta) \vdash (b \lor c, \min(\alpha, \beta))
+\end{equation}
+\subsubsection{Inference Rules}
+We can define a possibilistic knowledge base as a collection of possibilistic formulas, see equation \ref{Eq:Knowledge_base}. 
+\begin{equation}\label{Eq:Knowledge_base}
+	\Gamma = \{(a_i, \alpha_i), i = 1, \dots, m\}
+\end{equation}
+Further we can define the $ \alpha $-cut of knowledge base, see equation \ref{Eq:Knowledge_base_cut}. It only contains those formulas from the origin knowledge base with a certainty level of at least $ \alpha $. It has a nested structure where the $ \alpha $ knwoledge base is a part of the $ \beta $ knowledge base if $ \alpha $ is higher than $ \beta $.
+\begin{equation}\label{Eq:Knowledge_base_cut}
+	\Gamma_\alpha = \{(a_i, \alpha_i) \in \Gamma \mid \alpha_i \geq \alpha\}
+\end{equation}
+A possibilistic inference \((a, \alpha)\) depends only on formulas with certainty levels \(\geq \alpha\), see equation \ref{Eq:Inference}.
+\begin{equation}\label{Eq:Inference}
+	\Gamma \vdash (a, \alpha) \iff \Gamma_\alpha \vdash (a, \alpha)
+\end{equation}
+If we want to infer from the knowledge, we can only look on the formulas with a certainty of at least $ \alpha $. This means that a inference is ony valid if it is valid with the $ \alpha $-cut of a knowledge base. \\
+An important attribute of knowledge bases is the inconsistency level. It is the highest certainty level at which the knowledge base becomes inconsistent. The properties of the inconsistency level shows that all formulas which have a higher certainty level than the inconsistency level are safe form inconsistency, see equation \ref{Eq:Inconsistency_level}.
+\begin{equation}\label{Eq:Inconsistency_level}
+	\text{inc-l}(\Gamma) = \max\{\alpha \mid \Gamma \vdash (\bot, \alpha)\}.
+\end{equation}
+\subsubsection{Semantic Aspects}
+The semantics of possibilistic logic, as introduced in \cite{Dubois1994}, is based on the concepts of possibility distributions, weak possibility measures, and strong necessity measures. \\
+Consider a possibilistic logic formula \((a, \alpha)\), representing the constraint \(N(a) \geq \alpha\). The semantics of this formula is expressed using a possibility distribution \(\pi(a, \alpha)\), defined as:
+\[
+\pi(a, \alpha)(\omega) = 
+\begin{cases} 
+	1 & \text{if } \omega \models a, \\
+	1 - \alpha & \text{if } \omega \models \neg a.
+\end{cases}
+\]
+The intuitive interpretation is that models of \(a\) are fully possible (\(\pi = 1\)), while counter-models of \(a\) are less possible as \(\alpha\) increases. When \(\alpha = 0\), the formula \((a, 0)\) provides no additional information and can be ignored.\\
+The associated necessity measure satisfies:
+\[
+N_{a, \alpha}(a) = \alpha,
+\]
+and \(\pi(a, \alpha)\) is the least informative possibility distribution that satisfies this constraint.
+\subsection{Differences from classical logic}
+\subsection{Relation to Artificial Intelligence}
 
-
-Syntax \\
-Semantics \\
-Differences from classical logic \\
-Relation to Artificial Intelligence
 
 \section{Analysis and Development of Examples}\label{Examples}
 \subsection{Elaboration on existing examples from the literature}
