@@ -247,15 +247,13 @@ Moreover, possibilistic logic complements fuzzy logic by providing a logical fou
 The ability of possibilistic logic to handle uncertainty, inconsistency, and imprecision makes it a valuable tool in AI. By extending classical logic with measures of certainty and possibility, it bridges the gap between theoretical rigor and practical applicability in uncertain environments. As Dubois and Prade note, "possibilistic logic combines logical precision with the flexibility required for real-world reasoning" \cite{Dubois1994}.
 
 
-\section{Analysis and Development of Examples}\label{Examples}
+\section{Analysis and Development of Examples} \label{Examples}
+In the following examples of the application of Possibilistic Logic are explained. First the Penguin Problem is used for understanding the logic better. Second a new Problem is introduced.
+\subsection{The Penguin Problem}
 
-
-\subsection{The Penguin Example: Non-Monotonic Reasoning in Possibilistic Logic}
-
-One of the classical examples in non-monotonic reasoning is the \textit{Penguin Example}, which highlights the need for reasoning under exceptions and uncertainty. In classical logic, general rules like "birds fly" lead to contradictions when exceptions, such as "penguins do not fly," are introduced. Possibilistic logic provides a structured way to handle such exceptions by associating rules with certainty levels and defining a preference ordering over possible worlds.
-
+One of the classical examples in non-monotonic reasoning is the Penguin Example, which highlights the need for reasoning under exceptions and uncertainty. In classical logic, general rules like "birds fly" lead to contradictions when exceptions, such as "penguins do not fly," are introduced. Possibilistic logic provides a structured way to handle such exceptions by associating rules with certainty levels and defining a preference ordering over possible worlds. \\
+If the goal is to know if something flies or not we can use the default rules to generate a possibilistic logic base and to assign the rules graded certainties. With them we can apply our knowledge about the object and find out if it flies.
 \subsubsection{Default Rules and Constraints}
-
 The knowledge base consists of three default rules that represent generic knowledge about birds and penguins:
 \begin{align*}
 	d_1 &: b \rightarrow f \quad (\text{"Birds fly"}), \\
@@ -268,33 +266,35 @@ From these default rules, a set of \textit{comparative possibility constraints} 
 	C_2 &: p \land \neg f >_\Pi p \land f \quad \text{(penguins do not fly)}, \\
 	C_3 &: p \land b >_\Pi p \land \neg b \quad \text{(penguins are birds)}.
 \end{align*}
-These constraints establish an ordering over possible worlds, prioritizing those that align with more general and certain rules.
-
+These constraints establish an ordering over possible worlds, prioritizing those that align with more general and certain rules. As the default rules clearly state with each constraint which world is more plausible.
 \subsubsection{Possible Worlds and Possibility Distribution}
-
 The propositional language for this example involves three predicates: $b$ (bird), $p$ (penguin), and $f$ (flies). The set of possible worlds, $\Omega$, corresponds to all truth-value assignments:
 \begin{align*}
 	\Omega = \{ \omega_0, \omega_1, \omega_2, \omega_3, \omega_4, \omega_5, \omega_6, \omega_7 \},
 \end{align*}
 where each $\omega_i$ represents a distinct combination of $(b, f, p)$. Based on the constraints, these worlds are ranked to reflect which interpretations are more plausible.
-
-
 \begin{table}[h]
 	\centering
 	\begin{tabular}{c|c|c|c|c|c|c}
 		World & $b$ (Bird) & $f$ (Flies) & $p$ (Penguin) & $d_1$: $b \to f$ & $d_2$: $p \to \neg f$ & $d_3$: $p \to b$ \\
-		$\omega_0$ & 0 & 0 & 0 & true & true & true \\
-		$\omega_1$ & 0 & 0 & 1 & true &true & false \\
-		$\omega_2$ & 0 & 1 & 0 & true & true & true \\
-		$\omega_3$ & 0 & 1 & 1 & true & false & false \\
-		$\omega_4$ & 1 & 0 & 0 & false & true & true \\
+		$\omega_0$ & 0 & 0 & 0 &  &  &  \\
+		$\omega_1$ & 0 & 0 & 1 &  & true & false \\
+		$\omega_2$ & 0 & 1 & 0 &  &  &  \\
+		$\omega_3$ & 0 & 1 & 1 &  & false & false \\
+		$\omega_4$ & 1 & 0 & 0 & false &  &  \\
 		$\omega_5$ & 1 & 0 & 1 & false & true & true \\
-		$\omega_6$ & 1 & 1 & 0 & true & true & true \\
+		$\omega_6$ & 1 & 1 & 0 & true &  &  \\
 		$\omega_7$ & 1 & 1 & 1 & true & false & true \\
 	\end{tabular}
 	\caption{Truth values of bird (\(b\)), flies (\(f\)), and penguin (\(p\)) for each world \(\omega_i\), and whether each world satisfies or violates the default rules.}
 	\label{tab:worlds_rules}
 \end{table}
+
+\begin{align*}
+	C_1 &: \max(\pi(\omega_6), \pi(\omega_7)) > \max(\pi(\omega_4), \pi(\omega_5)), \\
+	C_2 &: \max(\pi(\omega_5), \pi(\omega_1)) > \max(\pi(\omega_3), \pi(\omega_7)), \\
+	C_3 &: \max(\pi(\omega_5), \pi(\omega_7)) > \max(\pi(\omega_1), \pi(\omega_3)).
+\end{align*}
 
 Applying the principle of minimal specificity, we derive the following \textit{possibility levels}:
 \begin{align*}
@@ -391,7 +391,7 @@ which means \textit{"Tweety does not fly"} with a certainty of $\frac{2}{3}$.
 
 
 % Heatmap Bar Chart
-\subsection*{2. Possibility Levels of Worlds}
+\paragraph*{2. Possibility Levels of Worlds}
 \begin{center}
 	\begin{tikzpicture}
 		\draw[->] (0,0) -- (8,0) node[right] {Worlds $\omega_i$};
@@ -408,7 +408,7 @@ which means \textit{"Tweety does not fly"} with a certainty of $\frac{2}{3}$.
 \end{center}
 
 % Flowchart for Reasoning
-\subsection*{3. Possibilistic Reasoning Flowchart}
+\paragraph*{3. Possibilistic Reasoning Flowchart}
 \begin{center}
 	\begin{tikzpicture}[node distance=1.5cm, every node/.style={draw, rounded corners, minimum width=3cm, minimum height=1cm}]
 		\node (start) {Start: $b$ (Tweety is a Bird)};
@@ -438,18 +438,7 @@ which means \textit{"Tweety does not fly"} with a certainty of $\frac{2}{3}$.
 \subsubsection{Implications for AI and Non-Monotonic Reasoning}
 
 This example illustrates how possibilistic logic naturally handles non-monotonic reasoning by allowing more specific rules (e.g., "penguins do not fly") to override general ones ("birds fly"). Unlike classical logic, which would face contradictions, or probability theory, which requires precise distributions, possibilistic logic provides a qualitative approach to default reasoning. It enables AI systems to reason under uncertainty while maintaining a structured approach to resolving conflicts \cite{Dubois1994}.
-\subsection{Extension of existing examples}
-Detailed discussion and interpretation
-\subsection{Development of new examples}
-Motivation for the new examples \\
-Presentation and analysis
-
-\section{Visualization in Possibilistic Logic} \label{Visualization}
-\subsection{The need for and benefits of visualization}
-\subsection{Approaches to visualization}
-Graphical representations of possibility and necessity \\
-Diagrams illustrating inference processes
-\subsection{Implementation and evaluation}
+\subsection{New Problem}
 
 
 \section{Discussion and Conclusion} \label{Conclusion}
