@@ -19,6 +19,9 @@
     args/.style={circle, minimum size=0.9cm,draw=black, thick,fill=white},
 }
 
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
 
 %%%% Author and Title Information %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \author{Alexander Köhn}
@@ -54,10 +57,13 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 % Syntax and semantics
 % Examples and porperties
 %
+%TODO Check upper / lower case
 \section{Introduction}
 % This part motivates your whole document. You describe your goal and research questions on a (semi-)informal level. To do so, you have to present to the reader information on the research area and how your goals and questions are connected to the state of the art. You explain what you will do in your paper and how; furthermore, you explain why your work is relevant. At the end of your introduction, you describe how your document is organized textually. Keep the language in this part such that a non-expert in the field can (roughly) understand the goals and approaches of your text.
+%TODO Add general introduction to the topic. Motivate possibilistic logic and only then give overview on the structure of this paper.
+%TODO add citation
 The goal of this paper is to introduce basic possibilistic logic with examples and visualization. The focus of this paper is on introducing common and new examples with more explanation and visualization. In this paper we will only focus on basic possibilistic logic. \\
-This work is structured as follows. In Section \ref{Fundamentals} basic possibilistic logic is explained with its preliminaries for understanding the syntax and semantics of the logic. Before the core part of this paper the Section \ref{DifferencesClassical} compares possibilistic logic with classical logic and the Section \ref{RelationAI} relates possibilistic logic with Artificial Intelligence. The Section \ref{Examples} shows the use of basic possibilistic logic with multiple examples and graphical explanations. The last Section \ref{Conclusion} discusses the results of the previous sections.
+This work is structured as follows. In Section \ref{Fundamentals} basic possibilistic logic is explained with its preliminaries for understanding the syntax and semantics of the logic. Before the core part of this paper the Section \ref{DifferencesClassical} compares possibilistic logic with classical logic and the Section \ref{RelationAI} relates possibilistic logic with artificial intelligence. The Section \ref{Examples} shows the use of basic possibilistic logic with multiple examples and graphical explanations. The last Section \ref{Conclusion} discusses the results of the previous sections.
 %Possibilistic logic is a weighted logic that handles uncertainty in a qualitative way by adding certainty to classical logic formulas. Its strength lies in modeling uncertainty and its ability to deal with inconsistency.
 
 %\subsection{Motivation}
@@ -68,27 +74,39 @@ This work is structured as follows. In Section \ref{Fundamentals} basic possibil
 % The preliminaries introduce the research context of your document and the general prior work you make use of. You describe the theories and methodologies on which your work is built upon. Also, priorly existing algorithms and results you will make use of later will be presented here. Ensure that the preliminaries focus on the relevant aspects and keep an appropriate weight in the presentation. While it is often advisable to repeat basic results if they are only of marginal importance for your contributions, they should be presented only briefly. In contrast, when your contributions heavily use results from the literature, you should explain these results in detail.
 
 \section{Fundamentals of Basic Possibilistic Logic} \label{Fundamentals}
-The following introduction on basic possibilistic logic is inspired by the presentation of Dubois and Prade in the overview chapter: Possibilistic Logic - An Overview \cite{dubois2014possibilistic}. This section gives a short overview of Basic Possibilistic Logic. For more information, the work \cite{dubois2014possibilistic} is referred. \\
-In this section we will first introduce main concepts of Possibility Theory. These concepts are necessary to understand Possibilistic Logic. Going further Basic Possibilistic Logic is introduced with the syntax, axioms, inference rules and semantic aspects.
-\subsection{Introduction to Possibility Theory}
-In the following basic concepts of Possibility Theory are introduced. Possibility Theory is explained in detail in \cite{dubois2023possibility}, \cite{zadeh1978}. First the possibility distribution is introduced and second the basic set functions of Possibility Theory which model the possibility and necessity of events.
-\subsubsection{Possibility Distribution}
-A possibility distribution is a function \( \pi \) that maps elements from a set of states \( U \) to a totally ordered scale \( S \), where the highest value is 1 and the lowest is 0, see \cite{dubois2014possibilistic}:
-\[
-\pi: U \to S.
-\]
+The following introduction on basic possibilistic logic is inspired by the presentation of Dubois and Prade \cite{dubois2014possibilistic}. This section gives a short overview of basic possibilistic logic. For more information, the work \cite{dubois2014possibilistic} is referred. \\
+In this section we will first introduce main concepts of possibility theory. These concepts are necessary to understand possibilistic logic. Going further basic possibilistic logic is introduced with the syntax, axioms, inference rules and semantic aspects.
+\subsection{Possibility Theory}
+In the following basic concepts of possibility theory are introduced. Possibility theory is explained in detail in \cite{dubois2023possibility}, \cite{zadeh1978}. First the possibility distribution is introduced and second the basic set functions of possibility theory which model the possibility and necessity of events. \\
+\begin{definition}
+	A possibility distribution is a function \( \pi \) that maps elements from a set of states \( U \) to a totally ordered scale \( S = \left[ 0 , 1 \right]  \), see \cite{dubois2014possibilistic}:
+	\[
+	\pi: U \to S.
+	\]
+\end{definition}
 The value \( \pi(u) \) indicates the degree of possibility assigned to the state \( u \). This function represents the agent's knowledge and helps differentiate between states that are more or less plausible. A state \( u \) is impossible if \( \pi(u) = 0 \), whereas it is considered fully possible if \( \pi(u) = 1 \). \\
+\begin{example}
+	%TODO
+\end{example}
 %A distribution $ \pi $ is at least as specific as $ \pi' $ if
 %\[
 %\pi(u) \leq \pi'(u), \quad \forall u \in U.
 %\]
 %An agent has complete knowledge if the possibility of one state is 1 and the possibility of all other states is 0. Complete ignorance is given it the possibility of all states is 1.
 %The Principle of minimal specificity states that any hypothesis not known to be impossible cannot be ruled out. It is a minimal commitment, cautious, information principle.
-\subsubsection{Possibility and Necessity Functions}
-If we want to know if the event $ A $ occurs we can respond in possibility theory with two measures calculated from the possibility distribution to $ A $.  $ A $ is a subset of states. The two measures are the possibility and the necessity of an event, see \cite{dubois2014possibilistic}. \\ 
-The Possibility is defined as $ \Pi(A) = \sup_{u \in A} \pi \left( u \right) $. It is the maximum of possibility of all the states of $ A $. The Possibility evaluates the extent to which $ A $ is consistent with $ \pi $. Possibility measures satisfy the characteristic maxitivity property $ \Pi \left( A \cup B \right)  = \max \left( \Pi \left( A \right), \Pi \left(  B \right) \right) $. \\
-The Necessity is defined as $ N(A) = \inf_{u \notin A} \left( 1 - \pi \left( u \right) \right) $. It is the minimum of the inversed possibility value of all states which are not in $ A $. The Necessity evaluates the extent to which $ A $ is certainly implied by $ \pi $. Necessity measures satisfy the characteristic minimization property $ N \left( A \cap B \right)  = \min \left( N \left( A \right) , N \left( B \right) \right) $. The minimization property expresses that to be certain about $ A $ and $ B $, one has to be certain about $ A $ and to be certain about $ B $. \\
+If we want to know if the event $ A $ occurs we can respond in possibility theory with two measures calculated from the possibility distribution to $ A $.  $ A $ is a subset of states. The two measures are the possibility and the necessity of an event, see \cite{dubois2014possibilistic}. \\ %TODO Clarify the sentence
+\begin{definition}
+	The possibility of an event $ A $ is  $ \Pi(A) = \sup_{u \in A} \pi \left( u \right) $.
+\end{definition}
+The possibility is the maximum possibility of all the states of $ A $. The possibility evaluates the extent to which $ A $ is consistent with $ \pi $. Possibility measures satisfy the characteristic maxitivity property $ \Pi \left( A \cup B \right)  = \max \left( \Pi \left( A \right), \Pi \left(  B \right) \right) $. \\
+\begin{definition}
+	The necessity of an event $ A $  is $ N(A) = \inf_{u \notin A} \left( 1 - \pi \left( u \right) \right) $.
+\end{definition}
+The necessity is the minimum of the inversed possibility value of all states which are not in $ A $. The necessity evaluates the extent to which $ A $ is certainly implied by $ \pi $. Necessity measures satisfy the characteristic minimization property $ N \left( A \cap B \right)  = \min \left( N \left( A \right) , N \left( B \right) \right) $. The minimization property expresses that to be certain about $ A $ and $ B $, one has to be certain about $ A $ and to be certain about $ B $. \\
 The duality of the two measures is expressed as $ N \left( A \right)  = 1 - \Pi \left( A^c \right) $, where $ A^c $ is the complement of $ A $.
+\begin{example}
+	%TODO
+\end{example}
 % Note also that we only have N(A?B) ? max(N(A),N(B)).This goes well with the idea that one may be certain about the event A?B, without being really certain about more specific events such as A and B.
 \subsection{Formal foundations of Basic Possibilistic Logic}
 In the following the foundations of Basic Possibilistic Logic are layed out. First the syntax is introduced. Second the axioms of this logic are derived and third the inference rules are explained. The last part covers the semantic aspects of the logic.
