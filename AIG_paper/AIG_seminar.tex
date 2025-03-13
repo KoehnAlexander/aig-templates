@@ -58,10 +58,10 @@ Possibilistic logic is a non-classical logic framework designed to handle uncert
 % Examples and porperties
 %
 %TODO Check upper / lower case
+%TODO add citations
+%TODO Insbesondere ist der Zusammenhang zur der im Beispiel vorgestellten Methodologie zur possibilistischen Logik unklar.
 \section{Introduction}
 % This part motivates your whole document. You describe your goal and research questions on a (semi-)informal level. To do so, you have to present to the reader information on the research area and how your goals and questions are connected to the state of the art. You explain what you will do in your paper and how; furthermore, you explain why your work is relevant. At the end of your introduction, you describe how your document is organized textually. Keep the language in this part such that a non-expert in the field can (roughly) understand the goals and approaches of your text.
-%TODO add citation
-
 Reasoning under uncertainty is a fundamental problem in artificial intelligence. Classical logic, while expressive and well-structured, lacks the ability to handle incomplete or uncertain information effectively. Several approaches have been proposed to address this issue, including possibility theory \cite{halpern1990}, fuzzy logic \cite{zadeh1965}, and possibilistic logic \cite{dubois1991}. The foundation of possibility theory was laid by Zadeh in 1978 \cite{zadeh1978} as an extension of fuzzy set theory \cite{zadeh1965}, aiming to provide a qualitative framework for handling uncertain information. Building upon Zadeh’s work, Dubois and Prade formulated possibilistic logic \cite{dubois1991} as a means to integrate possibility theory into formal logic systems. \\
 Possibilistic logic has been further developed for diverse areas such as knowledge representation, database systems, and reasoning under inconsistency. The goal of this paper is to introduce basic possibilistic logic with examples and visualization. The focus of this paper is on introducing common and new examples with more explanation and visualization. In this paper we will only focus on basic possibilistic logic. \\
 This work is structured as follows. In Section \ref{Fundamentals} basic possibilistic logic is explained with its preliminaries for understanding the syntax and semantics of the logic. Before the core part of this paper the Section \ref{DifferencesClassical} compares possibilistic logic with classical logic and the Section \ref{RelationAI} relates possibilistic logic with artificial intelligence. The Section \ref{Examples} shows the use of basic possibilistic logic with multiple examples and graphical explanations. The last Section \ref{Conclusion} discusses the results of the previous sections.
@@ -78,14 +78,14 @@ This work is structured as follows. In Section \ref{Fundamentals} basic possibil
 The following introduction on basic possibilistic logic is inspired by the presentation of Dubois and Prade \cite{dubois2014possibilistic}. This section gives a short overview of basic possibilistic logic. For more information, the work \cite{dubois2014possibilistic} is referred. \\
 In this section we will first introduce main concepts of possibility theory. These concepts are necessary to understand possibilistic logic. Going further basic possibilistic logic is introduced with the syntax, axioms, inference rules and semantic aspects.
 \subsection{Possibility Theory}
-In the following basic concepts of possibility theory are introduced. Possibility theory is explained in detail in \cite{dubois2023possibility}, \cite{zadeh1978}. First the possibility distribution is introduced and second the basic set functions of possibility theory which model the possibility and necessity of events. \\
+Possibility theory is explained in detail in \cite{dubois2023possibility}, \cite{zadeh1978}. Possibility theory relies on the concept of possibility distributions. 
 \begin{definition}
 	A possibility distribution is a function \( \pi \) that maps elements from a set of states \( U \) to a totally ordered scale \( S = \left[ 0 , 1 \right]  \), see \cite{dubois2014possibilistic}:
 	\[
 	\pi: U \to S.
 	\]
 \end{definition}
-The value \( \pi(u) \) indicates the degree of possibility assigned to the state \( u \). This function represents the agent's knowledge and helps differentiate between states that are more or less plausible. A state \( u \) is impossible if \( \pi(u) = 0 \), whereas it is considered fully possible if \( \pi(u) = 1 \). \\
+The value \( \pi(u) \) indicates the degree of possibility assigned to the state \( u \). This function represents the agent's knowledge and helps differentiate between states that are more or less plausible. A state \( u \) is impossible if \( \pi(u) = 0 \), whereas it is considered fully possible if \( \pi(u) = 1 \).
 \begin{example}
 	Consider a weather forecasting scenario where an agent assesses the possibility of different weather conditions for tomorrow. Let $ U = \{\text{sunny}, \text{cloudy}, \text{rainy}, \text{stormy}\} $ be the set of possible states. The agent assigns a possibility distribution $ \pi $ as follows: \\
 	$ \pi(\text{sunny}) = 1, \quad \pi(\text{cloudy}) = 0.7, \quad \pi(\text{rainy}) = 0.3, \quad \pi(\text{stormy}) = 0$. \\
@@ -97,7 +97,7 @@ The value \( \pi(u) \) indicates the degree of possibility assigned to the state
 %\]
 %An agent has complete knowledge if the possibility of one state is 1 and the possibility of all other states is 0. Complete ignorance is given it the possibility of all states is 1.
 %The Principle of minimal specificity states that any hypothesis not known to be impossible cannot be ruled out. It is a minimal commitment, cautious, information principle.
-If we want to know if the event $ A $ occurs we can respond in possibility theory with two measures calculated from the possibility distribution to $ A $.  $ A $ is a subset of states. The two measures are the possibility and the necessity of an event, see \cite{dubois2014possibilistic}. \\ %TODO Clarify the sentence
+The basic measures of possibility theory model the possibility and necessity of events, see \cite{dubois2014possibilistic}. If the occurence of an event $ A $  is of interest possibility theory responds with both two measures calculated from the possibility distribution of $ A $. 
 \begin{definition}
 	The possibility of an event $ A $ is  $ \Pi(A) = \sup_{u \in A} \pi \left( u \right) $.
 \end{definition}
@@ -108,7 +108,19 @@ The possibility is the maximum possibility of all the states of $ A $. The possi
 The necessity is the minimum of the inversed possibility value of all states which are not in $ A $. The necessity evaluates the extent to which $ A $ is certainly implied by $ \pi $. Necessity measures satisfy the characteristic minimization property $ N \left( A \cap B \right)  = \min \left( N \left( A \right) , N \left( B \right) \right) $. The minimization property expresses that to be certain about $ A $ and $ B $, one has to be certain about $ A $ and to be certain about $ B $. \\
 The duality of the two measures is expressed as $ N \left( A \right)  = 1 - \Pi \left( A^c \right) $, where $ A^c $ is the complement of $ A $.
 \begin{example}
-	%TODO
+	Consider a possibility distribution $ \pi $ over a set of possible weather conditions: $ U = \{ \text{sunny}, \text{cloudy}, \text{rainy} \} $ with the values $ \pi(\text{sunny}) = 1 $, $ \pi(\text{cloudy}) = 0.7 $, and $ \pi(\text{rainy}) = 0.3 $. 
+	
+	The possibility of the event "not rainy" $ A = \{ \text{sunny}, \text{cloudy} \} $ is given by: 
+	\[
+	\Pi(A) = \sup_{u \in A} \pi(u) = \max(\pi(\text{sunny}), \pi(\text{cloudy})) = \max(1, 0.7) = 1.
+	\]
+	
+	The necessity of "not rainy" is computed as:
+	\[
+	N(A) = \inf_{u \notin A} (1 - \pi(u)) = 1 - \pi(\text{rainy}) = 1 - 0.3 = 0.7.
+	\]
+	
+	This means that the event "not rainy" is fully possible but not completely necessary.
 \end{example}
 % Note also that we only have N(A?B) ? max(N(A),N(B)).This goes well with the idea that one may be certain about the event A?B, without being really certain about more specific events such as A and B.
 \subsection{Formal foundations of Basic Possibilistic Logic}
