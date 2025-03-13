@@ -37,7 +37,7 @@
 %TODO Write Abstract
 % use this if the document is written in english
 \englishabstract{
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+Possibilistic logic is a non-classical logic framework designed to handle uncertainty by incorporating degrees of possibility. This paper provides a general introduction to possibilistic logic by using strong examples of the apllication.
 }
 
 
@@ -62,6 +62,8 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 % This part motivates your whole document. You describe your goal and research questions on a (semi-)informal level. To do so, you have to present to the reader information on the research area and how your goals and questions are connected to the state of the art. You explain what you will do in your paper and how; furthermore, you explain why your work is relevant. At the end of your introduction, you describe how your document is organized textually. Keep the language in this part such that a non-expert in the field can (roughly) understand the goals and approaches of your text.
 %TODO Add general introduction to the topic. Motivate possibilistic logic and only then give overview on the structure of this paper.
 %TODO add citation
+
+Reasoning under uncertainty is a fundamental problem in artificial intelligence and knowledge representation. Classical logic, while expressive and well-structured, lacks the ability to handle incomplete or uncertain information effectively. Several approaches have been proposed to address this issue, including possibility theory \cite{halpern1990}, fuzzy logic \cite{zadeh1965}, and possibilistic logic \cite{dubois1994}. The foundation of possibility theory was laid by Zadeh in 1978 \cite{zadeh1978} as an extension of fuzzy set theory \cite{zadeh1965}, aiming to provide a qualitative framework for handling uncertain information. Building upon Zadeh’s work, Dubois and Prade formulated possibilistic logic in the late 1980s and early 1990s \cite{dubois1991, dubois1994} as a means to integrate possibility theory into formal logic systems. \\
 The goal of this paper is to introduce basic possibilistic logic with examples and visualization. The focus of this paper is on introducing common and new examples with more explanation and visualization. In this paper we will only focus on basic possibilistic logic. \\
 This work is structured as follows. In Section \ref{Fundamentals} basic possibilistic logic is explained with its preliminaries for understanding the syntax and semantics of the logic. Before the core part of this paper the Section \ref{DifferencesClassical} compares possibilistic logic with classical logic and the Section \ref{RelationAI} relates possibilistic logic with artificial intelligence. The Section \ref{Examples} shows the use of basic possibilistic logic with multiple examples and graphical explanations. The last Section \ref{Conclusion} discusses the results of the previous sections.
 %Possibilistic logic is a weighted logic that handles uncertainty in a qualitative way by adding certainty to classical logic formulas. Its strength lies in modeling uncertainty and its ability to deal with inconsistency.
@@ -86,7 +88,9 @@ In the following basic concepts of possibility theory are introduced. Possibilit
 \end{definition}
 The value \( \pi(u) \) indicates the degree of possibility assigned to the state \( u \). This function represents the agent's knowledge and helps differentiate between states that are more or less plausible. A state \( u \) is impossible if \( \pi(u) = 0 \), whereas it is considered fully possible if \( \pi(u) = 1 \). \\
 \begin{example}
-	%TODO
+	Consider a weather forecasting scenario where an agent assesses the possibility of different weather conditions for tomorrow. Let $ U = \{\text{sunny}, \text{cloudy}, \text{rainy}, \text{stormy}\} $ be the set of possible states. The agent assigns a possibility distribution $ \pi $ as follows: \\
+	$ \pi(\text{sunny}) = 1, \quad \pi(\text{cloudy}) = 0.7, \quad \pi(\text{rainy}) = 0.3, \quad \pi(\text{stormy}) = 0$. \\
+	Here, the agent is completely certain that a sunny day is possible ($\pi(\text{sunny}) = 1$), considers cloudy weather somewhat possible ($\pi(\text{cloudy}) = 0.7$), finds rain unlikely ($\pi(\text{rainy}) = 0.3$), and deems a storm impossible ($\pi(\text{stormy}) = 0$).
 \end{example}
 %A distribution $ \pi $ is at least as specific as $ \pi' $ if
 %\[
