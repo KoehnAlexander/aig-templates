@@ -62,8 +62,8 @@ Possibilistic logic is a non-classical logic framework designed to handle uncert
 %TODO Insbesondere ist der Zusammenhang zur der im Beispiel vorgestellten Methodologie zur possibilistischen Logik unklar.
 \section{Introduction}
 % This part motivates your whole document. You describe your goal and research questions on a (semi-)informal level. To do so, you have to present to the reader information on the research area and how your goals and questions are connected to the state of the art. You explain what you will do in your paper and how; furthermore, you explain why your work is relevant. At the end of your introduction, you describe how your document is organized textually. Keep the language in this part such that a non-expert in the field can (roughly) understand the goals and approaches of your text.
-Reasoning under uncertainty is a fundamental problem in artificial intelligence. Classical logic, while expressive and well-structured, lacks the ability to handle incomplete or uncertain information effectively. Several approaches have been proposed to address this issue, including possibility theory \cite{halpern1990}, fuzzy logic \cite{zadeh1965}, and possibilistic logic \cite{dubois1991}. The foundation of possibility theory was laid by Zadeh in 1978 \cite{zadeh1978} as an extension of fuzzy set theory \cite{zadeh1965}, aiming to provide a qualitative framework for handling uncertain information. Building upon Zadeh’s work, Dubois and Prade formulated possibilistic logic \cite{dubois1991} to integrate possibility theory into formal logic systems. \\
-Possibilistic logic has been further developed for diverse areas such as knowledge representation, database systems, and reasoning under inconsistency. The goal of this paper is to introduce basic possibilistic logic with examples and visualizations. The focus is on providing both common and new examples with additional explanations and graphical representations. In this paper, we will focus solely on basic possibilistic logic. \\
+Reasoning under uncertainty is a significant problem in artificial intelligence. Several approaches have been proposed to address this issue, including possibility theory \cite{halpern1990}, fuzzy logic \cite{zadeh1965}, and possibilistic logic \cite{dubois1991}. The foundation of possibility theory was laid by Zadeh in 1978 \cite{zadeh1978} as an extension of fuzzy set theory \cite{zadeh1965}, aiming to provide a qualitative framework for handling uncertain information. Building upon Zadeh’s work, Dubois and Prade formulated possibilistic logic \cite{dubois1991} to integrate possibility theory into formal logic systems. \\
+Possibilistic logic has been further developed for diverse applications such as default reasoning, belief revision or in decision under uncertainty. The goal of this paper is to introduce basic possibilistic logic with examples and visualizations. The focus is on providing both common and new examples with additional explanations and graphical representations. In this paper, we will focus solely on basic possibilistic logic. \\
 This work is structured as follows. In Section \ref{Fundamentals}, basic possibilistic logic is explained, including its preliminaries for understanding the syntax and semantics of the logic. Before the core part of this paper, Section \ref{DifferencesClassical} compares possibilistic logic with classical logic, and Section \ref{RelationAI} discusses its relationship with artificial intelligence. Section \ref{Examples} illustrates the application of basic possibilistic logic through multiple examples and graphical explanations. Finally, Section \ref{Conclusion} summarizes and discusses the results of the previous sections.
 %Possibilistic logic is a weighted logic that handles uncertainty in a qualitative way by adding certainty to classical logic formulas. Its strength lies in modeling uncertainty and its ability to deal with inconsistency.
 
@@ -80,9 +80,9 @@ In this section we will first introduce main concepts of possibility theory. The
 \subsection{Possibility Theory}
 Possibility theory is explained in detail in \cite{dubois2023possibility}, \cite{zadeh1978}. Possibility theory relies on the concept of possibility distributions. 
 \begin{definition}
-	A possibility distribution is a function \( \pi \) that maps elements from a set of states \( U \) to a totally ordered scale \( S = \left[ 0 , 1 \right]  \), see \cite{dubois2014possibilistic}:
+	A possibility distribution is a function \( \pi \) that maps elements from a set of states \( U \) to a totally ordered scale \( \left[ 0 , 1 \right]  \), see \cite{dubois2014possibilistic}:
 	\[
-	\pi: U \to S.
+	\pi: U \to \left[ 0 , 1 \right] .
 	\]
 \end{definition}
 The value \( \pi(u) \) indicates the degree of possibility assigned to the state \( u \). This function represents the agent's knowledge and helps differentiate between states that are more or less plausible. A state \( u \) is impossible if \( \pi(u) = 0 \), whereas it is considered fully possible if \( \pi(u) = 1 \).
@@ -153,7 +153,6 @@ The \textit{weakest link resolution rule} extends the resolution rule by conside
 \begin{equation}\label{Eq:Weakest_link_resolution}
 	(\neg a \lor b, \alpha), \quad (a \lor c, \beta) \vdash (b \lor c, \min(\alpha, \beta))
 \end{equation}
-
 For inference with basic possibilistic logic, a possibilistic logic base is used.
 \begin{definition}
 	A possibilistic knowledge base is a collection of possibilistic formulas:
@@ -194,72 +193,19 @@ An important property of knowledge bases is their inconsistency level.
 	where $ \bot $ represents an inconsistent state in logic.
 \end{definition}
 It represents the highest certainty level at which the knowledge base becomes inconsistent. Any formula with a certainty level higher than the inconsistency level remains free from inconsistency.
+\begin{example}
+	In the above example are no conflicting statements (e.g., one rule stating “Fever implies Flu” and another stating “Fever does not imply Flu”), there is no contradiction in this knowledge base. The inconsistency level $ \text{inc-l}(\Gamma) $ is 0, meaning the knowledge base is fully consistent at all certainty levels.
+\end{example}
 
 \section{Differences from classical logic} \label{DifferencesClassical}
-%TODO Differences to classical logic
-TODO: \\
-Handling of Inconsistencies
-%Possibilistic logic extends classical logic to address reasoning under uncertainty, offering mechanisms to represent degrees of belief and certainty. This section highlights the fundamental differences between the two logical frameworks, focusing on their semantics, expressive power, and handling of inconsistency.
-%\subsection{Representation of Uncertainty}
-%Classical logic operates within a binary truth-value system where every statement is either true (\(1\)) or false (\(0\)) \cite{Boole1854}. This simplicity facilitates precise reasoning but limits the capacity to model uncertainty or graded beliefs. For instance, in classical logic, if \(p\) is true, the disjunction \(p \lor q\) is true regardless of \(q\).
-%In contrast, possibilistic logic incorporates a certainty degree \(\alpha \in [0, 1]\) into formulas. A formula \((a, \alpha)\) encodes the constraint \(N(a) \geq \alpha\), where \(N(a)\) is a necessity measure representing the certainty of \(a\). As Dubois et al. explain, this framework allows for "a more nuanced reasoning where uncertainty is explicitly quantified" \cite{Dubois1994}. This makes possibilistic logic particularly suitable for applications such as decision-making and expert systems.
-%\subsection{Semantics}
-%The semantics of classical logic are based on truth assignments, where a model is a complete assignment of truth values to all propositions. A formula is true if it holds in all models satisfying the formula \cite{Tarski1941}.
-%Possibilistic logic employs possibility distributions to rank interpretations by their plausibility. A possibility distribution \(\pi(\omega)\) assigns a degree of possibility \([0, 1]\) to each interpretation \(\omega\). Models of a formula \(a\) have maximum possibility (\(\pi = 1\)), while countermodels have reduced possibility proportional to the certainty level \(\alpha\). This richer semantic framework accommodates reasoning with uncertainty and vagueness \cite{Dubois1994}.
-%\subsection{Handling Inconsistency}
-%Classical logic adopts a strict approach to inconsistency: the presence of a contradiction (\(a \land \neg a\)) renders the entire knowledge base invalid, allowing any formula to be derived \cite{Priest2008}.
-%Possibilistic logic, on the other hand, quantifies inconsistency. The inconsistency degree of a knowledge base reflects the extent to which it is contradictory. As Dubois et al. note, possibilistic logic "enables reasoning to proceed by prioritizing more certain information and disregarding less certain, conflicting data" \cite{Dubois1996}. This feature makes it robust for reasoning in incomplete and inconsistent environments.
-%\subsection{Expressiveness}
-%Classical logic excels in deterministic reasoning, where propositions are crisp and well-defined. It forms the foundation of mathematics, formal verification, and theoretical computer science \cite{Russell1903}. However, it cannot represent graded uncertainty.
-%Possibilistic logic extends the expressive power of classical logic by introducing mechanisms to model partial beliefs and degrees of certainty. This capability is crucial in fields like artificial intelligence, where uncertainty is inherent to problem-solving \cite{Zadeh1978}.
-%\subsection{Entailment}
-%Entailment in classical logic is binary: \(\Delta \models a\) indicates that \(a\) is true in all models of \(\Delta\). For example, if \(\Delta = \{p, p \to q\}\), then \(q\) is entailed if \(p\) is true \cite{Tarski1941}.
-%In possibilistic logic, entailment is graded. \(\Delta \models (a, \alpha)\) implies that \(a\) is true in all interpretations with at least the certainty level \(\alpha\). This certainty-based entailment enables reasoning about the strength of conclusions, a key feature in real-world applications \cite{Dubois1994}.
-%\subsection{Applications}
-%Classical logic is well-suited for deterministic problems with clear, unambiguous rules, such as mathematical reasoning and logic programming \cite{Boole1854}. 
-%Possibilistic logic, by contrast, is tailored for reasoning under uncertainty. Its ability to handle graded beliefs makes it a powerful tool in domains like artificial intelligence, decision support systems, and fuzzy logic applications. For example, possibilistic logic integrates seamlessly with fuzzy systems to facilitate approximate reasoning \cite{Dubois1994, Zadeh1978}.
-%\subsection{Summary}
-%The primary distinctions between classical and possibilistic logic are summarized in Table~\ref{tab:logic_comparison}.
-%
-%\begin{table}[h!]
-%	\centering
-%	\caption{Comparison of Classical Logic and Possibilistic Logic}
-%	\label{tab:logic_comparison}
-%	\begin{tabular}{|l|l|l|}
-%		\hline
-%		\textbf{Aspect}            & \textbf{Classical Logic}                  & \textbf{Possibilistic Logic}               \\ \hline
-%		Truth Values               & Binary (\(0, 1\))                        & Graded (\([0, 1]\))                        \\ \hline
-%		Semantics                  & Truth Assignments                        & Possibility Distributions                  \\ \hline
-%		Uncertainty Handling       & Not Supported                           & Explicitly Represented                     \\ \hline
-%		Inconsistency Handling     & All-or-Nothing                          & Quantified and Managed                     \\ \hline
-%		Applications               & Deterministic Problems                  & Uncertain or Vague Reasoning               \\ \hline
-%		Entailment                 & Binary                                  & Certainty-Based                            \\ \hline
-%	\end{tabular}
-%\end{table}
-%Possibilistic logic, by building upon classical logic, provides the means to address the limitations of classical reasoning in uncertain and inconsistent environments. As Dubois et al. summarize, "its ability to combine logical precision with graded uncertainty makes it a valuable tool for real-world reasoning tasks" \cite{Dubois1994}.
+Possibilistic logic extends classical logic with incorporating a certainty degree to classical logic formulas, see \cite{dubois2014possibilistic}. In classical logic a statement is either true or false corresponding to a binary value system. In contrast in possibilistic logic the certainty degree of the possbilistic formula is a non-binary value \cite{dubois1991}. \\
+In classical logic the presence of a contradiction (\(a \land \neg a\)) renders the entire knowledge base invalid, allowing any formula to be derived.
+Possibilistic logic can handle inconsistency. The inconsistency degree of a knowledge base reflects the extent to which it is contradictory \cite{dubois2014possibilistic}. This feature makes it robust for reasoning in incomplete and inconsistent environments.
+
 \section{Relation to Artificial Intelligence} \label{RelationAI}
-%TODO Relation to AI
-TODO: \\
-Areas where this logic is beneficial \\
-Examples of usage
-%Possibilistic logic has a significant role in the field of artificial intelligence (AI), where reasoning under uncertainty is a fundamental challenge. Unlike classical logic, which assumes a deterministic world, possibilistic logic provides a framework to model and reason about incomplete, inconsistent, or uncertain information. This capability makes it particularly relevant to AI systems that must operate in real-world environments.
-%\subsection{Reasoning Under Uncertainty}
-%In AI, systems frequently encounter scenarios where the available information is uncertain or imprecise. Classical logic, which relies on binary truth values, is insufficient for such cases. Possibilistic logic addresses this limitation by introducing graded measures of certainty and possibility. Each formula in possibilistic logic is associated with a certainty degree, allowing AI systems to represent and process partial beliefs \cite{Dubois1994}.
-%For example, in expert systems, possibilistic logic can encode the varying reliability of rules provided by human experts. A rule with a higher certainty degree is given more weight in inference processes, enabling the system to prioritize more reliable information \cite{Prade1985}.
-%\subsection{Handling Inconsistency}
-%Inconsistencies are inevitable in real-world AI applications, particularly when combining knowledge from multiple sources. Classical logic treats any inconsistency as catastrophic, rendering the entire knowledge base unusable. Possibilistic logic, by contrast, quantifies inconsistency and allows reasoning to continue by prioritizing more certain information \cite{Dubois1996}. This feature is crucial for applications such as multi-agent systems and knowledge integration, where conflicting data is common.
-%\subsection{Applications in AI}
-%Possibilistic logic has been applied in various AI domains, demonstrating its versatility and utility. Key applications include:
-%\begin{itemize}
-%	\item \textbf{Decision Support Systems:} Possibilistic logic enables decision-making under uncertainty by modeling degrees of belief and their impact on outcomes. This is particularly useful in medical diagnosis and risk assessment systems \cite{Benferhat1997}.
-%	\item \textbf{Natural Language Processing (NLP):} Uncertainty is inherent in NLP tasks, such as semantic analysis and information retrieval. Possibilistic logic provides a robust framework for modeling linguistic uncertainty and ambiguity \cite{Dubois1994}.
-%	\item \textbf{Fuzzy Systems:} Possibilistic logic integrates seamlessly with fuzzy logic to facilitate approximate reasoning, making it a natural choice for control systems and robotics \cite{Zadeh1978}.
-%\end{itemize}
-%\subsection{Relation to Other AI Frameworks}
-%Possibilistic logic is closely related to other uncertainty reasoning frameworks in AI, such as probabilistic reasoning and fuzzy logic. While probabilistic approaches focus on quantifying uncertainty in terms of likelihoods, possibilistic logic emphasizes qualitative reasoning based on plausibility and necessity measures \cite{Dubois1988}. This distinction makes possibilistic logic particularly suited to scenarios where precise probability distributions are unavailable or unnecessary. \\
-%Moreover, possibilistic logic complements fuzzy logic by providing a logical foundation for reasoning about fuzzy sets. As Zadeh \cite{Zadeh1978} observed, the integration of fuzzy logic and possibilistic reasoning enables more sophisticated modeling of real-world problems, particularly those involving vague or imprecise concepts.
-%\subsection{Conclusion}
-%The ability of possibilistic logic to handle uncertainty, inconsistency, and imprecision makes it a valuable tool in AI. By extending classical logic with measures of certainty and possibility, it bridges the gap between theoretical rigor and practical applicability in uncertain environments. As Dubois and Prade note, "possibilistic logic combines logical precision with the flexibility required for real-world reasoning" \cite{Dubois1994}.
+Possibilistic logic has with its strength in modeling certainty and handling inconsistency different aplication fields of artificial intelligence problems \cite{dubois2014possibilistic}, \cite{2021possibility}. In default reasoning possibilistic logic handles incomplete information reasoning. Possibilistic logic can be applied in information fusion where knowledge is combined from different sources.
+The logic can help with decisions under uncertainty. One application is the usage in medical diagnosis problems \cite{grabisch2003}.
+
 \section{Analysis and Development of Examples} \label{Examples}
 In the following, examples showing the application of basic possibilistic logic are explained. First, the penguin problem is presented to provide a better understanding of the logic. Second, a new problem is introduced.
 \subsection{The Penguin Problem}
@@ -285,8 +231,8 @@ The propositional language for this example involves three propositions: $b$ (bi
 \begin{align*}
 	\Omega = \{ \omega_0, \omega_1, \omega_2, \omega_3, \omega_4, \omega_5, \omega_6, \omega_7 \}.
 \end{align*}
-Based on the constraints, these worlds are ranked to reflect which interpretations are more plausible. \\
-\begin{table}[h]
+Based on the constraints, these worlds are ranked to reflect which interpretations are more plausible.
+\begin{table}
 	\centering
 	\begin{tabular}{c||c|c|c||c|c|c}
 		World & $b$ (Bird) & $f$ (Flies) & $p$ (Penguin) & $d_1$: $b \to f$ & $d_2$: $p \to \neg f$ & $d_3$: $p \to b$ \\
@@ -303,7 +249,6 @@ Based on the constraints, these worlds are ranked to reflect which interpretatio
 	\caption{Truth values of bird (\(b\)), flies (\(f\)), and penguin (\(p\)) for each world \(\omega_i\), and whether each world satisfies or violates the default rules.}
 	\label{tab:worlds_rules}
 \end{table}
-
 In table \ref{tab:worlds_rules} each line represents a world with the combination of the three predicates and the satisfaction or violation of a default rule. In this table it can be observed that no world satisfies all rules, which highlights the core problem. The worlds \( \omega_0 \) and \( \omega_2 \) do not satisfy or violate any rule. \\
 The first default rule, \( d_1: b \rightarrow f \) ("Birds fly"), increases the plausibility of worlds where birds fly (\( b \land f \)) compared to those where birds do not fly (\( b \land \neg f \)). This rule affects the ranking between worlds \( \omega_6 \), \( \omega_7 \) (where the bird flies) and \( \omega_4, \omega_5 \) (where the bird does not fly). \\
 The second default rule, \( d_2: p \rightarrow \neg f \) ("Penguins do not fly"), prioritizes worlds where penguins do not fly (\( p \land \neg f \)) over those where penguins fly (\( p \land f \)). This affects the relative plausibility of \( \omega_5 \), \( \omega_1 \) (where the penguin does not fly) compared to \( \omega_7 \) and \( \omega_3 \) (where the penguin flies). \\
@@ -318,7 +263,7 @@ We can insert the worlds in which the rule holds into the constraints, as these 
 With the combination of the constraints it is possible to find out an ordering, where no constarint is broken. The graph \ref{fig:worlds_ranking} gives a hint about the possibility relations between the worlds. \\
 For example the constraint $C_1$ says that either $\omega_6$ (blue arrows) or $\omega_7$ (red arrows) must be more possible than $\omega_4$ and $\omega_5$. The correct ordering is found if the worlds can be arranged in levels with the relations (arrows) while the arrows are only going down from a higher possibility level to a lower one. In this example an ordering can be found with color groups blue ($C_1$), orange ($C_2$) and yellow ($C_3$).
 % Hasse Diagram
-\begin{figure}[ht]
+\begin{figure}
 	\centering
 	\begin{tikzpicture}[node distance=1.5cm, every node/.style={circle, minimum size=1cm}, >=stealth]
 		\draw[->] (-5,-4) -- (-5,4) node[right] {Possibility $\pi(\omega_i)$};
@@ -353,7 +298,6 @@ For example the constraint $C_1$ says that either $\omega_6$ (blue arrows) or $\
 	\caption{Possibility of the worlds $\omega_i$ and possibility relation between the worlds represented by the colored arrows}
 	\label{fig:worlds_ranking}
 \end{figure}
-
 The ordering of the worlds threw the constraints results in:
 \begin{align*}
 	\pi(\omega_0) &= \pi(\omega_2) = \pi(\omega_6) = 1, \\
@@ -376,7 +320,7 @@ Thus, we obtain the possibilistic knowledge base:
 K = \{ (\neg p \lor \neg f, \frac{2}{3}), (\neg p \lor b, \frac{2}{3}), (\neg b \lor f, \frac{1}{3}) \}.
 \]
 The possibilitic knowledge base is visualized in figure \ref{fig:rules_ranking}.
-\begin{figure}[ht]
+\begin{figure}
 	\centering
 	\begin{tikzpicture}[node distance=1.5cm, every node/.style={circle, minimum size=1cm}, >=stealth]
 		\draw[->] (-2,-4) -- (-2,2) node[right] {Certainty Level};
@@ -401,7 +345,7 @@ From the rule $(\neg b \lor f, 1/3)$ in the knowledge base $K$, we can infer by 
 	(\neg b \lor f, 1/3) \quad \text{and} \quad (b, 1) \vdash (f, \min(1, 1/3)) = (f, 1/3).
 \end{align*}
 Thus, we conclude that Tweety flies with a certainty level of $\frac{1}{3}$. We can see the result graphically in figure \ref{fig:firstinformation}. The violet arrow symbolizes the inference with the weakest link resolution rule. \\
-\begin{figure}[ht]
+\begin{figure}[h]
 	\centering
 	\begin{tikzpicture}[every node/.style={circle}, >=stealth]
 		\draw[->] (-2,-4) -- (-2,4.5) node[right] {Certainty Level};
@@ -439,8 +383,8 @@ the system detects an inconsistency of level $\frac{1}{3}$. Given the principle 
 	K \cup F \vdash (\neg f, 2/3),
 \end{align*}
 which means \textit{"Tweety does not fly"} with a certainty of $\frac{2}{3}$. \\
-The results are visualized in the figure \ref{fig:secondinformation}. It can be seen that the inconclusive level is raised to a level where above no conflict is between the information.\\
-\begin{figure}[ht]
+The results are visualized in the figure \ref{fig:secondinformation}. It can be seen that the inconclusive level is raised to a level where above no conflict is between the information.
+\begin{figure}
 	\centering
 	\begin{tikzpicture}[node distance=1.5cm, every node/.style={circle, minimum size=1cm}, >=stealth]
 		\draw[->] (-2,-4) -- (-2,4.5) node[right] {Certainty Level};
@@ -463,7 +407,7 @@ The results are visualized in the figure \ref{fig:secondinformation}. It can be 
 	\label{fig:secondinformation}
 \end{figure}
 
-The process is visualized in the flowchart \ref{fig:flowchart}. \\
+The process is visualized in the flowchart \ref{fig:flowchart}.
 % Flowchart for Reasoning
 \begin{figure}[ht]
 	\centering
