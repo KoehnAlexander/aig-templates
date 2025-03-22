@@ -134,64 +134,64 @@ The semantics of a possibilistic logic formula are based on the semantics of the
 \begin{example}  
 	\((b \to f, 0.9)\) means that "birds fly" holds with certainty \( 0.9 \).  
 \end{example}
-The following inference rules of basic possibilistic logic are necessary for the application of the logic in this paper. The \textit{certainty weakening rule} states that if a formula holds with a certainty level \( \alpha \), it also holds with any lower certainty level \( \beta \) because we are being less demanding, see Equation \ref{Eq:Certainty_weakening}.
+The following inference rules of basic possibilistic logic are necessary for the application of the logic in this paper. The \textit{certainty weakening rule} states that if a formula holds with a certainty level \( \alpha \), it also holds with any lower certainty level \( \beta \) because we are being less demanding (see Equation \ref{Eq:Certainty_weakening}).
 \begin{equation} \label{Eq:Certainty_weakening}
 	\text{If } \beta \leq \alpha, \quad (a, \alpha) \vdash (a, \beta)
 \end{equation}
-The \textit{modus ponens rule} states that if \( a \to b \) holds with certainty level \( \alpha \), and \( a \) also holds with certainty level \( \alpha \), then \( b \) must hold with certainty level \( \alpha \), see Equation \ref{Eq:Modus_ponens}.
+The \textit{modus ponens rule} states that if \( a \to b \) holds with certainty level \( \alpha \), and \( a \) also holds with certainty level \( \alpha \), then \( b \) must hold with certainty level \( \alpha \) (see Equation \ref{Eq:Modus_ponens}).
 \begin{equation}\label{Eq:Modus_ponens}
 	(\neg a \lor b, \alpha), (a, \alpha) \vdash (b, \alpha), \quad \forall \alpha \in (0, 1]
-\end{equation}
-In classical logic, the \textit{resolution rule} allows us to combine two clauses that share a literal, eliminating that literal and inferring a new clause. In possibilistic logic, the resolution rule preserves the certainty level \( \alpha \), since the inferred formula \( b \lor c \) cannot be more certain than the least certain premise, see Equation \ref{Eq:Resolution}.
+\end{equation}  
+In classical logic, the \textit{resolution rule} allows us to combine two clauses that share a literal, eliminating that literal and inferring a new clause. In possibilistic logic, the resolution rule preserves the certainty level \( \alpha \) since the inferred formula \( b \lor c \) cannot be more certain than the least certain premise (see Equation \ref{Eq:Resolution}).
 \begin{equation}\label{Eq:Resolution}
 	(\neg a \lor b, \alpha), \quad (a \lor c, \alpha) \vdash (b \lor c, \alpha)
 \end{equation}
-The \textit{weakest link resolution rule} extends the resolution rule by considering different certainty levels \( \alpha \) and \( \beta \). It reflects the idea that the certainty of the conclusion cannot exceed the weakest certainty of the premises, see Equation \ref{Eq:Weakest_link_resolution}.
+The \textit{weakest link resolution rule} extends the resolution rule by considering different certainty levels \( \alpha \) and \( \beta \). It reflects the idea that the certainty of the conclusion cannot exceed the weakest certainty of the premises (see Equation \ref{Eq:Weakest_link_resolution}).
 \begin{equation}\label{Eq:Weakest_link_resolution}
 	(\neg a \lor b, \alpha), \quad (a \lor c, \beta) \vdash (b \lor c, \min(\alpha, \beta))
 \end{equation}
-For inference with basic possibilistic logic, a possibilistic logic base is used.
-\begin{definition}
-	A possibilistic knowledge base is a collection of possibilistic formulas:
-	\begin{equation}\label{Eq:Knowledge_base}
-		\Gamma = \{(a_i, \alpha_i), i = 1, \dots, m\}
-	\end{equation}
-\end{definition}
-\begin{example} \label{example:medical}
-	Consider a medical diagnosis system where symptoms are associated with diseases with varying degrees of certainty. The possibilistic knowledge base is given by:
+For inference with basic possibilistic logic, a possibilistic logic base is used.  
+\begin{definition}  
+	A possibilistic knowledge base is a collection of possibilistic formulas:  
+	\begin{equation}\label{Eq:Knowledge_base}  
+		\Gamma = \{(a_i, \alpha_i), i = 1, \dots, m\}  
+	\end{equation}  
+\end{definition}  
+\begin{example} \label{example:medical}  
+	In a medical diagnosis system symptoms are associated with diseases with varying degrees of certainty. The possibilistic knowledge base is given by:  
 	\[
 	\Gamma = \{ (\text{Fever} \Rightarrow \text{Flu}, 0.9), (\text{Cough} \Rightarrow \text{Cold}, 0.7), (\text{Headache} \Rightarrow \text{Migraine}, 0.8) \}.
-	\]
-	This means that having a fever strongly suggests flu with a certainty level of 0.9, a cough suggests a cold with 0.7, and a headache suggests a migraine with 0.8.
+	\]  
+	This means that having a fever strongly suggests flu with a certainty level of 0.9, a cough suggests a cold with 0.7, and a headache leads to a migraine with 0.8.  
 \end{example}
-The $ \alpha $-cut of a knowledge base contains only those formulas with a certainty level of at least $ \alpha $. It has a nested structure where $ \Gamma_\alpha $ is a subset of $ \Gamma_\beta $ if $ \alpha \geq \beta $.
-\begin{definition}
-	The $ \alpha $-cut of a knowledge base is defined as:
-	\begin{equation}\label{Eq:Knowledge_base_cut}
-		\Gamma_\alpha = \{(a_i, \alpha_i) \in \Gamma \mid \alpha_i \geq \alpha\}
-	\end{equation}
+The \( \alpha \)-cut of a knowledge base contains only those formulas with a certainty level of at least \( \alpha \). It has a nested structure where \( \Gamma_\alpha \) is a subset of \( \Gamma_\beta \) if \( \alpha \geq \beta \).
+\begin{definition}  
+	The \( \alpha \)-cut of a knowledge base is defined as:  
+	\begin{equation}\label{Eq:Knowledge_base_cut}  
+		\Gamma_\alpha = \{(a_i, \alpha_i) \in \Gamma \mid \alpha_i \geq \alpha\}  
+	\end{equation}  
 \end{definition}
-\begin{example}
-	Continuing with Example \ref{example:medical}, the $ \alpha $-cut of the knowledge base for $ \alpha = 0.8 $ is:
+\begin{example}  
+	Continuing with Example \ref{example:medical}, the \( \alpha \)-cut of the knowledge base for \( \alpha = 0.8 \) is:  
 	\[
 	\Gamma_\alpha = \{ (\text{Fever} \Rightarrow \text{Flu}, 0.9), (\text{Headache} \Rightarrow \text{Migraine}, 0.8) \}.
 	\]
 \end{example}
-A possibilistic inference $(a, \alpha)$ depends only on formulas with certainty levels $ \geq \alpha $, as shown in Equation \ref{Eq:Inference}:
-\begin{equation}\label{Eq:Inference}
-	\Gamma \vdash (a, \alpha) \iff \Gamma_\alpha \vdash (a, \alpha)
+A possibilistic inference \( (a, \alpha) \) depends only on formulas with certainty levels \( \geq \alpha \), as shown in Equation \ref{Eq:Inference}:
+\begin{equation}\label{Eq:Inference}  
+	\Gamma \vdash (a, \alpha) \iff \Gamma_\alpha \vdash (a, \alpha)  
 \end{equation}
 An important property of knowledge bases is their inconsistency level.
-\begin{definition}
-	The inconsistency level of a knowledge base $ \Gamma $ is defined as:
-	\begin{equation}\label{Eq:Inconsistency_level}
-		\text{inc-l}(\Gamma) = \max\{\alpha \mid \Gamma \vdash (\bot, \alpha)\}
-	\end{equation}
-	where $ \bot $ represents an inconsistent state in logic.
+\begin{definition}  
+	The inconsistency level of a knowledge base \( \Gamma \) is defined as:  
+	\begin{equation}\label{Eq:Inconsistency_level}  
+		\text{inc-l}(\Gamma) = \max\{\alpha \mid \Gamma \vdash (\bot, \alpha)\}  
+	\end{equation}  
+	where \( \bot \) represents an inconsistent state in logic.  
 \end{definition}
-It represents the highest certainty level at which the knowledge base becomes inconsistent. Any formula with a certainty level higher than the inconsistency level remains free from inconsistency.
-\begin{example}
-	In the above example are no conflicting statements (e.g., one rule stating “Fever implies Flu” and another stating “Fever does not imply Flu”), there is no contradiction in this knowledge base. The inconsistency level $ \text{inc-l}(\Gamma) $ is 0, meaning the knowledge base is fully consistent at all certainty levels.
+The inconsistency level represents the highest certainty level at which the knowledge base becomes inconsistent. Any formula with a certainty level higher than the inconsistency level remains free from inconsistency.
+\begin{example}  
+	In the above example, there are no conflicting statements (e.g., one rule stating “Fever implies Flu” and another stating “Fever does not imply Flu”). The inconsistency level \( \text{inc-l}(\Gamma) \) is 0, indicating that the knowledge base is fully consistent at all certainty levels.  
 \end{example}
 
 \section{Differences from classical logic} \label{DifferencesClassical}
