@@ -31,7 +31,6 @@
 %%%% Abstract %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%TODO Ask if German Abstract is necessary
 %\germanabstract{}
 
 %TODO Write Abstract
@@ -63,16 +62,8 @@ Possibilistic logic is a non-classical logic framework designed to handle uncert
 \section{Introduction}
 % This part motivates your whole document. You describe your goal and research questions on a (semi-)informal level. To do so, you have to present to the reader information on the research area and how your goals and questions are connected to the state of the art. You explain what you will do in your paper and how; furthermore, you explain why your work is relevant. At the end of your introduction, you describe how your document is organized textually. Keep the language in this part such that a non-expert in the field can (roughly) understand the goals and approaches of your text.
 Reasoning under uncertainty is a significant problem in artificial intelligence. Several approaches have been proposed to address this issue, including possibility theory \cite{halpern1990}, fuzzy logic \cite{zadeh1965}, and possibilistic logic \cite{dubois1991}. The foundation of possibility theory was laid by Zadeh in 1978 \cite{zadeh1978} as an extension of fuzzy set theory \cite{zadeh1965}, aiming to provide a qualitative framework for handling uncertain information. Building upon Zadeh’s work, Dubois and Prade formulated possibilistic logic \cite{dubois1991} to integrate possibility theory into formal logic systems. \\
-Possibilistic logic has been further developed for diverse applications such as default reasoning, belief revision or in decision under uncertainty. The goal of this paper is to introduce basic possibilistic logic with examples and visualizations. The focus is on providing both common and new examples with additional explanations and graphical representations. In this paper, we will focus solely on basic possibilistic logic. \\
-This work is structured as follows. In Section \ref{Fundamentals}, basic possibilistic logic is explained, including its preliminaries for understanding the syntax and semantics of the logic. Before the core part of this paper, Section \ref{DifferencesClassical} compares possibilistic logic with classical logic, and Section \ref{RelationAI} discusses its relationship with artificial intelligence. Section \ref{Examples} illustrates the application of basic possibilistic logic through multiple examples and graphical explanations. Finally, Section \ref{Conclusion} summarizes and discusses the results of the previous sections.
-%Possibilistic logic is a weighted logic that handles uncertainty in a qualitative way by adding certainty to classical logic formulas. Its strength lies in modeling uncertainty and its ability to deal with inconsistency.
-
-%\subsection{Motivation}
-%\subsection{Objectives of the paper}
-%\subsection{Structure of the paper}
-
-%\section{Preliminaries}
-% The preliminaries introduce the research context of your document and the general prior work you make use of. You describe the theories and methodologies on which your work is built upon. Also, priorly existing algorithms and results you will make use of later will be presented here. Ensure that the preliminaries focus on the relevant aspects and keep an appropriate weight in the presentation. While it is often advisable to repeat basic results if they are only of marginal importance for your contributions, they should be presented only briefly. In contrast, when your contributions heavily use results from the literature, you should explain these results in detail.
+Possibilistic logic has been further developed for diverse applications such as default reasoning, belief revision or decision under uncertainty with generalized apporaches, see \cite{dubois2017generalized}. The goal of this paper is to introduce basic possibilistic logic with examples and visualizations. The focus is on providing examples with additional explanations and graphical representations. In this paper, we will focus solely on basic possibilistic logic. \\
+This work is structured as follows. In Section \ref{Fundamentals}, basic possibilistic logic is explained, including its preliminaries for understanding the syntax and semantics of the logic. Before the core part of this paper, Section \ref{DifferencesClassical} compares possibilistic logic with classical logic, and Section \ref{RelationAI} discusses its relationship with artificial intelligence. Section \ref{Examples} illustrates the application of basic possibilistic logic through an example and graphical explanations. Finally, Section \ref{Conclusion} summarizes and discusses the results of the previous sections.
 
 \section{Fundamentals of Basic Possibilistic Logic} \label{Fundamentals}
 The following introduction on basic possibilistic logic is inspired by the presentation of Dubois and Prade \cite{dubois2014possibilistic}. This section gives a short overview of basic possibilistic logic. For more information, the work \cite{dubois2014possibilistic} is referred. \\
@@ -97,7 +88,7 @@ The value \( \pi(u) \) indicates the degree of possibility assigned to the state
 %\]
 %An agent has complete knowledge if the possibility of one state is 1 and the possibility of all other states is 0. Complete ignorance is given it the possibility of all states is 1.
 %The Principle of minimal specificity states that any hypothesis not known to be impossible cannot be ruled out. It is a minimal commitment, cautious, information principle.
-The basic measures of possibility theory model the possibility and necessity of events, see \cite{dubois2014possibilistic}. If the occurence of an event $ A $  is of interest possibility theory responds with both two measures calculated from the possibility distribution of $ A $. 
+The basic measures of possibility theory model the possibility and necessity of events, see \cite{dubois2014possibilistic}, \cite{lang2000possibilistic}. If the occurence of an event $ A $  is of interest possibility theory responds with both two measures calculated from the possibility distribution of $ A $. 
 \begin{definition}
 	The possibility of an event $ A $ is  $ \Pi(A) = \sup_{u \in A} \pi \left( u \right) $.
 \end{definition}
@@ -124,7 +115,7 @@ The duality of the two measures is expressed as $ N \left( A \right)  = 1 - \Pi 
 \end{example}
 % Note also that we only have N(A?B) ? max(N(A),N(B)).This goes well with the idea that one may be certain about the event A?B, without being really certain about more specific events such as A and B.
 \subsection{Formal Foundations of Basic Possibilistic Logic}
-This section lays out the foundations of basic possibilistic logic. First, the syntax is introduced. Second, the semantic aspects of the logic are derived. Third, the inference rules are explained. Finally, the axioms of this logic are covered.
+This section lays out the foundations of basic possibilistic logic. First, the syntax is introduced. Second, the semantic aspects of the logic are derived. Third, the inference rules are explained. Finally, the axioms of this logic are covered. Further references for this section are \cite{hollunder1995alternative}.
 \begin{definition}
 	The syntax of a basic possibilistic logic formula is:
 	\[
@@ -204,12 +195,10 @@ Possibilistic logic can handle inconsistency. The inconsistency degree of a know
 
 \section{Relation to Artificial Intelligence} \label{RelationAI}
 Possibilistic logic has with its strength in modeling certainty and handling inconsistency different aplication fields of artificial intelligence problems \cite{dubois2014possibilistic}, \cite{2021possibility}. In default reasoning possibilistic logic handles incomplete information reasoning. Possibilistic logic can be applied in information fusion where knowledge is combined from different sources.
-The logic can help with decisions under uncertainty. One application is the usage in medical diagnosis problems \cite{grabisch2003}.
+The logic can help with decisions under uncertainty. One application is the usage in medical diagnosis problems \cite{grabisch2003}. In \cite{dubois2020possibilistic}, \cite{persia2023learning} connections between reasoning with possibilistic logic and machine learning are shown.
 
 \section{Analysis and Development of Examples} \label{Examples}
-In the following, examples showing the application of basic possibilistic logic are explained. First, the penguin problem is presented to provide a better understanding of the logic. Second, a new problem is introduced.
-\subsection{The Penguin Problem}
-One of the classical examples in non-monotonic reasoning is the penguin problem. Basic possibilistic logic provides a structured way to handle exceptions of general rules like "birds fly" by associating rules with certainty levels and defining a preference ordering over possible worlds. Each possible world is a combination of the language interpretation of the underlying rules, see \cite{dubois2014possibilistic}. 
+In the following we will go through an example showing the application of basic possibilistic logic.  One of the classical examples in non-monotonic reasoning is the penguin problem. Basic possibilistic logic provides a structured way to handle exceptions of general rules like "birds fly" by associating rules with certainty levels and defining a preference ordering over possible worlds. Each possible world is a combination of the language interpretation of the underlying rules, see \cite{dubois2014possibilistic}. This is example can be found in shorter notice in \cite{dubois2014possibilistic}, \cite{prade1992representing}.
 \subsubsection{Default Rules}
 The knowledge base of this example consists of three default rules about birds and penguins. A default rule expresses general knowledge and holds in most cases, but it may have exceptions:
 \begin{align*}
@@ -344,7 +333,7 @@ From the rule $(\neg b \lor f, 1/3)$ in the knowledge base $K$, we can infer by 
 \begin{align*}
 	(\neg b \lor f, 1/3) \quad \text{and} \quad (b, 1) \vdash (f, \min(1, 1/3)) = (f, 1/3).
 \end{align*}
-Thus, we conclude that Tweety flies with a certainty level of $\frac{1}{3}$. We can see the result graphically in figure \ref{fig:firstinformation}. The violet arrow symbolizes the inference with the weakest link resolution rule. \\
+Thus, we conclude that Tweety flies with a certainty level of $\frac{1}{3}$. We can see the result graphically in figure \ref{fig:firstinformation}. The violet arrow symbolizes the inference with the weakest link resolution rule.
 \begin{figure}[h]
 	\centering
 	\begin{tikzpicture}[every node/.style={circle}, >=stealth]
@@ -407,44 +396,38 @@ The results are visualized in the figure \ref{fig:secondinformation}. It can be 
 	\label{fig:secondinformation}
 \end{figure}
 
-The process is visualized in the flowchart \ref{fig:flowchart}.
-% Flowchart for Reasoning
-\begin{figure}[ht]
-	\centering
-	\begin{tikzpicture}[node distance=1.5cm, every node/.style={draw, rounded corners, minimum width=3cm, minimum height=1cm}]
-		\node (start) {Start: $b$ (Tweety is a Bird)};
-		\node (applyRule1) [below of=start] {Apply $(\neg b \lor f, 1/3)$};
-		\node (inferF) [below of=applyRule1] {Infer $(f, 1/3)$ (Tweety flies with 1/3 certainty)};
-		
-		\node (newInfo) [right of=applyRule1, xshift=5cm] {New Info: $p$ (Tweety is a Penguin)};
-		\node (applyRule2) [below of=newInfo] {Apply $(\neg p \lor \neg f, 2/3)$};
-		\node (inferNotF) [below of=applyRule2] {Infer $(\neg f, 2/3)$};
-		
-		\node (conflict) [below of=inferF, yshift=-1cm] {Conflict: $(\neg f, 2/3)$ vs $(f, 1/3)$};
-		\node (resolve) [below of=conflict] {Resolve: Inconsistency $(\bot, 1/3)$};
-		\node (conclusion) [below of=resolve] {Final Conclusion: $(\neg f, 2/3)$ (Tweety does not fly)};
-		
-		% Arrows
-		\draw[->] (start) -- (applyRule1);
-		\draw[->] (applyRule1) -- (inferF);
-		\draw[->] (newInfo) -- (applyRule2);
-		\draw[->] (applyRule2) -- (inferNotF);
-		\draw[->] (inferF) -- (conflict);
-		\draw[->] (inferNotF) -- (conflict);
-		\draw[->] (conflict) -- (resolve);
-		\draw[->] (resolve) -- (conclusion);
-	\end{tikzpicture}
-	\caption{Ranking of the worlds}
-	\label{fig:flowchart}
-\end{figure}
+This example shows how possibilistic logic can handle inconsistency when new information is added. The calculation of the necessities of the rules out of the possible worlds is one key aspect in this example.
 
-\clearpage
-\subsection{New Problem}
-%TODO Creat new Problem
-TODO: \\
-More complex Problem \\
-Medical Problem \\
-
+%The process is visualized in the flowchart \ref{fig:flowchart}.
+%% Flowchart for Reasoning
+%\begin{figure}[ht]
+%	\centering
+%	\begin{tikzpicture}[node distance=1.5cm, every node/.style={draw, rounded corners, minimum width=3cm, minimum height=1cm}]
+%		\node (start) {Start: $b$ (Tweety is a Bird)};
+%		\node (applyRule1) [below of=start] {Apply $(\neg b \lor f, 1/3)$};
+%		\node (inferF) [below of=applyRule1] {Infer $(f, 1/3)$ (Tweety flies with 1/3 certainty)};
+%		
+%		\node (newInfo) [right of=applyRule1, xshift=5cm] {New Info: $p$ (Tweety is a Penguin)};
+%		\node (applyRule2) [below of=newInfo] {Apply $(\neg p \lor \neg f, 2/3)$};
+%		\node (inferNotF) [below of=applyRule2] {Infer $(\neg f, 2/3)$};
+%		
+%		\node (conflict) [below of=inferF, yshift=-1cm] {Conflict: $(\neg f, 2/3)$ vs $(f, 1/3)$};
+%		\node (resolve) [below of=conflict] {Resolve: Inconsistency $(\bot, 1/3)$};
+%		\node (conclusion) [below of=resolve] {Final Conclusion: $(\neg f, 2/3)$ (Tweety does not fly)};
+%		
+%		% Arrows
+%		\draw[->] (start) -- (applyRule1);
+%		\draw[->] (applyRule1) -- (inferF);
+%		\draw[->] (newInfo) -- (applyRule2);
+%		\draw[->] (applyRule2) -- (inferNotF);
+%		\draw[->] (inferF) -- (conflict);
+%		\draw[->] (inferNotF) -- (conflict);
+%		\draw[->] (conflict) -- (resolve);
+%		\draw[->] (resolve) -- (conclusion);
+%	\end{tikzpicture}
+%	\caption{Ranking of the worlds}
+%	\label{fig:flowchart}
+%\end{figure}
 \clearpage
 \section{Discussion and Conclusion} \label{Conclusion}
 % In this part, you revisit the paper’s outline and summarise concisely the most important contributions of your document. It is advisable to connect your results with the research questions given in the introduction. Discuss relevant related work and potential future research questions and research problems that can be addressed in future work.
