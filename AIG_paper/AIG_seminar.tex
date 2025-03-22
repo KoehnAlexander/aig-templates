@@ -62,72 +62,78 @@ Possibilistic logic is a non-classical logic framework designed to handle uncert
 \section{Introduction}
 % This part motivates your whole document. You describe your goal and research questions on a (semi-)informal level. To do so, you have to present to the reader information on the research area and how your goals and questions are connected to the state of the art. You explain what you will do in your paper and how; furthermore, you explain why your work is relevant. At the end of your introduction, you describe how your document is organized textually. Keep the language in this part such that a non-expert in the field can (roughly) understand the goals and approaches of your text.
 Reasoning under uncertainty is a significant problem in artificial intelligence. Several approaches have been proposed to address this issue, including possibility theory \cite{halpern1990}, fuzzy logic \cite{zadeh1965}, and possibilistic logic \cite{dubois1991}. The foundation of possibility theory was laid by Zadeh in 1978 \cite{zadeh1978} as an extension of fuzzy set theory \cite{zadeh1965}, aiming to provide a qualitative framework for handling uncertain information. Building upon Zadeh’s work, Dubois and Prade formulated possibilistic logic \cite{dubois1991} to integrate possibility theory into formal logic systems. \\
-Possibilistic logic has been further developed for diverse applications such as default reasoning, belief revision or decision under uncertainty with generalized apporaches, see \cite{dubois2017generalized}. The goal of this paper is to introduce basic possibilistic logic with examples and visualizations. The focus is on providing examples with additional explanations and graphical representations. In this paper, we will focus solely on basic possibilistic logic. \\
+Possibilistic logic has been further developed for diverse applications such as default reasoning, belief revision, or decision-making under uncertainty with generalized approaches; see \cite{dubois2017generalized}. The goal of this paper is to introduce basic possibilistic logic with examples and visualizations. The focus is on providing examples with additional explanations and graphical representations. In this paper, we will focus solely on basic possibilistic logic. \\
 This work is structured as follows. In Section \ref{Fundamentals}, basic possibilistic logic is explained, including its preliminaries for understanding the syntax and semantics of the logic. Before the core part of this paper, Section \ref{DifferencesClassical} compares possibilistic logic with classical logic, and Section \ref{RelationAI} discusses its relationship with artificial intelligence. Section \ref{Examples} illustrates the application of basic possibilistic logic through an example and graphical explanations. Finally, Section \ref{Conclusion} summarizes and discusses the results of the previous sections.
 
 \section{Fundamentals of Basic Possibilistic Logic} \label{Fundamentals}
-The following introduction on basic possibilistic logic is inspired by the presentation of Dubois and Prade \cite{dubois2014possibilistic}. This section gives a short overview of basic possibilistic logic. For more information, the work \cite{dubois2014possibilistic} is referred. \\
-In this section we will first introduce main concepts of possibility theory. These concepts are necessary to understand possibilistic logic. Going further basic possibilistic logic is introduced with the syntax, axioms, inference rules and semantic aspects.
+The following introduction to basic possibilistic logic is inspired by the presentation of Dubois and Prade \cite{dubois2014possibilistic}. This section provides a brief overview of basic possibilistic logic. For more details, we refer to the works \cite{dubois2014possibilistic} and \cite{dubois1991}. \\
+In this section, we first introduce the main concepts of possibility theory, which are necessary for understanding possibilistic logic. Then, we present basic possibilistic logic, covering its syntax, axioms, inference rules, and semantic aspects.
 \subsection{Possibility Theory}
-Possibility theory is explained in detail in \cite{dubois2023possibility}, \cite{zadeh1978}. Possibility theory relies on the concept of possibility distributions. 
+Possibility theory is explained in detail in \cite{dubois2023possibility} and \cite{zadeh1978}. It relies on the concept of possibility distributions.
 \begin{definition}
 	A possibility distribution is a function \( \pi \) that maps elements from a set of states \( U \) to a totally ordered scale \( \left[ 0 , 1 \right]  \), see \cite{dubois2014possibilistic}:
 	\[
 	\pi: U \to \left[ 0 , 1 \right] .
 	\]
 \end{definition}
-The value \( \pi(u) \) indicates the degree of possibility assigned to the state \( u \). This function represents the agent's knowledge and helps differentiate between states that are more or less plausible. A state \( u \) is impossible if \( \pi(u) = 0 \), whereas it is considered fully possible if \( \pi(u) = 1 \).
+The value $ \pi(u) $ indicates the degree of possibility assigned to the state u. This function represents the agent’s knowledge and helps differentiate between states that are more or less plausible. A state u is considered impossible if $ \pi(u) = 0 $, whereas it is fully possible if $ \pi(u) = 1 $.
 \begin{example}
 	Consider a weather forecasting scenario where an agent assesses the possibility of different weather conditions for tomorrow. Let $ U = \{\text{sunny}, \text{cloudy}, \text{rainy}, \text{stormy}\} $ be the set of possible states. The agent assigns a possibility distribution $ \pi $ as follows: \\
 	$ \pi(\text{sunny}) = 1, \quad \pi(\text{cloudy}) = 0.7, \quad \pi(\text{rainy}) = 0.3, \quad \pi(\text{stormy}) = 0$. \\
-	Here, the agent is completely certain that a sunny day is possible ($\pi(\text{sunny}) = 1$), considers cloudy weather somewhat possible ($\pi(\text{cloudy}) = 0.7$), finds rain unlikely ($\pi(\text{rainy}) = 0.3$), and deems a storm impossible ($\pi(\text{stormy}) = 0$).
+	The agent is completely certain that a sunny day is fully possible ($\pi(\text{sunny}) = 1$), considers cloudy weather strong possible ($\pi(\text{cloudy}) = 0.7$), finds rain unlikely ($\pi(\text{rainy}) = 0.3$), and states a storm impossible ($\pi(\text{stormy}) = 0$).
 \end{example}
-%A distribution $ \pi $ is at least as specific as $ \pi' $ if
-%\[
-%\pi(u) \leq \pi'(u), \quad \forall u \in U.
-%\]
-%An agent has complete knowledge if the possibility of one state is 1 and the possibility of all other states is 0. Complete ignorance is given it the possibility of all states is 1.
-%The Principle of minimal specificity states that any hypothesis not known to be impossible cannot be ruled out. It is a minimal commitment, cautious, information principle.
-The basic measures of possibility theory model the possibility and necessity of events, see \cite{dubois2014possibilistic}, \cite{lang2000possibilistic}. If the occurence of an event $ A $  is of interest possibility theory responds with both two measures calculated from the possibility distribution of $ A $. 
-\begin{definition}
-	The possibility of an event $ A $ is  $ \Pi(A) = \sup_{u \in A} \pi \left( u \right) $.
-\end{definition}
-The possibility is the maximum possibility of all the states of $ A $. The possibility evaluates the extent to which $ A $ is consistent with $ \pi $. Possibility measures satisfy the characteristic maxitivity property $ \Pi \left( A \cup B \right)  = \max \left( \Pi \left( A \right), \Pi \left(  B \right) \right) $. \\
-\begin{definition}
-	The necessity of an event $ A $  is $ N(A) = \inf_{u \notin A} \left( 1 - \pi \left( u \right) \right) $.
-\end{definition}
-The necessity is the minimum of the inversed possibility value of all states which are not in $ A $. The necessity evaluates the extent to which $ A $ is certainly implied by $ \pi $. Necessity measures satisfy the characteristic minimization property $ N \left( A \cap B \right)  = \min \left( N \left( A \right) , N \left( B \right) \right) $. The minimization property expresses that to be certain about $ A $ and $ B $, one has to be certain about $ A $ and to be certain about $ B $. \\
-The duality of the two measures is expressed as $ N \left( A \right)  = 1 - \Pi \left( A^c \right) $, where $ A^c $ is the complement of $ A $.
+The basic measures of possibility theory model the possibility and necessity of events (see \cite{dubois2014possibilistic}, \cite{lang2000possibilistic}). If the occurrence of an event \( A \) is of interest, possibility theory provides two measures derived from the possibility distribution of \( A \).  
+\begin{definition}  
+	The possibility of an event \( A \) is defined as:  
+	\[
+	\Pi(A) = \sup_{u \in A} \pi \left( u \right).
+	\]  
+\end{definition}  
+The possibility measure represents the maximum possibility assigned to any state in \( A \). It evaluates the extent to which \( A \) is consistent with \( \pi \). Possibility measures satisfy the characteristic maxitivity property:  
+\[
+\Pi \left( A \cup B \right)  = \max \left( \Pi \left( A \right), \Pi \left(  B \right) \right).
+\]  
+\begin{definition}  
+	The necessity of an event \( A \) is defined as:  
+	\[
+	N(A) = \inf_{u \notin A} \left( 1 - \pi \left( u \right) \right).
+	\]  
+\end{definition}  
+The necessity measure represents the minimum of the inverted possibility values of all states not in \( A \). It evaluates the extent to which \( A \) is certainly implied by \( \pi \). Necessity measures satisfy the characteristic minimization property:  
+\[
+N \left( A \cap B \right)  = \min \left( N \left( A \right) , N \left( B \right) \right).
+\]  
+This property expresses that for \( A \cap B \) to be certain, both \( A \) and \( B \) must be certain individually.  
+The duality between these two measures is given by:  
+\[
+N \left( A \right)  = 1 - \Pi \left( A^c \right),
+\]  
+where \( A^c \) is the complement of \( A \).  
 \begin{example}
-	Consider a possibility distribution $ \pi $ over a set of possible weather conditions: $ U = \{ \text{sunny}, \text{cloudy}, \text{rainy} \} $ with the values $ \pi(\text{sunny}) = 1 $, $ \pi(\text{cloudy}) = 0.7 $, and $ \pi(\text{rainy}) = 0.3 $. 
-	
+	Consider a possibility distribution $ \pi $ over a set of possible weather conditions: $ U = \{ \text{sunny}, \text{cloudy}, \text{rainy} \} $ with the values $ \pi(\text{sunny}) = 1 $, $ \pi(\text{cloudy}) = 0.7 $, and $ \pi(\text{rainy}) = 0.3 $. \\
 	The possibility of the event "not rainy" $ A = \{ \text{sunny}, \text{cloudy} \} $ is given by: 
 	\[
 	\Pi(A) = \sup_{u \in A} \pi(u) = \max(\pi(\text{sunny}), \pi(\text{cloudy})) = \max(1, 0.7) = 1.
 	\]
-	
 	The necessity of "not rainy" is computed as:
 	\[
 	N(A) = \inf_{u \notin A} (1 - \pi(u)) = 1 - \pi(\text{rainy}) = 1 - 0.3 = 0.7.
 	\]
-	
 	This means that the event "not rainy" is fully possible but not completely necessary.
 \end{example}
-% Note also that we only have N(A?B) ? max(N(A),N(B)).This goes well with the idea that one may be certain about the event A?B, without being really certain about more specific events such as A and B.
 \subsection{Formal Foundations of Basic Possibilistic Logic}
-This section lays out the foundations of basic possibilistic logic. First, the syntax is introduced. Second, the semantic aspects of the logic are derived. Third, the inference rules are explained. Finally, the axioms of this logic are covered. Further references for this section are \cite{hollunder1995alternative}.
-\begin{definition}
-	The syntax of a basic possibilistic logic formula is:
+This section lays out the foundations of basic possibilistic logic. First, the syntax is introduced. Second, the semantic aspects of the logic are derived. Third, the inference rules are explained. Finally, the axioms of this logic are covered. Further references for this section are \cite{dubois2014possibilistic}, \cite{hollunder1995alternative}.
+\begin{definition}  
+	The syntax of a basic possibilistic logic formula is:  
 	\[
 	(a, \alpha)
-	\]
-	where \(a\) is a classical logic formula (e.g., \(p \to q\)) and \(\alpha \) is the certainty level (minimum necessity degree of \( a \)). The classical logic formula can be from propositional logic or first-order logic, see \cite{dubois2014possibilistic}.
-\end{definition}
-The semantics of a possibilistic logic formula are based on the semantics of the classical logic formula. The pair \( \left( a , \alpha \right) \) is understood as \( N \left( a \right) > \alpha \). This means that the formula \( a \) is at least certain to degree \( \alpha \). The higher \( \alpha \), the stronger the belief in \( a \).
-\begin{example}
-	\((b \to f, 0.9)\) means that birds fly with certainty \( 0.9 \).
+	\]  
+	where \( a \) is a classical logic formula (e.g., \( p \to q \)) and \( \alpha \) is the certainty level (the minimum necessity degree of \( a \)). The classical logic formula can be from propositional logic or first-order logic (see \cite{dubois2014possibilistic}).  
+\end{definition}  
+The semantics of a possibilistic logic formula are based on the semantics of the corresponding classical logic formula. The pair \( \left( a , \alpha \right) \) is interpreted as \( N \left( a \right) > \alpha \), meaning that the formula \( a \) is at least certain to degree \( \alpha \). The higher the value of \( \alpha \), the stronger the belief in \( a \).  
+\begin{example}  
+	\((b \to f, 0.9)\) means that "birds fly" holds with certainty \( 0.9 \).  
 \end{example}
-
 The following inference rules of basic possibilistic logic are necessary for the application of the logic in this paper. The \textit{certainty weakening rule} states that if a formula holds with a certainty level \( \alpha \), it also holds with any lower certainty level \( \beta \) because we are being less demanding, see Equation \ref{Eq:Certainty_weakening}.
 \begin{equation} \label{Eq:Certainty_weakening}
 	\text{If } \beta \leq \alpha, \quad (a, \alpha) \vdash (a, \beta)
