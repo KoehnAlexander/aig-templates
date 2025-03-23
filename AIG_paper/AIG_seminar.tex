@@ -25,45 +25,18 @@
 
 %%%% Author and Title Information %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \author{Alexander Köhn}
-%TODO Correct title of paper
-\title{Basic Possibilistic Logic: Examples and Visualization}
+\title{Basic Possibilistic Logic: An Example and Visualization of Handling Inconsistency}
 
-%%%% Abstract %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%\germanabstract{}
-
-%TODO Write Abstract
-% use this if the document is written in english
 \englishabstract{
-Possibilistic logic is a non-classical logic framework designed to handle uncertainty by incorporating degrees of possibility. This paper provides a general introduction to possibilistic logic by using strong examples of the apllication.
-}
-
+This paper gives an introduction to basic possibilistic logic and shows its application through a detailed example. The focus is on explaining how possibilistic logic handles uncertain and inconsistent information. This paper demonstrates with the penguin problem example how possibilistic logic resolves conflicts in reasoning.}
 
 \begin{document}
-
 \maketitle % prints title and author information, as well as the abstract 
-
-
-% Email Korrespondenz
-% Eine Ausarbeitung der Beispiele aus dem Originalpapier würde ich für Ihre Ausarbeitung sehr begrüßen. Auch die Erarbeitung neuer Beispiel klingt sehr gut. Grundsätzlich sollte Ihre Ausarbeitung wenigstens die formale Präsentation von Syntax und Semantik possibilistischer Logik, sowie dazu notwendige Motivation und Beispiele enthalten. Darüberhinaus können Sie noch weitere Erweiterungen hinzufügen, sollten aber einen klaren Fokus setzen und nicht zu sehr in die Breite gehen.
 % ===================== Beginning of the actual text section =====================
-
-% Structure
-% paper should not exceed 12 pages
-% Introduce and explain the logic
-% Relation to artificial intelligence
-% Syntax and semantics
-% Examples and porperties
-%
-%TODO add citations
-%TODO Insbesondere ist der Zusammenhang zur der im Beispiel vorgestellten Methodologie zur possibilistischen Logik unklar.
 \section{Introduction}
-% This part motivates your whole document. You describe your goal and research questions on a (semi-)informal level. To do so, you have to present to the reader information on the research area and how your goals and questions are connected to the state of the art. You explain what you will do in your paper and how; furthermore, you explain why your work is relevant. At the end of your introduction, you describe how your document is organized textually. Keep the language in this part such that a non-expert in the field can (roughly) understand the goals and approaches of your text.
-Reasoning under uncertainty is a significant problem in artificial intelligence. Several approaches have been proposed to address this issue, including possibility theory \cite{halpern1990}, fuzzy logic \cite{zadeh1965}, and possibilistic logic \cite{dubois1991}. The foundation of possibility theory was laid by Zadeh in 1978 \cite{zadeh1978} as an extension of fuzzy set theory \cite{zadeh1965}, aiming to provide a qualitative framework for handling uncertain information. Building upon Zadeh’s work, Dubois and Prade formulated possibilistic logic \cite{dubois1991} to integrate possibility theory into formal logic systems. \\
-Possibilistic logic has been further developed for diverse applications such as default reasoning, belief revision, or decision-making under uncertainty with generalized approaches; see \cite{dubois2017generalized}. The goal of this paper is to introduce basic possibilistic logic with examples and visualizations. The focus is on providing examples with additional explanations and graphical representations. In this paper, we will focus solely on basic possibilistic logic. \\
-This work is structured as follows. In Section \ref{Fundamentals}, basic possibilistic logic is explained, including its preliminaries for understanding the syntax and semantics of the logic. Before the core part of this paper, Section \ref{DifferencesClassical} compares possibilistic logic with classical logic, and Section \ref{RelationAI} discusses its relationship with artificial intelligence. Section \ref{Examples} illustrates the application of basic possibilistic logic through an example and graphical explanations. Finally, Section \ref{Conclusion} summarizes and discusses the results of the previous sections.
-
+Reasoning under uncertainty is a classical problem in artificial intelligence. Several approaches have been proposed to address this issue, including possibility theory \cite{halpern1990}, fuzzy logic \cite{zadeh1965}, and possibilistic logic \cite{dubois1991}. The starting point of possibility theory was by Zadeh in 1978 \cite{zadeh1978} as an extension of fuzzy set theory \cite{zadeh1965}. The goal was to provide a qualitative framework for handling uncertain information. Building upon Zadeh’s work, Dubois and Prade formulated possibilistic logic \cite{dubois1991} to integrate possibility theory into formal logic systems. \\
+Possibilistic logic has been extended for different applications such as default reasoning, belief revision, or decision-making under uncertainty with generalized approaches; see \cite{dubois2017generalized}. The goal of this paper is to introduce basic possibilistic logic with examples and visualizations. In this paper, we will focus on basic possibilistic logic. \\
+This work is structured as follows. In Section \ref{Fundamentals}, basic possibilistic logic is explained, including a short notice about key aspects of possibility theory. Before the core part of this paper, Section \ref{DifferencesClassical} compares possibilistic logic with classical logic, and Section \ref{RelationAI} discusses the relationship of this logic with artificial intelligence. Section \ref{Examples} will go through the penguin problem example with this logic. Section \ref{Conclusion} summarizes and discusses the results of this paper.
 \section{Fundamentals of Basic Possibilistic Logic} \label{Fundamentals}
 The following introduction to basic possibilistic logic is inspired by the presentation of Dubois and Prade \cite{dubois2014possibilistic}. This section provides a brief overview of basic possibilistic logic. For more details, we refer to the works \cite{dubois2014possibilistic} and \cite{dubois1991}. \\
 In this section, we first introduce the main concepts of possibility theory, which are necessary for understanding possibilistic logic. Then, we present basic possibilistic logic, covering its syntax, axioms, inference rules, and semantic aspects.
@@ -81,14 +54,14 @@ The value $ \pi(u) $ indicates the degree of possibility assigned to the state u
 	$ \pi(\text{sunny}) = 1, \quad \pi(\text{cloudy}) = 0.7, \quad \pi(\text{rainy}) = 0.3, \quad \pi(\text{stormy}) = 0$. \\
 	The agent is completely certain that a sunny day is fully possible ($\pi(\text{sunny}) = 1$), considers cloudy weather strong possible ($\pi(\text{cloudy}) = 0.7$), finds rain unlikely ($\pi(\text{rainy}) = 0.3$), and states a storm impossible ($\pi(\text{stormy}) = 0$).
 \end{example}
-The basic measures of possibility theory model the possibility and necessity of events (see \cite{dubois2014possibilistic}, \cite{lang2000possibilistic}). If the occurrence of an event \( A \) is of interest, possibility theory provides two measures derived from the possibility distribution of \( A \).  
+The basic measures of Possibility theory models with the two measures, possibility and necessity, the occurence of an event (see \cite{dubois2014possibilistic}, \cite{lang2000possibilistic}).
 \begin{definition}  
 	The possibility of an event \( A \) is defined as:  
 	\[
 	\Pi(A) = \sup_{u \in A} \pi \left( u \right).
 	\]  
 \end{definition}  
-The possibility measure represents the maximum possibility assigned to any state in \( A \). It evaluates the extent to which \( A \) is consistent with \( \pi \). Possibility measures satisfy the characteristic maxitivity property:  
+The possibility measure represents the maximum possibility assigned to any state in \( A \). It shows the degree to which \( A \) is consistent with \( \pi \). Possibility measures fulfill the maxitivity property:
 \[
 \Pi \left( A \cup B \right)  = \max \left( \Pi \left( A \right), \Pi \left(  B \right) \right).
 \]  
@@ -121,7 +94,7 @@ where \( A^c \) is the complement of \( A \).
 	This means that the event "not rainy" is fully possible but not completely necessary.
 \end{example}
 \subsection{Formal Foundations of Basic Possibilistic Logic}
-This section lays out the foundations of basic possibilistic logic. First, the syntax is introduced. Second, the semantic aspects of the logic are derived. Third, the inference rules are explained. Finally, the axioms of this logic are covered. Further references for this section are \cite{dubois2014possibilistic}, \cite{hollunder1995alternative}.
+This section introduces the foundations of basic possibilistic logic. First, the syntax is presented. Second, the semantic aspects of the logic are derived. Third, the inference rules are explained. Finally, the axioms of this logic are covered. Further references for this section are \cite{dubois2014possibilistic}, \cite{hollunder1995alternative}.
 \begin{definition}  
 	The syntax of a basic possibilistic logic formula is:  
 	\[
@@ -192,33 +165,30 @@ The inconsistency level represents the highest certainty level at which the know
 \begin{example}  
 	In the above example, there are no conflicting statements (e.g., one rule stating “Fever implies Flu” and another stating “Fever does not imply Flu”). The inconsistency level \( \text{inc-l}(\Gamma) \) is 0, indicating that the knowledge base is fully consistent at all certainty levels.  
 \end{example}
-
 \section{Differences from Classical Logic} \label{DifferencesClassical}  
-Possibilistic logic extends classical logic by incorporating a certainty degree into classical logic formulas, see \cite{dubois2014possibilistic}. In classical logic, a statement is either true or false, corresponding to a binary value system. In contrast, in possibilistic logic, the certainty degree of a possibilistic formula is a non-binary value \cite{dubois1991}. \\
-In classical logic, the presence of a contradiction makes the entire knowledge base invalid, allowing any formula to be derived. In difference possibilistic logic can handle inconsistency. The inconsistency degree of a knowledge base reflects the extent to which it is contradictory \cite{dubois2014possibilistic}. This feature makes possibilistic logic robust for reasoning in incomplete and inconsistent environments.  
-
+Possibilistic logic extends classical logic by adding a certainty degree into classical logic formulas, see \cite{dubois2014possibilistic}. In classical logic, a statement is either true or false, corresponding to a binary value system. In contrast, in possibilistic logic, the certainty degree of a possibilistic formula is a non-binary value \cite{dubois1991}. \\
+In classical logic, the presence of a contradiction makes the entire knowledge base invalid, allowing any formula to be derived. In difference possibilistic logic can handle inconsistency. The inconsistency degree of a knowledge base reflects the extent to which it is contradictory \cite{dubois2014possibilistic}. This feature makes possibilistic logic robust for reasoning in incomplete and inconsistent environments.
 \section{Relation to Artificial Intelligence} \label{RelationAI}
-Possibilistic logic, with its strength in modeling certainty and handling inconsistency, has various application fields in artificial intelligence problems \cite{dubois2014possibilistic}, \cite{2021possibility}. The following apllication examples are only a glimpse into the possible fields. In default reasoning, possibilistic logic handles incomplete information reasoning. Additionally, possibilistic logic can be applied in information fusion, where knowledge is combined from different sources. The logic can also assist with decisions under uncertainty. One application is its use in medical diagnosis problems \cite{grabisch2003}. In \cite{dubois2020possibilistic}, \cite{persia2023learning}, connections between reasoning with possibilistic logic and machine learning are explored.  
-
+Possibilistic logic, with its strength in modeling certainty and handling inconsistency, has various application fields in artificial intelligence problems \cite{dubois2014possibilistic}, \cite{2021possibility}. The following apllication examples do not fully cover every application field. In default reasoning, possibilistic logic handles incomplete information reasoning. Additionally, possibilistic logic can be applied in information fusion, where knowledge is combined from different sources. The logic can also assist with decisions under uncertainty. One application is its use in medical diagnosis problems \cite{grabisch2003}. In \cite{dubois2020possibilistic}, \cite{persia2023learning}, connections between reasoning with possibilistic logic and machine learning are explored.
 \section{Applying Basic Possibilistic Logic} \label{Examples}  
-In the following, we will go through an example demonstrating the application of basic possibilistic logic. One of the classical examples in non-monotonic reasoning is the penguin problem. Basic possibilistic logic provides a structured way to handle exceptions to general rules, such as "birds fly," by associating rules with certainty levels and defining a preference ordering over possible worlds. Each possible world represents a combination of the language interpretation of the underlying rules, see \cite{dubois2014possibilistic}. This example can be found in a more concise form in \cite{dubois2014possibilistic}, \cite{prade1992representing}.  
-\subsubsection{Default Rules}  
-The knowledge base of this example consists of three default rules about birds and penguins. A default rule expresses general knowledge and holds in most cases, but it may have exceptions:  
+This section will go through the penguin problem example in detail with additional visualization at key points. This example was already presented in the context of possibilistic logic in \cite{dubois2014possibilistic}, \cite{prade1992representing} and this paper is inspired these papers, but gives more details at important sections of the example. This example is well suited for showing the behavior of possibilistic logic as the handling of inconsistencies is needed for finding answers.
+\subsection{Default Rules}  
+The knowledge base of this example consists of three default rules about birds and penguins. A default rule expresses general knowledge and holds in most cases, but it might have exceptions:  
 \begin{align*}
 	d_1 &: b \rightarrow f \quad (\text{"Birds fly"}), \\
 	d_2 &: p \rightarrow \neg f \quad (\text{"Penguins do not fly"}), \\
 	d_3 &: p \rightarrow b \quad (\text{"Penguins are birds"}).
 \end{align*}  
-In the following, the goal is to assign certainty levels to these rules to obtain a possibilistic knowledge base. After the creation of the possibilistic knowledge base we are able to use it for reasoning. To construct this knowledge base, the following steps are necessary. First, the constraints from the rules are derived. Second, the possible worlds are ranked based on these constraints. Finally, using the ranked worlds, the certainty levels of the rules are determined.
-\subsubsection{Constraints}
-From the default rules, a set of comparative possibility constraints can be constructed. Comparative possibility constraints are derived from the idea that a rule \( a \rightarrow b \) implies that situations where both \( a \) and \( b \) hold should be considered more possible than those where \( a \) holds but \( b \) does not, see \cite{dubois2014possibilistic}:  
+In the following, the goal is to assign certainty levels to these rules to create a possibilistic knowledge base. After the creation of the possibilistic knowledge base we are able to use it for reasoning. To construct this knowledge base, the following steps are necessary. First, the constraints from the rules are derived. Second, the possible worlds are ranked based on these constraints. Finally, using the ranked worlds, the certainty levels of the rules are determined.
+\subsection{Constraints}
+From the default rules, a set of comparative possibility constraints can be constructed. Comparative possibility constraints are derived from the idea that a rule \( a \rightarrow b \) implies that situations where both \( a \) and \( b \) hold should be considered more possible than those situations where \( a \) holds but \( b \) does not, see \cite{dubois2014possibilistic}:  
 \begin{align*}
 	C_1 &: b \land f >_\Pi b \land \neg f \quad \text{(birds fly)}, \\
 	C_2 &: p \land \neg f >_\Pi p \land f \quad \text{(penguins do not fly)}, \\
 	C_3 &: p \land b >_\Pi p \land \neg b \quad \text{(penguins are birds)}.
 \end{align*}  
 For example, \( C_1 \) states that the worlds where birds fly are more possible than worlds where birds do not fly. These constraints establish an ordering over possible worlds, which will be examined next.  
-\subsubsection{Possible Worlds}
+\subsection{Possible Worlds}
 The propositional language for this example involves three propositions: \( b \) (bird), \( p \) (penguin), and \( f \) (flies). The set of possible worlds, \( \Omega \), consists of all possible combinations of \( (b, f, p) \) represented by \( \omega_i \):
 \begin{align*}
 	\Omega = \{ \omega_0, \omega_1, \omega_2, \omega_3, \omega_4, \omega_5, \omega_6, \omega_7 \}.
@@ -241,7 +211,7 @@ Based on the constraints, these worlds are ranked to reflect which interpretatio
 	\caption{Truth values of bird (\( b \)), flies (\( f \)), and penguin (\( p \)) for each world \( \omega_i \), and whether each world satisfies or violates the default rules.}
 	\label{tab:worlds_rules}
 \end{table}
-In Table \ref{tab:worlds_rules}, each row represents a world with a unique combination of the three predicates, along with an indication of whether the default rules are satisfied or violated. Notably, no world satisfies all rules, highlighting the core reasoning challenge. The worlds \( \omega_0 \) and \( \omega_2 \) neither satisfy nor violate any rule.  
+In Table \ref{tab:worlds_rules}, each row represents a world with a unique combination of the three predicates, along with an indication of whether the default rules are satisfied or violated. No world satisfies all rules, highlighting the core reasoning challenge. The worlds \( \omega_0 \) and \( \omega_2 \) neither satisfy or violate any rule.  
 The first default rule, \( d_1: b \rightarrow f \) ("Birds fly"), increases the plausibility of worlds where birds fly (\( b \land f \)) compared to those where birds do not fly (\( b \land \neg f \)). This rule influences the ranking between worlds \( \omega_6 \), \( \omega_7 \) (where the bird flies) and \( \omega_4 \), \( \omega_5 \) (where the bird does not fly).
 The second default rule, \( d_2: p \rightarrow \neg f \) ("Penguins do not fly"), prioritizes worlds where penguins do not fly (\( p \land \neg f \)) over those where penguins fly (\( p \land f \)). This affects the relative plausibility of \( \omega_5 \), \( \omega_1 \) (where the penguin does not fly) compared to \( \omega_7 \), \( \omega_3 \) (where the penguin flies).  
 The third default rule, \( d_3: p \rightarrow b \) ("Penguins are birds"), ranks the worlds \( \omega_5 \), \( \omega_7 \) higher than \( \omega_1 \), \( \omega_3 \).
@@ -252,7 +222,7 @@ By incorporating these rules, we derive the following constraints on possibility
 	C_3 &: \max(\pi(\omega_5), \pi(\omega_7)) > \max(\pi(\omega_1), \pi(\omega_3)).
 \end{align*}
 These constraints guide the ranking of possible worlds according to their plausibility in the given possibilistic logic framework.
-\subsubsection{Ranking of the Possible Worlds}
+\subsection{Ranking of the Possible Worlds}
 By combining the constraints, we can determine an ordering of the worlds where no constraint is violated. The graph in Figure \ref{fig:worlds_ranking} illustrates the possibility relations between the worlds. \\
 For example, constraint \( C_1 \) states that either \( \omega_6 \) (blue arrows) or \( \omega_7 \) (red arrows) must be more possible than \( \omega_4 \) and \( \omega_5 \). The correct ordering is achieved if the worlds can be arranged into levels while ensuring that the arrows only point downward from a higher possibility level to a lower one. In this example, the ordering is color-coded into groups: blue (\( C_1 \)), orange (\( C_2 \)), and yellow (\( C_3 \)).
 % Hasse Diagram  
@@ -300,8 +270,8 @@ By following the constraints, we determine the ranking of the worlds as follows:
 	\pi(\omega_4) &= \pi(\omega_5) = \frac{2}{3}, \\
 	\pi(\omega_1) &= \pi(\omega_3) = \pi(\omega_7) = \frac{1}{3}.
 \end{align*}
-In this example, we use numerical values to represent the different possibility levels of the worlds. The worlds \( \omega_0 \) and \( \omega_2 \) hold the highest possibility level since no constraints downgrade them.  
-\subsubsection{Creating Knowledge Base}
+In this example, we use numerical values to represent the different qualitative possibility levels of the worlds. The worlds \( \omega_0 \) and \( \omega_2 \) hold the highest possibility level since no constraints downgrade them.  
+\subsection{Creating Knowledge Base}
 We calculate the necessity degrees from the possibility of the worlds as follows with the duality relationship of possibility and necessity:
 \begin{align*}
 	N(\neg p \lor \neg f) &= \min \{ 1 - \pi(\omega) \mid \omega \models p \land f \} \\
@@ -328,10 +298,10 @@ The possibilistic knowledge base is visualized in Figure \ref{fig:rules_ranking}
 		\node [draw] (c3) at (2,-3) {$\neg b \lor f, \frac{1}{3}$};
 		\draw[very thick, dashed, red] (-2,-4) -- (6,-4) node[right] {Inconclusive Level};
 	\end{tikzpicture}
-	\caption{Possibilistic Knowledge Base of the Penguin Problem with the elements arranged over the certainty}
+	\caption{Possibilistic knowledge base of the penguin problem with the elements arranged over the certainty}
 	\label{fig:rules_ranking}
 \end{figure}
-\subsubsection{Reasoning with Uncertain Information}
+\subsection{Reasoning with Uncertain Information}
 In this section, we determine whether Tweety flies by introducing relevant information about itself. First, we introduce that Tweety is a bird:
 \begin{align*}
 	F = \{ (b, 1) \} \quad \text{(Tweety is a bird with certainty 1)}.
@@ -358,7 +328,7 @@ Thus, we conclude that Tweety flies with a certainty level of $\frac{1}{3}$. The
 		
 		\draw[very thick, dashed, red] (-2,-4) -- (6,-4) node[right] {Inconclusive Level};
 	\end{tikzpicture}
-	\caption{Possibilistic Knowledge Base of the Penguin Problem with first information about Tweety}
+	\caption{Possibilistic knowledge base of the penguin problem with first information about Tweety}
 	\label{fig:firstinformation}
 \end{figure}
 
@@ -366,7 +336,7 @@ If we introduce new information stating that Tweety is also a penguin:
 \begin{align*}
 	F = \{ (b,1), (p,1) \} \quad \text{(Tweety is a penguin with certainty 1)},
 \end{align*}
-then, using $(\neg p \lor \neg f, 2/3)$, we derive:
+then, using $(\neg p \lor \neg f, 2/3)$ with the weakest link resolution rule, we derive:
 \begin{align*}
 	(\neg p \lor \neg f, 2/3) \quad \text{and} \quad (p, 1) \vdash (\neg f, \min(1, 2/3)) = (\neg f, 2/3).
 \end{align*}
@@ -374,7 +344,7 @@ Since this results in conflicting conclusions:
 \begin{align*}
 	(\neg f, 2/3) \quad \text{and} \quad (f, 1/3) \vdash (\bot, \min(2/3, 1/3)) = (\bot, 1/3),
 \end{align*}
-the system detects an inconsistency of level $\frac{1}{3}$. Given the principle that higher certainty information takes precedence, the inference that Tweety flies is overridden, leading to the final conclusion:
+the system detects an inconsistency of level $\frac{1}{3}$. Given the principle that higher certainty information takes advantage, the inference that Tweety flies is overridden, leading to the final conclusion:
 \begin{align*}
 	K \cup F \vdash (\neg f, 2/3),
 \end{align*}
@@ -384,61 +354,30 @@ The results are illustrated in Figure \ref{fig:secondinformation}. It can be see
 	\centering
 	\begin{tikzpicture}[node distance=1.5cm, every node/.style={circle, minimum size=1cm}, >=stealth]
 		\draw[->] (-2,-4) -- (-2,4.5) node[right] {Certainty Level};
+		\draw[draw=none, thick, fill=green, opacity=0.1] (-2,-4) node[above right] {$\frac{1}{3}$} rectangle (6,-1.5);
+		\draw[draw=none, thick, fill=blue, opacity=0.1] (-2,-1.5) node[above right] {$\frac{2}{3}$} rectangle (6,1.5);
+		\draw[draw=none, thick, fill=red, opacity=0.1] (-2,1.5) node[above right] {$1$} rectangle (6,4);
 		% Nodes
 		\node [draw] (f1) at (2,3) {$ b, 1$};
 		\node [draw] (f2) at (0,3) {$ p, 1$};
 		\node [draw] (c1) at (0,0) {$\neg p \lor \neg f, \frac{2}{3}$};
+		\node [draw] (c2) at (4,0) {$\neg p \lor b, \frac{2}{3}$};
 		\node [draw] (c3) at (2,-3) {$\neg b \lor f, \frac{1}{3}$};
+		
+		\draw[->, violet, thick] (f1) -- (c3);
+		\draw[->, violet, thick] (f2) -- (c1);
 		\draw[<->, red, thick] (c1) -- node[midway, below left] {Conflict} (c3);
+		\draw[very thick, dashed, red] (-2,-1.5) -- (6,-1.5) node[right] {Inconclusive Level};
 	\end{tikzpicture}
-	\caption{Possibilistic Knowledge Base of the Penguin Problem with new information about Tweety}
+	\caption{Possibilistic knowledge base of the penguin problem with new information about Tweety}
 	\label{fig:secondinformation}
 \end{figure}
 
-This example shows how possibilistic logic can handle inconsistency when new information is added. The calculation of the necessities of the rules out of the possible worlds is one key aspect in this example.
-
-%The process is visualized in the flowchart \ref{fig:flowchart}.
-%% Flowchart for Reasoning
-%\begin{figure}[ht]
-%	\centering
-%	\begin{tikzpicture}[node distance=1.5cm, every node/.style={draw, rounded corners, minimum width=3cm, minimum height=1cm}]
-%		\node (start) {Start: $b$ (Tweety is a Bird)};
-%		\node (applyRule1) [below of=start] {Apply $(\neg b \lor f, 1/3)$};
-%		\node (inferF) [below of=applyRule1] {Infer $(f, 1/3)$ (Tweety flies with 1/3 certainty)};
-%		
-%		\node (newInfo) [right of=applyRule1, xshift=5cm] {New Info: $p$ (Tweety is a Penguin)};
-%		\node (applyRule2) [below of=newInfo] {Apply $(\neg p \lor \neg f, 2/3)$};
-%		\node (inferNotF) [below of=applyRule2] {Infer $(\neg f, 2/3)$};
-%		
-%		\node (conflict) [below of=inferF, yshift=-1cm] {Conflict: $(\neg f, 2/3)$ vs $(f, 1/3)$};
-%		\node (resolve) [below of=conflict] {Resolve: Inconsistency $(\bot, 1/3)$};
-%		\node (conclusion) [below of=resolve] {Final Conclusion: $(\neg f, 2/3)$ (Tweety does not fly)};
-%		
-%		% Arrows
-%		\draw[->] (start) -- (applyRule1);
-%		\draw[->] (applyRule1) -- (inferF);
-%		\draw[->] (newInfo) -- (applyRule2);
-%		\draw[->] (applyRule2) -- (inferNotF);
-%		\draw[->] (inferF) -- (conflict);
-%		\draw[->] (inferNotF) -- (conflict);
-%		\draw[->] (conflict) -- (resolve);
-%		\draw[->] (resolve) -- (conclusion);
-%	\end{tikzpicture}
-%	\caption{Ranking of the worlds}
-%	\label{fig:flowchart}
-%\end{figure}
+This example shows how possibilistic logic can handle inconsistency when new information is added. The creation of the possibilistic knowledge base with qualitative certainty levels out of the relation between the constraints is one major aspect of this example.
 \clearpage
 \section{Discussion and Conclusion} \label{Conclusion}
-% In this part, you revisit the paper’s outline and summarise concisely the most important contributions of your document. It is advisable to connect your results with the research questions given in the introduction. Discuss relevant related work and potential future research questions and research problems that can be addressed in future work.
-
-%TODO Create Discussion
-
-
-% References
-% In this part you list all literature your paper makes use of. Note that you should only include references that are actually referenced in the text. Take care that all references are complete (Authors, title, year of publication, publisher, etc.). Find further information on citing below.
+This paper introduced basic possibilistic logic and showed its application through the penguin problem example. It is presented how possibilistic logic extends classical logic by adding certainty levels to logical formulas, allowing for reasoning under uncertainty and inconsistency. In the penguin problem possibilitic logic handled inconsistency in the knowledge base, which was created out of the constraints of the problem. The key learning of the example and this paper is that possibilistic logic provides a robust framework when inconsistent information are present.
 \clearpage
 \addreferences
-
 \makestatement{1}
-
 \end{document}
