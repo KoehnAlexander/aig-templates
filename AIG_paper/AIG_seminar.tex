@@ -56,7 +56,6 @@ Possibilistic logic is a non-classical logic framework designed to handle uncert
 % Syntax and semantics
 % Examples and porperties
 %
-%TODO Check upper / lower case
 %TODO add citations
 %TODO Insbesondere ist der Zusammenhang zur der im Beispiel vorgestellten Methodologie zur possibilistischen Logik unklar.
 \section{Introduction}
@@ -201,103 +200,107 @@ In classical logic, the presence of a contradiction makes the entire knowledge b
 \section{Relation to Artificial Intelligence} \label{RelationAI}
 Possibilistic logic, with its strength in modeling certainty and handling inconsistency, has various application fields in artificial intelligence problems \cite{dubois2014possibilistic}, \cite{2021possibility}. The following apllication examples are only a glimpse into the possible fields. In default reasoning, possibilistic logic handles incomplete information reasoning. Additionally, possibilistic logic can be applied in information fusion, where knowledge is combined from different sources. The logic can also assist with decisions under uncertainty. One application is its use in medical diagnosis problems \cite{grabisch2003}. In \cite{dubois2020possibilistic}, \cite{persia2023learning}, connections between reasoning with possibilistic logic and machine learning are explored.  
 
-\section{Analysis and Development of Examples} \label{Examples}
-In the following we will go through an example showing the application of basic possibilistic logic.  One of the classical examples in non-monotonic reasoning is the penguin problem. Basic possibilistic logic provides a structured way to handle exceptions of general rules like "birds fly" by associating rules with certainty levels and defining a preference ordering over possible worlds. Each possible world is a combination of the language interpretation of the underlying rules, see \cite{dubois2014possibilistic}. This is example can be found in shorter notice in \cite{dubois2014possibilistic}, \cite{prade1992representing}.
-\subsubsection{Default Rules}
-The knowledge base of this example consists of three default rules about birds and penguins. A default rule expresses general knowledge and holds in most cases, but it may have exceptions:
+\section{Applying Basic Possibilistic Logic} \label{Examples}  
+In the following, we will go through an example demonstrating the application of basic possibilistic logic. One of the classical examples in non-monotonic reasoning is the penguin problem. Basic possibilistic logic provides a structured way to handle exceptions to general rules, such as "birds fly," by associating rules with certainty levels and defining a preference ordering over possible worlds. Each possible world represents a combination of the language interpretation of the underlying rules, see \cite{dubois2014possibilistic}. This example can be found in a more concise form in \cite{dubois2014possibilistic}, \cite{prade1992representing}.  
+\subsubsection{Default Rules}  
+The knowledge base of this example consists of three default rules about birds and penguins. A default rule expresses general knowledge and holds in most cases, but it may have exceptions:  
 \begin{align*}
 	d_1 &: b \rightarrow f \quad (\text{"Birds fly"}), \\
 	d_2 &: p \rightarrow \neg f \quad (\text{"Penguins do not fly"}), \\
 	d_3 &: p \rightarrow b \quad (\text{"Penguins are birds"}).
-\end{align*}
-In the following the goal is to assign certainty levels to these rules, to get a possibilistic knowledge base. In order to find this knowledge base, the following steps are necessary. First the constraints from the rules are constructed. Second, the possible worlds are ranked by the constraints. With the ranked worlds the certainty of the rules is calculated. 
+\end{align*}  
+In the following, the goal is to assign certainty levels to these rules to obtain a possibilistic knowledge base. After the creation of the possibilistic knowledge base we are able to use it for reasoning. To construct this knowledge base, the following steps are necessary. First, the constraints from the rules are derived. Second, the possible worlds are ranked based on these constraints. Finally, using the ranked worlds, the certainty levels of the rules are determined.
 \subsubsection{Constraints}
-From the default rules, a set of comparative possibility constraints can be constructed. Comparative possibility constraints are derived from the expression that a rule $ a \rightarrow b $ gives situations where $ a $ and $ b $ is true a higher possibilty than that $ b $ is false, see \cite{dubois2014possibilistic}:
+From the default rules, a set of comparative possibility constraints can be constructed. Comparative possibility constraints are derived from the idea that a rule \( a \rightarrow b \) implies that situations where both \( a \) and \( b \) hold should be considered more possible than those where \( a \) holds but \( b \) does not, see \cite{dubois2014possibilistic}:  
 \begin{align*}
 	C_1 &: b \land f >_\Pi b \land \neg f \quad \text{(birds fly)}, \\
 	C_2 &: p \land \neg f >_\Pi p \land f \quad \text{(penguins do not fly)}, \\
 	C_3 &: p \land b >_\Pi p \land \neg b \quad \text{(penguins are birds)}.
-\end{align*}
-For example, $C_1$ states that the worlds where birds fly are more possible than worlds where birds do not fly. These constraints establish an ordering over possible worlds, which will be illuminated next. 
+\end{align*}  
+For example, \( C_1 \) states that the worlds where birds fly are more possible than worlds where birds do not fly. These constraints establish an ordering over possible worlds, which will be examined next.  
 \subsubsection{Possible Worlds}
-The propositional language for this example involves three propositions: $b$ (bird), $p$ (penguin), and $f$ (flies). The set of possible worlds, $\Omega$, consists of all possible combinations of $(b, f, p)$ represented by $\omega_i$:
+The propositional language for this example involves three propositions: \( b \) (bird), \( p \) (penguin), and \( f \) (flies). The set of possible worlds, \( \Omega \), consists of all possible combinations of \( (b, f, p) \) represented by \( \omega_i \):
 \begin{align*}
 	\Omega = \{ \omega_0, \omega_1, \omega_2, \omega_3, \omega_4, \omega_5, \omega_6, \omega_7 \}.
-\end{align*}
-Based on the constraints, these worlds are ranked to reflect which interpretations are more plausible.
-\begin{table}
+\end{align*}  
+Based on the constraints, these worlds are ranked to reflect which interpretations are more plausible.\\
+\begin{table}[h]
 	\centering
 	\begin{tabular}{c||c|c|c||c|c|c}
-		World & $b$ (Bird) & $f$ (Flies) & $p$ (Penguin) & $d_1$: $b \to f$ & $d_2$: $p \to \neg f$ & $d_3$: $p \to b$ \\
+		World & \( b \) (Bird) & \( f \) (Flies) & \( p \) (Penguin) & \( d_1: b \to f \) & \( d_2: p \to \neg f \) & \( d_3: p \to b \) \\
 		\hline
-		$\omega_0$ & 0 & 0 & 0 &  &  &  \\
-		$\omega_1$ & 0 & 0 & 1 &  & \textcolor{green}{satisfied} & \textcolor{red}{violated} \\
-		$\omega_2$ & 0 & 1 & 0 &  &  &  \\
-		$\omega_3$ & 0 & 1 & 1 &  & \textcolor{red}{violated} & \textcolor{red}{violated} \\
-		$\omega_4$ & 1 & 0 & 0 & \textcolor{red}{violated} &  &  \\
-		$\omega_5$ & 1 & 0 & 1 & \textcolor{red}{violated} & \textcolor{green}{satisfied} & \textcolor{green}{satisfied} \\
-		$\omega_6$ & 1 & 1 & 0 & \textcolor{green}{satisfied} &  &  \\
-		$\omega_7$ & 1 & 1 & 1 & \textcolor{green}{satisfied} & \textcolor{red}{violated} & \textcolor{green}{satisfied} \\
+		\( \omega_0 \) & 0 & 0 & 0 &  &  &  \\
+		\( \omega_1 \) & 0 & 0 & 1 &  & \textcolor{green}{satisfied} & \textcolor{red}{violated} \\
+		\( \omega_2 \) & 0 & 1 & 0 &  &  &  \\
+		\( \omega_3 \) & 0 & 1 & 1 &  & \textcolor{red}{violated} & \textcolor{red}{violated} \\
+		\( \omega_4 \) & 1 & 0 & 0 & \textcolor{red}{violated} &  &  \\
+		\( \omega_5 \) & 1 & 0 & 1 & \textcolor{red}{violated} & \textcolor{green}{satisfied} & \textcolor{green}{satisfied} \\
+		\( \omega_6 \) & 1 & 1 & 0 & \textcolor{green}{satisfied} &  &  \\
+		\( \omega_7 \) & 1 & 1 & 1 & \textcolor{green}{satisfied} & \textcolor{red}{violated} & \textcolor{green}{satisfied} \\
 	\end{tabular}
-	\caption{Truth values of bird (\(b\)), flies (\(f\)), and penguin (\(p\)) for each world \(\omega_i\), and whether each world satisfies or violates the default rules.}
+	\caption{Truth values of bird (\( b \)), flies (\( f \)), and penguin (\( p \)) for each world \( \omega_i \), and whether each world satisfies or violates the default rules.}
 	\label{tab:worlds_rules}
 \end{table}
-In table \ref{tab:worlds_rules} each line represents a world with the combination of the three predicates and the satisfaction or violation of a default rule. In this table it can be observed that no world satisfies all rules, which highlights the core problem. The worlds \( \omega_0 \) and \( \omega_2 \) do not satisfy or violate any rule. \\
-The first default rule, \( d_1: b \rightarrow f \) ("Birds fly"), increases the plausibility of worlds where birds fly (\( b \land f \)) compared to those where birds do not fly (\( b \land \neg f \)). This rule affects the ranking between worlds \( \omega_6 \), \( \omega_7 \) (where the bird flies) and \( \omega_4, \omega_5 \) (where the bird does not fly). \\
-The second default rule, \( d_2: p \rightarrow \neg f \) ("Penguins do not fly"), prioritizes worlds where penguins do not fly (\( p \land \neg f \)) over those where penguins fly (\( p \land f \)). This affects the relative plausibility of \( \omega_5 \), \( \omega_1 \) (where the penguin does not fly) compared to \( \omega_7 \) and \( \omega_3 \) (where the penguin flies). \\
-The third default rule, \( d_3: p \rightarrow b \) ("Penguins are birds"), ranks the worlds \( \omega_5 \), \( \omega_7 \) higher than \( \omega_1 \), \( \omega_3 \). \\
-We can insert the worlds in which the rule holds into the constraints, as these worlds represent the rule:
+In Table \ref{tab:worlds_rules}, each row represents a world with a unique combination of the three predicates, along with an indication of whether the default rules are satisfied or violated. Notably, no world satisfies all rules, highlighting the core reasoning challenge. The worlds \( \omega_0 \) and \( \omega_2 \) neither satisfy nor violate any rule.  
+The first default rule, \( d_1: b \rightarrow f \) ("Birds fly"), increases the plausibility of worlds where birds fly (\( b \land f \)) compared to those where birds do not fly (\( b \land \neg f \)). This rule influences the ranking between worlds \( \omega_6 \), \( \omega_7 \) (where the bird flies) and \( \omega_4 \), \( \omega_5 \) (where the bird does not fly).
+The second default rule, \( d_2: p \rightarrow \neg f \) ("Penguins do not fly"), prioritizes worlds where penguins do not fly (\( p \land \neg f \)) over those where penguins fly (\( p \land f \)). This affects the relative plausibility of \( \omega_5 \), \( \omega_1 \) (where the penguin does not fly) compared to \( \omega_7 \), \( \omega_3 \) (where the penguin flies).  
+The third default rule, \( d_3: p \rightarrow b \) ("Penguins are birds"), ranks the worlds \( \omega_5 \), \( \omega_7 \) higher than \( \omega_1 \), \( \omega_3 \).
+By incorporating these rules, we derive the following constraints on possibility degrees:  
 \begin{align*}
 	C_1 &: \max(\pi(\omega_6), \pi(\omega_7)) > \max(\pi(\omega_4), \pi(\omega_5)), \\
 	C_2 &: \max(\pi(\omega_5), \pi(\omega_1)) > \max(\pi(\omega_3), \pi(\omega_7)), \\
 	C_3 &: \max(\pi(\omega_5), \pi(\omega_7)) > \max(\pi(\omega_1), \pi(\omega_3)).
 \end{align*}
-\subsubsection{Ranking of the possible Worlds}
-With the combination of the constraints it is possible to find out an ordering, where no constarint is broken. The graph \ref{fig:worlds_ranking} gives a hint about the possibility relations between the worlds. \\
-For example the constraint $C_1$ says that either $\omega_6$ (blue arrows) or $\omega_7$ (red arrows) must be more possible than $\omega_4$ and $\omega_5$. The correct ordering is found if the worlds can be arranged in levels with the relations (arrows) while the arrows are only going down from a higher possibility level to a lower one. In this example an ordering can be found with color groups blue ($C_1$), orange ($C_2$) and yellow ($C_3$).
-% Hasse Diagram
-\begin{figure}
+These constraints guide the ranking of possible worlds according to their plausibility in the given possibilistic logic framework.
+\subsubsection{Ranking of the Possible Worlds}
+By combining the constraints, we can determine an ordering of the worlds where no constraint is violated. The graph in Figure \ref{fig:worlds_ranking} illustrates the possibility relations between the worlds. \\
+For example, constraint \( C_1 \) states that either \( \omega_6 \) (blue arrows) or \( \omega_7 \) (red arrows) must be more possible than \( \omega_4 \) and \( \omega_5 \). The correct ordering is achieved if the worlds can be arranged into levels while ensuring that the arrows only point downward from a higher possibility level to a lower one. In this example, the ordering is color-coded into groups: blue (\( C_1 \)), orange (\( C_2 \)), and yellow (\( C_3 \)).
+% Hasse Diagram  
+\begin{figure}[h]
 	\centering
 	\begin{tikzpicture}[node distance=1.5cm, every node/.style={circle, minimum size=1cm}, >=stealth]
-		\draw[->] (-5,-4) -- (-5,4) node[right] {Possibility $\pi(\omega_i)$};
-		\draw[draw=none, thick, fill=green, opacity=0.1] (-5,-4) node[above right] {$\frac{1}{3}$} rectangle (4,-1);
-		\draw[draw=none, thick, fill=blue, opacity=0.1] (-5,-1) node[above right] {$\frac{2}{3}$} rectangle (4,1);
-		\draw[draw=none, thick, fill=red, opacity=0.1] (-5,1) node[above right] {$1$} rectangle (4,3.75);
+		% Axis and Background Layers
+		\draw[->] (-5,-4) -- (-5,4) node[right] {Possibility \( \pi(\omega_i) \)};
+		\draw[draw=none, thick, fill=green, opacity=0.1] (-5,-4) node[above right] {\(\frac{1}{3}\)} rectangle (4,-1);
+		\draw[draw=none, thick, fill=blue, opacity=0.1] (-5,-1) node[above right] {\(\frac{2}{3}\)} rectangle (4,1);
+		\draw[draw=none, thick, fill=red, opacity=0.1] (-5,1) node[above right] {\(1\)} rectangle (4,3.75);
+		
 		% Nodes
-		\node [draw] (w0) at (-3,2) {$\omega_0$};
-		\node [draw] (w2) at (0,3) {$\omega_2$};
-		\node [draw] (w6) at (3,2) {$\omega_6$};
-		\node [draw] (w4) at (-1,0) {$\omega_4$};
-		\node [draw] (w5) at (1,0) {$\omega_5$};
-		\node [draw] (w1) at (-3,-2) {$\omega_1$};
-		\node [draw] (w3) at (0,-3) {$\omega_3$};
-		\node [draw] (w7) at (3,-2) {$\omega_7$};
+		\node [draw] (w0) at (-3,2) {\(\omega_0\)};
+		\node [draw] (w2) at (0,3) {\(\omega_2\)};
+		\node [draw] (w6) at (3,2) {\(\omega_6\)};
+		\node [draw] (w4) at (-1,0) {\(\omega_4\)};
+		\node [draw] (w5) at (1,0) {\(\omega_5\)};
+		\node [draw] (w1) at (-3,-2) {\(\omega_1\)};
+		\node [draw] (w3) at (0,-3) {\(\omega_3\)};
+		\node [draw] (w7) at (3,-2) {\(\omega_7\)};
+		
 		% Arrows with Labels
-		\draw[->, red] (w7) -- (w4) node[midway, right] {$C_1$};
-		\draw[->, red] (w7) to[bend left=10] node[midway, right] {$C_1$} (w5) ;
-		\draw[->, blue, thick] (w6) -- (w5) node[midway, right] {$C_1$};
-		\draw[->, blue, thick] (w6) -- (w4) node[midway, left] {$C_1$};
+		\draw[->, red] (w7) -- (w4) node[midway, right] {\( C_1 \)};
+		\draw[->, red] (w7) to[bend left=10] node[midway, right] {\( C_1 \)} (w5);
+		\draw[->, blue, thick] (w6) -- (w5) node[midway, right] {\( C_1 \)};
+		\draw[->, blue, thick] (w6) -- (w4) node[midway, left] {\( C_1 \)};
 		
-		\draw[->, orange, thick] (w5) to[bend right=10] node[midway, right] {$C_2$} (w3);
-		\draw[->, orange, thick] (w5) to[bend left=25] node[midway, right] {$C_2$} (w7) ;
-		\draw[->, green] (w1) -- (w3) node[midway, below] {$C_2$};
-		\draw[->, green] (w1) to[bend left=5] node[midway, above] {$C_2$} (w7);
+		\draw[->, orange, thick] (w5) to[bend right=10] node[midway, right] {\( C_2 \)} (w3);
+		\draw[->, orange, thick] (w5) to[bend left=25] node[midway, right] {\( C_2 \)} (w7);
+		\draw[->, green] (w1) -- (w3) node[midway, below] {\( C_2 \)};
+		\draw[->, green] (w1) to[bend left=5] node[midway, above] {\( C_2 \)} (w7);
 		
-		\draw[->, yellow, thick] (w5) -- (w1) node[midway, left] {$C_3$};
-		\draw[->, yellow, thick] (w5) to[bend left=25] node[midway, right] {$C_3$} (w3);
-		\draw[->, violet] (w7) to[bend left=5]  node[midway, below left] {$C_3$} (w1);
-		\draw[->, violet] (w7) -- (w3) node[midway, below] {$C_3$};
+		\draw[->, yellow, thick] (w5) -- (w1) node[midway, left] {\( C_3 \)};
+		\draw[->, yellow, thick] (w5) to[bend left=25] node[midway, right] {\( C_3 \)} (w3);
+		\draw[->, violet] (w7) to[bend left=5] node[midway, below left] {\( C_3 \)} (w1);
+		\draw[->, violet] (w7) -- (w3) node[midway, below] {\( C_3 \)};
 	\end{tikzpicture}
-	\caption{Possibility of the worlds $\omega_i$ and possibility relation between the worlds represented by the colored arrows}
+	\caption{Possibility of the worlds \( \omega_i \) and possibility relations between the worlds, represented by the colored arrows.}
 	\label{fig:worlds_ranking}
 \end{figure}
-The ordering of the worlds threw the constraints results in:
+By following the constraints, we determine the ranking of the worlds as follows:  
 \begin{align*}
 	\pi(\omega_0) &= \pi(\omega_2) = \pi(\omega_6) = 1, \\
 	\pi(\omega_4) &= \pi(\omega_5) = \frac{2}{3}, \\
 	\pi(\omega_1) &= \pi(\omega_3) = \pi(\omega_7) = \frac{1}{3}.
 \end{align*}
-In this example the numerical representation is used for the different possibility levels of the worlds. The worlds $\omega_0$ and $\omega_1$ are in the highest possibility level, as no constraints grades the worlds down.
+In this example, we use numerical values to represent the different possibility levels of the worlds. The worlds \( \omega_0 \) and \( \omega_2 \) hold the highest possibility level since no constraints downgrade them.  
 \subsubsection{Creating Knowledge Base}
 We calculate the necessity degrees from the possibility of the worlds as follows with the duality relationship of possibility and necessity:
 \begin{align*}
@@ -312,7 +315,7 @@ Thus, we obtain the possibilistic knowledge base:
 \[
 K = \{ (\neg p \lor \neg f, \frac{2}{3}), (\neg p \lor b, \frac{2}{3}), (\neg b \lor f, \frac{1}{3}) \}.
 \]
-The possibilitic knowledge base is visualized in figure \ref{fig:rules_ranking}.
+The possibilistic knowledge base is visualized in Figure \ref{fig:rules_ranking}.
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[node distance=1.5cm, every node/.style={circle, minimum size=1cm}, >=stealth]
@@ -329,15 +332,15 @@ The possibilitic knowledge base is visualized in figure \ref{fig:rules_ranking}.
 	\label{fig:rules_ranking}
 \end{figure}
 \subsubsection{Reasoning with Uncertain Information}
-In this part we can find out if Tweety flies by introducing information about Tweety. First we introduce that Tweety is a bird:
+In this section, we determine whether Tweety flies by introducing relevant information about itself. First, we introduce that Tweety is a bird:
 \begin{align*}
 	F = \{ (b, 1) \} \quad \text{(Tweety is a bird with certainty 1)}.
 \end{align*}
-From the rule $(\neg b \lor f, 1/3)$ in the knowledge base $K$, we can infer by using the weakest link resultion rule \ref{Eq:Weakest_link_resolution}:
+Using the rule $(\neg b \lor f, 1/3)$ from the knowledge base $K$, we apply the weakest link resolution rule (Equation \ref{Eq:Weakest_link_resolution}):
 \begin{align*}
 	(\neg b \lor f, 1/3) \quad \text{and} \quad (b, 1) \vdash (f, \min(1, 1/3)) = (f, 1/3).
 \end{align*}
-Thus, we conclude that Tweety flies with a certainty level of $\frac{1}{3}$. We can see the result graphically in figure \ref{fig:firstinformation}. The violet arrow symbolizes the inference with the weakest link resolution rule.
+Thus, we conclude that Tweety flies with a certainty level of $\frac{1}{3}$. The result is illustrated graphically in Figure \ref{fig:firstinformation}. The violet arrow symbolizes the inference using the weakest link resolution rule.
 \begin{figure}[h]
 	\centering
 	\begin{tikzpicture}[every node/.style={circle}, >=stealth]
@@ -352,14 +355,14 @@ Thus, we conclude that Tweety flies with a certainty level of $\frac{1}{3}$. We 
 		\node [draw] (c3) at (2,-3) {$\neg b \lor f, \frac{1}{3}$};
 		
 		\draw[->, violet, thick] (f1) -- (c3);
-	
+		
 		\draw[very thick, dashed, red] (-2,-4) -- (6,-4) node[right] {Inconclusive Level};
 	\end{tikzpicture}
 	\caption{Possibilistic Knowledge Base of the Penguin Problem with first information about Tweety}
 	\label{fig:firstinformation}
 \end{figure}
 
-If new information states that Tweety is also a penguin:
+If we introduce new information stating that Tweety is also a penguin:
 \begin{align*}
 	F = \{ (b,1), (p,1) \} \quad \text{(Tweety is a penguin with certainty 1)},
 \end{align*}
@@ -367,34 +370,26 @@ then, using $(\neg p \lor \neg f, 2/3)$, we derive:
 \begin{align*}
 	(\neg p \lor \neg f, 2/3) \quad \text{and} \quad (p, 1) \vdash (\neg f, \min(1, 2/3)) = (\neg f, 2/3).
 \end{align*}
-Since we now have conflicting conclusions:
+Since this results in conflicting conclusions:
 \begin{align*}
 	(\neg f, 2/3) \quad \text{and} \quad (f, 1/3) \vdash (\bot, \min(2/3, 1/3)) = (\bot, 1/3),
 \end{align*}
-the system detects an inconsistency of level $\frac{1}{3}$. Given the principle that higher certainty information takes advantage, the inference that Tweety flies is drowned, leading to the final conclusion:
+the system detects an inconsistency of level $\frac{1}{3}$. Given the principle that higher certainty information takes precedence, the inference that Tweety flies is overridden, leading to the final conclusion:
 \begin{align*}
 	K \cup F \vdash (\neg f, 2/3),
 \end{align*}
-which means \textit{"Tweety does not fly"} with a certainty of $\frac{2}{3}$. \\
-The results are visualized in the figure \ref{fig:secondinformation}. It can be seen that the inconclusive level is raised to a level where above no conflict is between the information.
+which means "Tweety does not fly" with a certainty of $\frac{2}{3}$.  
+The results are illustrated in Figure \ref{fig:secondinformation}. It can be seen that the inconclusive level is raised to a level where no conflict exists between the information.
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[node distance=1.5cm, every node/.style={circle, minimum size=1cm}, >=stealth]
 		\draw[->] (-2,-4) -- (-2,4.5) node[right] {Certainty Level};
-		\draw[draw=none, thick, fill=green, opacity=0.1] (-2,-4) node[above right] {$\frac{1}{3}$} rectangle (6,-1.5);
-		\draw[draw=none, thick, fill=blue, opacity=0.1] (-2,-1.5) node[above right] {$\frac{2}{3}$} rectangle (6,1.5);
-		\draw[draw=none, thick, fill=red, opacity=0.1] (-2,1.5) node[above right] {$1$} rectangle (6,4);
 		% Nodes
 		\node [draw] (f1) at (2,3) {$ b, 1$};
 		\node [draw] (f2) at (0,3) {$ p, 1$};
 		\node [draw] (c1) at (0,0) {$\neg p \lor \neg f, \frac{2}{3}$};
-		\node [draw] (c2) at (4,0) {$\neg p \lor b, \frac{2}{3}$};
 		\node [draw] (c3) at (2,-3) {$\neg b \lor f, \frac{1}{3}$};
-		
-		\draw[->, violet, thick] (f1) -- (c3);
-		\draw[->, violet, thick] (f2) -- (c1);
 		\draw[<->, red, thick] (c1) -- node[midway, below left] {Conflict} (c3);
-		\draw[very thick, dashed, red] (-2,-1.5) -- (6,-1.5) node[right] {Inconclusive Level};
 	\end{tikzpicture}
 	\caption{Possibilistic Knowledge Base of the Penguin Problem with new information about Tweety}
 	\label{fig:secondinformation}
